@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "../../../features/accounts/screens/accounts_list.dart" show showAccountsListModal;
+import '../../../core/typography/text_16_medium.dart';
 
 class AccountCarousel extends StatefulWidget {
   final List<Widget> cards;
@@ -45,9 +46,8 @@ class _AccountCarouselState extends State<AccountCarousel> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Управление счетами",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              const Text16Medium(
+                text: "Управление счетами",
               ),
               IconButton(
                 icon: const Icon(Icons.more_horiz),

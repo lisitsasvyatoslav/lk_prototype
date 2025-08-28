@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Text16Semibold extends StatelessWidget {
+class Text20Semibold extends StatelessWidget {
   final String text;
   final Color? color;
   final TextAlign? textAlign;
+  final int? maxLines;
+  final TextOverflow? overflow;
 
-  const Text16Semibold({
+  const Text20Semibold({
     super.key,
     required this.text,
-    this.color = Colors.black,
+    this.color,
     this.textAlign,
+    this.maxLines,
+    this.overflow,
   });
 
   @override
@@ -17,12 +21,13 @@ class Text16Semibold extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 16,
-        color: color,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
+        color: color,
       ),
       textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: overflow,
     );
   }
 }
-

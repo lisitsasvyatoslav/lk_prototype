@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../core/theme/colors.dart';
 import '../widgets/agreement_document_card.dart';
 import '../../../core/widgets/screen_header.dart';
+import '../../../core/typography/text_20_semibold.dart';
 
 class AgreementsSheet extends StatelessWidget {
   const AgreementsSheet({super.key});
@@ -44,13 +45,9 @@ class AgreementsSheet extends StatelessWidget {
                   const SizedBox(height: 24),
                   
                   // Additional agreements section
-                  const Text(
-                    'Дополнительные соглашения',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
+                  Text20Semibold(
+                    text: 'Дополнительные соглашения',
+                    color: AppColors.textPrimary,
                   ),
                   
                   const SizedBox(height: 16),

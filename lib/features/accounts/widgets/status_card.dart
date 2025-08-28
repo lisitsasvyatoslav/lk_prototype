@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../core/typography/text_10_regular.dart';
+import '../../../core/typography/text_12_regular.dart';
+import '../../../core/typography/text_12_medium.dart';
 
 class StatusCard extends StatelessWidget {
   const StatusCard({super.key});
@@ -19,38 +22,25 @@ class StatusCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
-            Text(
-              'Статус',
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF9AA0AA),
-                fontWeight: FontWeight.w400,
-              ),
+            Text12Regular(
+              text: 'Статус',
+              color: Color(0xFF9AA0AA),
             ),
             SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    'КПУР',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                   Text12Medium(
+                     text: 'КПУР',
+                   ),
                   SizedBox(height: 4),
-                  Text(
-                    'Клиент с повышенным\nуровнем риска',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: Color(0xFF9AA0AA),
-                      fontWeight: FontWeight.w400,
-                      height: 1.2,
-                    ),
-                  ),
+                  Text10Regular(
+                     text: 'Клиент с повышенным\nуровнем риска',
+                     textAlign: TextAlign.right,
+                     color: Color(0xFF9AA0AA),
+                     height: 1.2,
+                   ),
                 ],
               ),
             ),

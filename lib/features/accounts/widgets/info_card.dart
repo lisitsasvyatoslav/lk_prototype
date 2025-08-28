@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../core/widgets/text_12_regular.dart';
-import '../../../core/widgets/text_12_medium.dart';
+import '../../../core/typography/text_12_regular.dart';
+import '../../../core/typography/text_12_medium.dart';
 import '../../../core/widgets/tariff_row.dart';
 
 class InfoCard extends StatelessWidget {

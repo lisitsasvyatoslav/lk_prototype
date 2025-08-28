@@ -1,0 +1,10 @@
+export 'text_10_regular.dart';
+export 'text_11_regular.dart';
+export 'text_12_regular.dart';
+export 'text_12_medium.dart';
+export 'text_14_semibold.dart';
+export 'text_15_regular.dart';
+export 'text_15_semibold.dart';
+export 'text_16_medium.dart';
+export 'text_16_semibold.dart';
+export 'text_20_semibold.dart';

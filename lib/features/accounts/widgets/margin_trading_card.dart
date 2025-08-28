@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../core/widgets/text_15_regular.dart';
-import '../../../core/widgets/text_15_semibold.dart';
-import '../../../core/widgets/text_11_regular.dart';
+import '../../../core/typography/text_15_regular.dart';
+import '../../../core/typography/text_15_semibold.dart';
+import '../../../core/typography/text_11_regular.dart';
 
 class MarginTradingCard extends StatelessWidget {
   const MarginTradingCard({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/widgets/text_16_semibold.dart';
+import '../../../core/typography/text_16_semibold.dart';
 
 class SectionLabel extends StatelessWidget {
   final String text;

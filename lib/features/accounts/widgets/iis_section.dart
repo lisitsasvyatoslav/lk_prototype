@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'section_label.dart';
 import '../../../core/widgets/tariff_row.dart';
+import '../../../core/typography/text_12_regular.dart';
+import '../../../core/typography/text_12_medium.dart';
 
 class IISSection extends StatelessWidget {
   const IISSection({super.key});
@@ -71,8 +73,8 @@ class _IisRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xFF5E6472))),
-          Text(value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF303441))),
+          Text12Regular(text: label, color: Color(0xFF5E6472)),
+          Text12Medium(text: value, color: Color(0xFF303441)),
         ],
       ),
     );

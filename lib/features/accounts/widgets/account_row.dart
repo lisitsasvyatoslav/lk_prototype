@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../core/widgets/badge.dart';
-import '../../../core/widgets/text_title_15_semibold.dart';
-import '../../../core/widgets/text_body_15_medium.dart';
-import '../../../core/widgets/text_caption_11.dart';
+import '../../../core/typography/text_15_semibold.dart';
+import '../../../core/typography/text_15_regular.dart';
+import '../../../core/typography/text_11_regular.dart';
 
 class AccountRow extends StatelessWidget {
   final String balance;
@@ -47,13 +47,12 @@ class AccountRow extends StatelessWidget {
                     children: [
                       Flexible(
                         fit: FlexFit.loose,
-                        child: TextTitle15Semibold(
+                        child: Text15Semibold(
                           text: balance,
-                          overflow: true,
                         ),
                       ),
                       const SizedBox(width: 6),
-                      TextBody15Medium(
+                      Text15Regular(
                         text: changeText,
                         color: changeColor,
                       ),
@@ -63,9 +62,9 @@ class AccountRow extends StatelessWidget {
                     spacing: 6,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      TextCaption11(text: number),
-                      TextCaption11(text: '•'),
-                      TextCaption11(text: subtitle),
+                      Text11Regular(text: number),
+                      Text11Regular(text: '•'),
+                      Text11Regular(text: subtitle),
                       if (badge != null)
                          CustomBadge(text: badge!),
                     ],
