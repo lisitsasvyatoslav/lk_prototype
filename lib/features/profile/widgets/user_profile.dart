@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/appcolors.dart';
 
 class UserProfileBlock extends StatelessWidget {
   final String avatarUrl;
@@ -19,9 +20,9 @@ class UserProfileBlock extends StatelessWidget {
         Text(
           userName,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: AppColors.textBaseDefault,
           ),
         ),
       ],

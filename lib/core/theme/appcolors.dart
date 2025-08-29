@@ -23,6 +23,7 @@ class AppColors {
 
   // Negative
   static const textNegativeDefault = Color(0xFFE84144);
+  static const iconNegativeDefault = Color(0xFFE84144);
 
   // Brand
   static const bgBrandDefault = Color(0xFFFFC759);
@@ -79,4 +80,15 @@ class AppColors {
   // Gradients / neutral
   static const iconNeutralGradient = Color(0xFFFFFFFF);
   static const iconBrandGradient = Color(0xFFFFFFFF);
+
+  // Input
+  static const inputTextDefault = Color(0xFF1A1A1F);
+  static const inputBgActive = Color(0x00C0C0CC); // 0% opacity
+  static const inputCursorBlinker = Color(0xFFE08F05);
+  static const inputLabelActive = Color(0xFFE08F05);
+  static const inputBorderActive = Color(0xFFFFBA30);
+  static const inputBorderShadeActive = Color(0x29FFBA30); // 16% opacity
+
+  // Button label text
+  static const buttonLabelText = Color(0xFFE08F05);
 }

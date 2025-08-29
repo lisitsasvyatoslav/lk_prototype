@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text14Semibold extends StatelessWidget {
   final String text;
+  final Color? color;
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
@@ -9,6 +11,7 @@ class Text14Semibold extends StatelessWidget {
   const Text14Semibold(
     this.text, {
     super.key,
+    this.color,
     this.textAlign,
     this.maxLines,
     this.overflow,
@@ -18,10 +21,10 @@ class Text14Semibold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w600,
-        color: Color(0xFF70717E),
+        color: color ?? AppColors.textBaseSecondary,
       ),
       textAlign: textAlign,
       maxLines: maxLines,

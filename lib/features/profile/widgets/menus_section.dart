@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'custom_menu.dart';
+import '../../../core/theme/appcolors.dart';
 
 class MenusSection extends StatelessWidget {
   const MenusSection({super.key});
@@ -106,7 +107,7 @@ class MenusSection extends StatelessWidget {
         const SizedBox(height: 24),
         const Text(
           "Версия приложения 9.8.0",
-          style: TextStyle(fontSize: 12, color: Colors.grey),
+          style: TextStyle(fontSize: 12, color: AppColors.textBaseSecondary),
         ),
         const SizedBox(height: 24),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text16Medium extends StatelessWidget {
   final String text;
@@ -10,7 +11,7 @@ class Text16Medium extends StatelessWidget {
   const Text16Medium({
     super.key,
     required this.text,
-    this.color,
+    this.color = AppColors.textBaseDefault,
     this.textAlign,
     this.maxLines,
     this.overflow,

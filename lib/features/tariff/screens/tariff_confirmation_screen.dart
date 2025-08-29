@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../core/widgets/screen_header.dart';
+import '../../../core/theme/appcolors.dart';
 
 class TariffConfirmationScreen extends StatelessWidget {
   final String newTariff;
@@ -15,18 +16,10 @@ class TariffConfirmationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-       backgroundColor: const Color(0xFFF2F4F6),
-               appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(44),
-          child: ScreenHeader(
-            title: 'Подтверждение',
-            backgroundColor: const Color(0xFFF2F4F6),
-            titleColor: const Color(0xFF303441),
-            iconColor: const Color(0xFF303441),
-          ),
-        ),
+       backgroundColor: AppColors.bgBaseTertiary,
       body: Column(
         children: [
+          ScreenHeader(title: 'Подтверждение'),
           // Верхняя половина - контент
           Expanded(
             child: Padding(
@@ -39,20 +32,20 @@ class TariffConfirmationScreen extends StatelessWidget {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE8F5E8),
+                      color: AppColors.textPositiveDefault.withOpacity(0.1),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF4CAF50).withOpacity(0.2),
+                          color: AppColors.textPositiveDefault.withOpacity(0.2),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.check,
                       size: 60,
-                      color: Color(0xFF4CAF50),
+                      color: AppColors.textPositiveDefault,
                     ),
                   ),
                   
@@ -64,7 +57,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: const Color(0xFF4CAF50),
+                      color: AppColors.textPositiveDefault,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -74,10 +67,10 @@ class TariffConfirmationScreen extends StatelessWidget {
                   // Дата вступления в силу
                   Text(
                     'Изменения вступят в силу $effectiveDate',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF6B7280),
+                      color: AppColors.textBaseSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -93,7 +86,7 @@ class TariffConfirmationScreen extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
                  decoration: BoxDecoration(
-                 color: const Color(0xFFECEEF0),
+                 color: const Color(0xFFEDECF0),
                  borderRadius: BorderRadius.circular(16),
                ),
               child: Row(
@@ -102,21 +95,21 @@ class TariffConfirmationScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Автоследование',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF303441),
+                            color: AppColors.textBaseDefault,
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
+                        Text(
                           'Автоследование за опытными трейдерами',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xFF6B7280),
+                            color: AppColors.textBaseSecondary,
                             height: 1.3,
                           ),
                         ),
@@ -144,8 +137,8 @@ class TariffConfirmationScreen extends StatelessWidget {
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE6E6EE),
-                      foregroundColor: const Color(0xFF303441),
+                      backgroundColor: AppColors.buttonBgSecondaryDefault,
+                      foregroundColor: AppColors.buttonLabelSecondary,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),

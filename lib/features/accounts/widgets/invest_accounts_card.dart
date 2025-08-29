@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'account_row.dart';
 import '../screens/account_details_modal.dart';
+import '../../../core/theme/appcolors.dart';
 
 class InvestAccountsCard extends StatelessWidget {
   const InvestAccountsCard({super.key});
@@ -9,8 +10,8 @@ class InvestAccountsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: AppColors.bgBaseDefault,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),

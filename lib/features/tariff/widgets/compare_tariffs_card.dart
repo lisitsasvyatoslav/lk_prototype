@@ -10,7 +10,14 @@ class CompareTariffsCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.grey100,
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFFF2F2F6),
+            Color(0xFFFFFFFF),
+          ],
+        ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.grey300, width: 1),
       ),

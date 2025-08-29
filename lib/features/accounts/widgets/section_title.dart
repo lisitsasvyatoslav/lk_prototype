@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/appcolors.dart';
 import '../../../core/typography/text_14_semibold.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -11,7 +12,7 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Text14Semibold(text),
+        child: Text14Semibold(text, color: AppColors.textBaseSecondary),
       ),
     );
   }

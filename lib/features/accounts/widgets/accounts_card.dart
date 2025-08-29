@@ -1,8 +1,8 @@
+import 'account_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'account_row.dart';
 import '../screens/account_details_modal.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountsCard extends StatelessWidget {
   const AccountsCard({super.key});
@@ -13,8 +13,8 @@ class AccountsCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        color: AppColors.bgBaseDefault,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
@@ -28,7 +28,7 @@ class AccountsCard extends StatelessWidget {
           AccountRow(
             balance: '1 593 742,90 ₽',
             changeText: '−2947,23 ₽',
-            changeColor: Color(0xFFE64646),
+            changeColor: AppColors.textNegativeDefault,
             number: '15185RI112B',
             subtitle: 'Деньги на ветер',
             isFavorite: true,
@@ -42,7 +42,7 @@ class AccountsCard extends StatelessWidget {
           AccountRow(
             balance: '87 198 345,33 ₽',
             changeText: '+2947,23 ₽',
-            changeColor: Color(0xFF17A555),
+            changeColor: AppColors.textPositiveDefault,
             number: '15185RI112B',
             subtitle: 'КЛФ-918353',
             badge: 'иис',
@@ -57,7 +57,7 @@ class AccountsCard extends StatelessWidget {
           AccountRow(
             balance: '448 742,90 ₽',
             changeText: '−2947,23 ₽',
-            changeColor: Color(0xFFE64646),
+            changeColor: AppColors.textNegativeDefault,
             number: '15355R1',
             subtitle: 'Demo',
             secondaryLine: 'Действует до 26 сент 2025',

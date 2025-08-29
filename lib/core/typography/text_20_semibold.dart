@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text20Semibold extends StatelessWidget {
   final String text;
@@ -10,7 +11,7 @@ class Text20Semibold extends StatelessWidget {
   const Text20Semibold({
     super.key,
     required this.text,
-    this.color,
+    this.color = AppColors.textBaseDefault,
     this.textAlign,
     this.maxLines,
     this.overflow,

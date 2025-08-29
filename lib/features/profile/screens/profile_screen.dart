@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../widgets/index.dart';
+import '../../../core/theme/appcolors.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
-      child: Column(
+        child: Column(
         children: [
           const UserProfileBlock(
             avatarUrl: 'https://i.pravatar.cc/150?img=3',

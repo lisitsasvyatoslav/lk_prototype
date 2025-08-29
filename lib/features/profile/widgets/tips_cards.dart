@@ -16,7 +16,7 @@ class TipsCards extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         TipCard(
-          icon: Icons.emoji_events,
+          icon: Icons.star,
           title: "Получить статус",
           subtitle: "Квалифицированный\nинвестор",
         ),

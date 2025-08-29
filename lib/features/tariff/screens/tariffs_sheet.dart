@@ -18,17 +18,6 @@ class TariffsSheet extends StatelessWidget {
       top: false,
       child: Column(
         children: [
-          const SizedBox(height: 8),
-          Container(
-            width: 36,
-            height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.black12,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          const SizedBox(height: 12),
-          
           ScreenHeader(title: 'Тарифы'),
           
           const SizedBox(height: 16),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text15Semibold extends StatelessWidget {
   final String text;
@@ -8,7 +9,7 @@ class Text15Semibold extends StatelessWidget {
   const Text15Semibold({
     super.key,
     required this.text,
-    this.color = Colors.black,
+    this.color = AppColors.textBaseDefault,
     this.textAlign,
   });
 

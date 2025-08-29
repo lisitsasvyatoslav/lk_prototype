@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text11Regular extends StatelessWidget {
   final String text;
@@ -8,7 +9,7 @@ class Text11Regular extends StatelessWidget {
   const Text11Regular({
     super.key,
     required this.text,
-    this.color = const Color(0xFF9AA0AA),
+    this.color = AppColors.textBaseTertiary,
     this.textAlign,
   });
 

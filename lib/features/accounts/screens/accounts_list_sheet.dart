@@ -5,6 +5,7 @@ import '../widgets/section_title.dart';
 import '../widgets/accounts_card.dart';
 import '../widgets/invest_accounts_card.dart';
 import '../../../core/widgets/screen_header.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountsListSheet extends StatelessWidget {
   const AccountsListSheet({super.key});
@@ -15,16 +16,6 @@ class AccountsListSheet extends StatelessWidget {
       top: false,
       child: Column(
         children: [
-          const SizedBox(height: 8),
-          Container(
-            width: 36,
-            height: 4,
-            decoration: BoxDecoration(
-              color: Colors.white10,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          const SizedBox(height: 12),
           ScreenHeader(title: 'Счета'),
           const SizedBox(height: 8),
           Expanded(
@@ -45,11 +36,12 @@ class AccountsListSheet extends StatelessWidget {
               top: false,
               child: SizedBox(
                 width: double.infinity,
+                height: 56,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFFC858),
                     foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -57,7 +49,7 @@ class AccountsListSheet extends StatelessWidget {
                   onPressed: () {},
                   child: const Text(
                     'Открыть счет',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: AppColors.buttonLabelPrimary),
                   ),
                 ),
               ),

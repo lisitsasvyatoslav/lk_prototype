@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import '../../../core/theme/appcolors.dart';
 
 class LearningMenuCard extends StatelessWidget {
   const LearningMenuCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const divider = Divider(height: 1, thickness: 1, color: Color(0xFF3A3A42));
+    const divider = Divider(height: 1, thickness: 1, color: AppColors.borderBaseDefault);
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E1E),
+        color: AppColors.bgBaseDefault,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        children: const [
+        children: [
           _MenuRow(
-            leading: const Icon(
+            leading: Icon(
               CupertinoIcons.gift_fill,
-              color: Color(0xFFFFA940),
+              color: AppColors.iconBrandDefault,
               size: 24,
             ),
             title: 'Тестирования для инвесторов',
@@ -27,9 +27,9 @@ class LearningMenuCard extends StatelessWidget {
           ),
           divider,
           _MenuRow(
-            leading: const Icon(
+            leading: Icon(
               CupertinoIcons.doc,
-              color: Color(0xFFFFA940),
+              color: AppColors.iconBrandDefault,
               size: 24,
             ),
             title: 'Центр обучения',
@@ -69,18 +69,18 @@ class _MenuRow extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: Colors.white,
+                    color: AppColors.textBaseDefault,
                   ),
                 ),
                 if (subtitle != null) ...[
                   Text(
                     subtitle!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: Color(0xFFA4A4B4),
+                      color: AppColors.textBaseTertiary,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -88,7 +88,7 @@ class _MenuRow extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.chevron_right, color: Colors.white38),
+          Icon(Icons.chevron_right, color: AppColors.iconBaseSecondary),
           const SizedBox(width: 16),
         ],
       ),

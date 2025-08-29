@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
+import '../../../core/theme/appcolors.dart';
 import 'tariff_change_screen.dart';
 import '../widgets/tariff_agreements_button.dart';
 
@@ -54,24 +54,24 @@ class TariffChangeModal extends StatelessWidget {
                  ],
                ),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 40),
               
               // Information icon
               Container(
-                width: 64,
-                height: 64,
+                width: 80,
+                height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: AppColors.opacityBase16,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.info_outline,
-                  size: 32,
-                  color: Color(0xFF303441),
+                  size: 48,
+                  color: const Color(0xFF9596A3),
                 ),
               ),
               
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               
               // Primary message (только для персонального тарифа)
               if (isPersonalTariff) ...[
@@ -79,13 +79,13 @@ class TariffChangeModal extends StatelessWidget {
                   'У вас персональный тариф\nкоторый можно сменить через\nменеджера',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF303441),
+                    color: AppColors.textBaseDefault,
                     height: 1.4,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
               ],
               
               // Information text
@@ -95,12 +95,12 @@ class TariffChangeModal extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF6B7280),
+                  color: AppColors.textBaseSecondary,
                   height: 1.4,
                 ),
               ),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
                              // Agreements link
                Padding(
@@ -120,8 +120,8 @@ class TariffChangeModal extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () => Navigator.of(context).pop(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade200,
-                        foregroundColor: const Color(0xFF303441),
+                        backgroundColor: AppColors.buttonBgSecondaryDefault,
+                        foregroundColor: AppColors.buttonLabelSecondary,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -130,14 +130,14 @@ class TariffChangeModal extends StatelessWidget {
                       child: const Text(
                         'Отменить',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 17,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
                   ),
                   
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   
                   // Continue button
                   SizedBox(
@@ -166,8 +166,8 @@ class TariffChangeModal extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFD700),
-                        foregroundColor: const Color(0xFF303441),
+                        backgroundColor: AppColors.buttonBgPrimaryDefault,
+                        foregroundColor: AppColors.buttonLabelPrimary,
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -176,7 +176,7 @@ class TariffChangeModal extends StatelessWidget {
                       child: Text(
                         isPersonalTariff ? 'Чат с менеджером' : 'Продолжить',
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 17,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

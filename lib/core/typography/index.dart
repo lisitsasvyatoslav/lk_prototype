@@ -7,4 +7,5 @@ export 'text_15_regular.dart';
 export 'text_15_semibold.dart';
 export 'text_16_medium.dart';
 export 'text_16_semibold.dart';
+export 'text_18_semibold.dart';
 export 'text_20_semibold.dart';

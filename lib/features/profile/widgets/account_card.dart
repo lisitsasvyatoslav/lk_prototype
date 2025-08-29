@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../../../features/tariff/widgets/tariffs_modal.dart' show showTariffsModal;
 import '../../../core/widgets/tariff_row.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountCard extends StatelessWidget {
   final List<FlSpot> spots;
@@ -13,9 +14,9 @@ class AccountCard extends StatelessWidget {
     double diff = spots.last.y - spots.first.y;
     Color lineColor;
     if (diff > 0) {
-      lineColor = Colors.greenAccent;
+      lineColor = AppColors.iconPositiveDefault;
     } else if (diff < 0) {
-      lineColor = Colors.redAccent;
+      lineColor = AppColors.iconNegativeDefault;
     } else {
       lineColor = Colors.grey;
     }
@@ -24,11 +25,11 @@ class AccountCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF1C1C1E),
+        color: AppColors.bgBaseSecondary,
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x33000000),
+            color: Color(0x22000000),
             blurRadius: 16,
             offset: Offset(0, 6),
           ),
@@ -45,7 +46,7 @@ class AccountCard extends StatelessWidget {
                 children: [
                   const Text(
                     "15185RI112B • Название счета",
-                    style: TextStyle(color: Colors.white70, fontSize: 11),
+                    style: TextStyle(color: AppColors.textBaseSecondary, fontSize: 11),
                   ),
                   const SizedBox(width: 6),
                   Container(
@@ -54,7 +55,7 @@ class AccountCard extends StatelessWidget {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.amber,
+                      color: AppColors.iconBrandDefault,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Text(
@@ -62,6 +63,7 @@ class AccountCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 8,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.iconOnBrandDefault,
                       ),
                     ),
                   ),
@@ -69,16 +71,16 @@ class AccountCard extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
+                  horizontal: 8,
+                  vertical: 2,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2A2A2D),
+                  color: AppColors.opacityBase24,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Text(
                   "15 августа",
-                  style: TextStyle(fontSize: 12, color: Colors.white70),
+                  style: TextStyle(fontSize: 11, color: AppColors.textBaseSecondary),
                 ),
               ),
             ],
@@ -95,9 +97,9 @@ class AccountCard extends StatelessWidget {
                   Text(
                     "1 593 742,90 ₽",
                     style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textBaseDefault,
                     ),
                   ),
                   SizedBox(height: 4),
@@ -105,7 +107,7 @@ class AccountCard extends StatelessWidget {
                     "-2947,23 ₽ (0,34%)",
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.redAccent,
+                      color: AppColors.textNegativeDefault,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -156,11 +158,8 @@ class AccountCard extends StatelessWidget {
 
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xFF2A2A2D),
+              color: AppColors.bgBaseTertiary,
               borderRadius: BorderRadius.circular(14),
-              boxShadow: const [
-                BoxShadow(color: Color(0x11000000), blurRadius: 8, offset: Offset(0, 2)),
-              ],
             ),
             child: Column(
               children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/appcolors.dart';
 
 class TariffRow extends StatelessWidget {
   final String title;
@@ -39,9 +40,9 @@ class TariffRow extends StatelessWidget {
                 Text(
                   title, 
                   style: const TextStyle(
-                    fontSize: 15, 
-                    fontWeight: FontWeight.w700, 
-                    color: Color(0xFF303441)
+                    fontSize: 12, 
+                    fontWeight: FontWeight.w600, 
+                    color: AppColors.textBaseDefault
                   )
                 ),
                 const SizedBox(height: 2),
@@ -50,7 +51,7 @@ class TariffRow extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 10, 
                     fontWeight: FontWeight.w400, 
-                    color: Color(0xFF9AA0AA)
+                    color: AppColors.textBaseSecondary
                   )
                 ),
               ],

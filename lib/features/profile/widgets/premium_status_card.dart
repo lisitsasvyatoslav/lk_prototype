@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
+import '../../../core/theme/appcolors.dart';
 
 class PremiumStatusCard extends StatelessWidget {
   final double progress;
@@ -18,7 +18,7 @@ class PremiumStatusCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E1E1E),
+          color: AppColors.bgBaseDefault,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -31,13 +31,13 @@ class PremiumStatusCard extends StatelessWidget {
                    decoration: BoxDecoration(
                      shape: BoxShape.circle,
                      border: Border.all(
-                       color: Colors.grey[800]!,
+                       color: AppColors.iconBaseTertiary,
                        width: 4,
                      ),
                    ),
-                   child: const Icon(
+                   child: Icon(
                      Icons.diamond,
-                     color: Colors.white,
+                     color: AppColors.iconBaseDefault,
                      size: 20,
                    ),
                  ),
@@ -48,7 +48,7 @@ class PremiumStatusCard extends StatelessWidget {
                      painter: ProgressPainter(
                        progress: progress,
                        strokeWidth: 4,
-                       color: const Color(0xFFF9E595),
+                       color: AppColors.iconBrandDefault,
                      ),
                    ),
                  ),
@@ -58,8 +58,8 @@ class PremiumStatusCard extends StatelessWidget {
             Expanded(
               child: Text(
                 'Статус "Премиум"',
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: AppColors.textBaseDefault,
                   fontSize: 17,
                   fontWeight: FontWeight.w400,
                 ),
@@ -71,7 +71,7 @@ class PremiumStatusCard extends StatelessWidget {
                 Text(
                   '${(progress * 100).toInt()}%',
                   style: TextStyle(
-                    color: Colors.grey[400],
+                    color: AppColors.textBaseSecondary,
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -79,7 +79,7 @@ class PremiumStatusCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Icon(
                   Icons.chevron_right,
-                  color: Colors.grey[400],
+                  color: AppColors.iconBaseTertiary,
                   size: 24,
                 ),
               ],

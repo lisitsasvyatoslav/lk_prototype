@@ -4,6 +4,7 @@ import '../../../core/widgets/badge.dart';
 import '../../../core/typography/text_15_semibold.dart';
 import '../../../core/typography/text_15_regular.dart';
 import '../../../core/typography/text_11_regular.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountRow extends StatelessWidget {
   final String balance;
@@ -62,9 +63,9 @@ class AccountRow extends StatelessWidget {
                     spacing: 6,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      Text11Regular(text: number),
-                      Text11Regular(text: '•'),
-                      Text11Regular(text: subtitle),
+                      Text11Regular(text: number, color: AppColors.textBaseSecondary),
+                      Text11Regular(text: '•', color: AppColors.textBaseSecondary),
+                      Text11Regular(text: subtitle, color: AppColors.textBaseSecondary),
                       if (badge != null)
                          CustomBadge(text: badge!),
                     ],
@@ -75,7 +76,7 @@ class AccountRow extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xCC8E8E93),
+                        color: AppColors.textBaseTertiary,
                       ),
                     ),
                   ],
@@ -88,9 +89,9 @@ class AccountRow extends StatelessWidget {
                 if (isFavorite)
                   const Padding(
                     padding: EdgeInsets.only(right: 8),
-                    child: Icon(CupertinoIcons.star_fill, color: Color(0xFFB0B5C0), size: 20),
+                    child: Icon(CupertinoIcons.star_fill, color: AppColors.iconBaseTertiary, size: 20),
                   ),
-                const Icon(CupertinoIcons.chevron_right, color: Color(0xFFB0B5C0), size: 20),
+                const Icon(CupertinoIcons.chevron_right, color: AppColors.iconBaseTertiary, size: 20),
               ],
             ),
           ],

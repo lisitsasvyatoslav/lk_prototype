@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "../../../features/accounts/screens/accounts_list.dart" show showAccountsListModal;
 import '../../../core/typography/text_16_medium.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountCarousel extends StatefulWidget {
   final List<Widget> cards;
@@ -36,7 +37,7 @@ class _AccountCarouselState extends State<AccountCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final cardHeight = 225.0;
+    final cardHeight = 201.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -46,11 +47,16 @@ class _AccountCarouselState extends State<AccountCarousel> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text16Medium(
-                text: "Управление счетами",
+              const Text(
+              "Управление счетами",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textBaseDefault,
+                ),
               ),
               IconButton(
-                icon: const Icon(Icons.more_horiz),
+                icon: const Icon(Icons.more_horiz, color: AppColors.iconBaseTertiary),
                 iconSize: 28,
                 onPressed: () {
                   showAccountsListModal(context);
@@ -78,15 +84,15 @@ class _AccountCarouselState extends State<AccountCarousel> {
           widthFactor: 0.9,
           child: Container(
             height: 5,
-            decoration: const BoxDecoration(
-              color: Color(0xFF1C1C1E),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: AppColors.bgBaseSecondary,
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                  color: Color(0x55000000),
+                  color: const Color(0x11000000),
                   blurRadius: 8,
                   offset: Offset(0, 3),
                 ),
@@ -98,15 +104,15 @@ class _AccountCarouselState extends State<AccountCarousel> {
           widthFactor: 0.85,
           child: Container(
             height: 5,
-            decoration: const BoxDecoration(
-              color: Color(0xFF1C1C1E),
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: AppColors.bgBaseSecondary,
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(16),
                 bottomRight: Radius.circular(16),
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
-                  color: Color(0x55000000),
+                  color: const Color(0x11000000),
                   blurRadius: 8,
                   offset: Offset(0, 3),
                 ),
@@ -129,7 +135,7 @@ class _AccountCarouselState extends State<AccountCarousel> {
                 width: isActive ? 16 : 8,
                 height: 2,
                 decoration: BoxDecoration(
-                  color: isActive ? Colors.orange : Colors.grey,
+                  color: isActive ? AppColors.indicatorBgActive : AppColors.indicatorBgInactive,
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),

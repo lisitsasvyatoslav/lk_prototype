@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/appcolors.dart';
 
 class Text12Medium extends StatelessWidget {
   final String text;
@@ -8,7 +9,7 @@ class Text12Medium extends StatelessWidget {
   const Text12Medium({
     super.key,
     required this.text,
-    this.color = Colors.black,
+    this.color = AppColors.textBaseDefault,
     this.textAlign,
   });
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/appcolors.dart';
 
 class TipCard extends StatelessWidget {
   final IconData icon;
@@ -15,10 +16,10 @@ class TipCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-    this.iconColor = const Color(0xFFA4A4B4),
-    this.titleColor = Colors.white,
-    this.subtitleColor = const Color(0xFFA4A4B4),
-    this.backgroundColor = const Color(0xFF1E1E1E),
+    this.iconColor = AppColors.iconBaseSecondary,
+    this.titleColor = AppColors.textBaseDefault,
+    this.subtitleColor = AppColors.textBaseSecondary,
+    this.backgroundColor = AppColors.bgBaseDefault,
     this.onTap,
   });
 
