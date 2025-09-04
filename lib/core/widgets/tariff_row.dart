@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
 
 class TariffRow extends StatelessWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
+  final IconData? icon;
+  final String? svgIcon;
+  final double? iconSize;
   final List<Color> gradient;
   final VoidCallback? onTap;
 
@@ -12,7 +15,9 @@ class TariffRow extends StatelessWidget {
     super.key,
     required this.title,
     required this.subtitle,
-    required this.icon,
+    this.icon,
+    this.svgIcon,
+    this.iconSize,
     required this.gradient,
     this.onTap,
   });
@@ -24,13 +29,30 @@ class TariffRow extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: gradient),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: gradient
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: Colors.white, size: 18),
+            child: svgIcon != null
+                ? SizedBox(
+                    width: iconSize ?? 20.53,
+                    height: iconSize ?? 20.53,
+                    child: Center(
+                      child: Transform.scale(
+                        scale: (iconSize ?? 20.53) / 28, // Масштабируем относительно базового размера 28
+                        child: SvgPicture.asset(
+                          svgIcon!,
+                          width: 28,
+                          height: 28,
+                        ),
+                      ),
+                    ),
+                  )
+                : Icon(icon, color: Colors.white, size: iconSize ?? 18),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -40,7 +62,7 @@ class TariffRow extends StatelessWidget {
                 Text(
                   title, 
                   style: const TextStyle(
-                    fontSize: 12, 
+                    fontSize: 15, 
                     fontWeight: FontWeight.w600, 
                     color: AppColors.textBaseDefault
                   )

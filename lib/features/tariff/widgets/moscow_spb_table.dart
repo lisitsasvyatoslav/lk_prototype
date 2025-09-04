@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'table_row.dart';
-import '../../../core/theme/colors.dart';
 
-// 11w400 14w400 11w600 14w400 11w400 paddX 16 paddY12
 class MoscowSPBTable extends StatelessWidget {
   const MoscowSPBTable({super.key});
 
@@ -11,11 +9,11 @@ class MoscowSPBTable extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-        color: AppColors.surface, 
+        color: Colors.white, 
         borderRadius: BorderRadius.circular(12), 
         boxShadow: const [
           BoxShadow(
-            color: AppColors.shadowLight,
+            color: const Color(0x08000000),
             blurRadius: 4,
             offset: Offset(0, 1),
           ),
@@ -34,7 +32,7 @@ class MoscowSPBTable extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.textTertiary,
+                    color: const Color(0xFF6E6F7C),
                     height: 1.3,
                   ),
                 ),
@@ -49,7 +47,7 @@ class MoscowSPBTable extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.textTertiary,
+                    color: const Color(0xFF6E6F7C),
                     height: 1.3,
                   ),
                 ),
@@ -59,13 +57,13 @@ class MoscowSPBTable extends StatelessWidget {
           const SizedBox(height: 8),
 
           TariffTableRow(title: 'до 1 млн включительно', value: '0,035%'),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           TariffTableRow(title: 'от 1 млн до 5 млн включительно', value: '0,030%'),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           TariffTableRow(title: 'от 5 млн', value: '0,025%'),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           const SizedBox(height: 16),
 
@@ -74,28 +72,28 @@ class MoscowSPBTable extends StatelessWidget {
             style: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w600,
-              color: AppColors.textTertiary,
+              color: const Color(0xFF6E6F7C),
             ),
           ),
           const SizedBox(height: 16),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           TariffTableRow(
             title: 'МосБиржа',
             subtitle: 'Кроме облигаций российских эмитентов',
             value: '0,03%',
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           TariffTableRow(
             title: 'МосБиржа',
             subtitle: 'Облигации российских эмитентов',
             value: '0,015%',
           ),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
 
           TariffTableRow(title: 'СПБ Биржа', value: '0,01%'),
-          const Divider(height: 1, color: AppColors.divider),
+          const Divider(height: 1, color: Color(0xFFF0F1F4)),
         ],
       ),
     );

@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/appcolors.dart';
 
 class TipCard extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;
   final String title;
   final String subtitle;
-  final Color iconColor;
   final Color titleColor;
   final Color subtitleColor;
   final Color backgroundColor;
@@ -16,7 +15,6 @@ class TipCard extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.subtitle,
-    this.iconColor = AppColors.iconBaseSecondary,
     this.titleColor = AppColors.textBaseDefault,
     this.subtitleColor = AppColors.textBaseSecondary,
     this.backgroundColor = AppColors.bgBaseDefault,
@@ -34,7 +32,7 @@ class TipCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: iconColor, size: 28),
+          icon,
           const SizedBox(height: 8),
           Text(
             title,

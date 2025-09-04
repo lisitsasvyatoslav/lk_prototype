@@ -15,7 +15,7 @@ class UserProfileBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CircleAvatar(radius: 40, backgroundImage: NetworkImage(avatarUrl)),
+        CircleAvatar(radius: 40, backgroundImage: Image.asset('assets/images/avatar_profile.jpg').image),
         const SizedBox(height: 24),
         Text(
           userName,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
 
 class PremiumStatusCard extends StatelessWidget {
@@ -35,11 +36,20 @@ class PremiumStatusCard extends StatelessWidget {
                        width: 4,
                      ),
                    ),
-                   child: Icon(
-                     Icons.diamond,
-                     color: AppColors.iconBaseDefault,
-                     size: 20,
-                   ),
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Center(
+                      child: Transform.scale(
+                        scale: 1, 
+                        child: SvgPicture.asset(
+                          'assets/icons/diamond.svg',
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
+                    ),
+                  )
                  ),
                  SizedBox(
                    width: 40,

@@ -15,6 +15,8 @@ class SmsConfirmationScreen extends StatefulWidget {
     required this.effectiveDate,
   });
 
+  static const String _phoneNumber = '+7(952) ***-**-91';
+
   @override
   State<SmsConfirmationScreen> createState() => _SmsConfirmationScreenState();
 }
@@ -173,152 +175,143 @@ class _SmsConfirmationScreenState extends State<SmsConfirmationScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-            // Инструкционный текст
-            Text(
-              'Код смс-подписи будет отправлен на ваш\nномер +7(952) ***-**-91',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textBaseDefault,
-                height: 1.4,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Поле ввода SMS кода или Loader
-            if (!_isLoading)
-              Center(
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 200),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: _isFocused ? AppColors.inputBorderShadeActive : Colors.transparent,
-                      width: 3,
+                  // Инструкционный текст
+                  Text(
+                    'Код смс-подписи будет отправлен на ваш\nномер ${SmsConfirmationScreen._phoneNumber}',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textBaseDefault,
+                      height: 1.4,
                     ),
-                    borderRadius: BorderRadius.circular(12),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.inputBorderActive,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColors.inputBgActive,
-                    ),
-                    child: Column(
-                      children: [
-                        // Label сверху
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: Text(
-                            'Код из SMS',
-                            style: TextStyle(
-                              color: AppColors.inputLabelActive,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
+                  
+                  const SizedBox(height: 16),
+                  
+                  // Поле ввода SMS кода или Loader
+                  if (!_isLoading)
+                    Center(
+                      child: Container(
+                        constraints: const BoxConstraints(maxWidth: 200),
+                        height: 56,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: _isFocused ? AppColors.inputBorderShadeActive : Colors.transparent,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: AppColors.inputBorderActive,
+                              width: 2,
                             ),
-                            textAlign: TextAlign.center,
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.inputBgActive,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // Группа: Label + поле ввода
+                              Column(
+                                children: [
+                                  // Label сверху
+                                  Text(
+                                    'Код из SMS',
+                                    style: TextStyle(
+                                      color: AppColors.inputLabelActive,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  // Поле ввода
+                                  SizedBox(
+                                    height: 24,
+                                    child: TextField(
+                                      controller: _codeController,
+                                      focusNode: _focusNode,
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 6,
+                                      textAlign: TextAlign.center,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ],
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.inputTextDefault,
+                                        height: 1.0,
+                                      ),
+                                      decoration: InputDecoration(
+                                        hintText: '', // Пустой placeholder
+                                        border: InputBorder.none,
+                                        isDense: true,
+                                        contentPadding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 0,
+                                        ),
+                                        counterText: '',
+                                      ),
+                                      onChanged: (value) {
+                                        if (value.length == 6) {
+                                          _submitCode();
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        // Поле ввода
-                        TextField(
-                          controller: _codeController,
-                          focusNode: _focusNode,
-                          keyboardType: TextInputType.number,
-                          maxLength: 6,
-                          textAlign: TextAlign.center,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.inputTextDefault,
+                      ),
+                    )
+                  else
+                    // Loader вместо всего инпута (без лейбла)
+                    Center(
+                      child: Container(
+                        constraints: const BoxConstraints(maxWidth: 200),
+                        height: 56,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildLoaderDot(0),
+                              const SizedBox(width: 8),
+                              _buildLoaderDot(1),
+                              const SizedBox(width: 8),
+                              _buildLoaderDot(2),
+                            ],
                           ),
-                          decoration: InputDecoration(
-                            hintText: '', // Пустой placeholder
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                              bottom: 12,
-                            ),
-                            counterText: '',
-                          ),
-                          onChanged: (value) {
-                            if (value.length == 6) {
-                              _submitCode();
-                            }
-                          },
                         ),
-                      ],
+                      ),
+                    ),
+                  
+                  const SizedBox(height: 16),
+                  
+                  // Таймер повторной отправки
+                  GestureDetector(
+                    onTap: _canResend ? _resendCode : null,
+                    child: Text(
+                      _canResend 
+                        ? 'Отправить код повторно'
+                        : 'Отправить код ещё раз через ${_formatResendTime()}',
+                      style: TextStyle(
+                        fontSize: _canResend ? 14 : 12,
+                        fontWeight: _canResend ? FontWeight.w500 : FontWeight.w400,
+                        color: _canResend 
+                          ? AppColors.buttonLabelText 
+                          : AppColors.textBaseSecondary,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-              )
-            else
-              // Loader вместо инпута
-              Center(
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 200),
-                  child: Column(
-                    children: [
-                      // Label сверху
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: Text(
-                          'Код из SMS',
-                          style: TextStyle(
-                            color: AppColors.inputLabelActive,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      // Loader (три точки)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildLoaderDot(0),
-                            const SizedBox(width: 8),
-                            _buildLoaderDot(1),
-                            const SizedBox(width: 8),
-                            _buildLoaderDot(2),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            
-            const SizedBox(height: 16),
-            
-            // Таймер повторной отправки
-            GestureDetector(
-              onTap: _canResend ? _resendCode : null,
-              child: Text(
-                _canResend 
-                  ? 'Отправить код повторно'
-                  : 'Отправить код ещё раз через ${_formatResendTime()}',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: _canResend 
-                    ? AppColors.buttonLabelText 
-                    : AppColors.textBaseSecondary,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            
-                              const SizedBox(height: 48),
+                  
+                  const SizedBox(height: 48),
                 ],
               ),
             ),

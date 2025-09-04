@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
 
 class TariffTableRow extends StatelessWidget {
   final String title;        // основной текст (слева)
@@ -33,7 +32,7 @@ class TariffTableRow extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textDark,
+                    color: const Color(0xFF1A1B20),
                     height: 1.3,
                   ),
                 ),
@@ -44,7 +43,7 @@ class TariffTableRow extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w400,
-                      color: AppColors.textTertiary,
+                      color: const Color(0xFF6E6F7C),
                       height: 1.3,
                     ),
                   ),
@@ -61,7 +60,7 @@ class TariffTableRow extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: AppColors.textDark,
+                color: const Color(0xFF1A1B20),
                 height: 1.3,
               ),
             ),

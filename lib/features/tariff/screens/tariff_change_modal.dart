@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
 import 'tariff_change_screen.dart';
 import '../widgets/tariff_agreements_button.dart';
@@ -64,10 +65,12 @@ class TariffChangeModal extends StatelessWidget {
                   color: AppColors.opacityBase16,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.info_outline,
-                  size: 48,
-                  color: const Color(0xFF9596A3),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/info_circle.svg',
+                    width: 48,
+                    height: 48,
+                  ),
                 ),
               ),
               

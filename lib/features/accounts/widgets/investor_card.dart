@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/widgets/tariff_row.dart';
+import '../../tariff/screens/tariffs_sheet.dart';
 
 class InvestorCard extends StatelessWidget {
   const InvestorCard({super.key});
@@ -18,9 +19,15 @@ class InvestorCard extends StatelessWidget {
         children: [
           TariffRow(
             title: 'Инвестор',
-            subtitle: 'Текущий тариф • с 23 дек 2023',
-            icon: Icons.show_chart,
-            gradient: const [Color(0xFF9C27B0), Color(0xFFE91E63)],
+            subtitle: 'Бесплатно • с 23 дек 2023',
+            svgIcon: 'assets/icons/chart_forest.svg',
+            iconSize: 20.5,
+            gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const TariffsScreen(),
+              ),
+            ),
           ),
         ],
       ),

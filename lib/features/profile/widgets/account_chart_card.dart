@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../../../features/tariff/widgets/tariffs_modal.dart' show showTariffsModal;
+import '../../../features/tariff/widgets/tariffs_modal.dart' show navigateToTariffsScreen;
 import '../../../core/widgets/tariff_row.dart';
 import '../../../core/theme/appcolors.dart';
 
-class AccountCard extends StatelessWidget {
+class AccountChartCard extends StatelessWidget {
   final List<FlSpot> spots;
 
-  const AccountCard({super.key, required this.spots});
+  const AccountChartCard({super.key, required this.spots});
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +165,11 @@ class AccountCard extends StatelessWidget {
               children: [
                 TariffRow(
                   title: 'Инвестор',
-                  subtitle: 'Текущий тариф • с 23 дек 2023',
-                  icon: Icons.show_chart,
-                  gradient: const [Color(0xFF9C27B0), Color(0xFFE91E63)],
-                  onTap: () => showTariffsModal(context),
+                  subtitle: 'Бесплатно • с 23 дек 2023',
+                  svgIcon: 'assets/icons/chart_forest.svg',
+                  iconSize: 20.5,
+                  gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+                  onTap: () => navigateToTariffsScreen(context),
                 ),
               ],
             ),

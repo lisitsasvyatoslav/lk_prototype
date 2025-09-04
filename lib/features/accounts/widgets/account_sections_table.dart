@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../core/widgets/table_head_text.dart';
 import '../../../core/widgets/table_cell_text.dart';
+import '../../../core/theme/appcolors.dart';
 
 class AccountSectionsTable extends StatelessWidget {
   const AccountSectionsTable({super.key});
@@ -44,7 +45,7 @@ class AccountSectionsTable extends StatelessWidget {
                   ),
                 ),
                 if (i != rows.length - 1)
-                  const Divider(height: 1, color: Color(0xFFEBEBF2)),
+                  const Divider(height: 1, color: AppColors.borderBaseDefault),
               ],
             ],
           ),

@@ -1,108 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../widgets/tariffs_carousel.dart';
-import '../widgets/accordion_section.dart';
 import '../widgets/moscow_spb_table.dart';
 import '../widgets/compare_tariffs_card.dart';
 import '../widgets/scrollable_tabs.dart';
 import '../widgets/tariff_agreements_button.dart';
-import '../../../core/theme/colors.dart';
+import '../../../core/widgets/accordion_section.dart';
+import '../../../core/theme/appcolors.dart';
 import '../../../core/widgets/screen_header.dart';
 
-class TariffsSheet extends StatelessWidget {
-  const TariffsSheet({super.key});
+class TariffsScreen extends StatelessWidget {
+  const TariffsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Column(
-        children: [
-          ScreenHeader(title: 'Тарифы'),
-          
-          const SizedBox(height: 16),
-          
-          // Content sections below the card
-          Flexible(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Main tariff card
-                  TariffsCarousel(),
-                  
-                  const SizedBox(height: 24),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF2F4F6),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ScreenHeader(title: 'Тарифы'),
+            
+            const SizedBox(height: 16),
+            
+            // Content sections below the card
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Main tariff card
+                    TariffsCarousel(),
+                    
+                    const SizedBox(height: 24),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: const TariffAgreementsButton(),
-                  ),
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Main title
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: const Text(
-                      'Все условия тарифа\n"Долгосрочный портфель"',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textPrimary,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: const TariffAgreementsButton(),
+                    ),
+                    
+                    const SizedBox(height: 24),
+                    
+                    // Main title
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Все условия тарифа\n"Долгосрочный портфель"',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textBaseDefault,
+                        ),
                       ),
                     ),
-                  ),
-                  
-                  const SizedBox(height: 24),
-                  
-                  // Segmented control (tabs)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: const ScrollableTabs(),
-                  ),
-                  
-                  const SizedBox(height: 16),
-                  
-                  // Expandable sections
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: AccordionSection(
+                    
+                    const SizedBox(height: 8),
+                    
+                    // Description text
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Покупайте российские акции, облигации и фонды на Московской и СПБ биржах без брокерской комиссии и абонентской платы при любом обороте',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.textOnLightDefault,
+                        ),
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 24),
+                    
+                    // Segmented control (tabs)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: const ScrollableTabs(),
+                    ),
+                    
+                    const SizedBox(height: 16),
+                    
+                    // Expandable sections
+                    AccordionSection(
                       title: 'Московская биржа и СПБ Биржа',
-                      content: MoscowSPBTable(),
+                      child: MoscowSPBTable(),
+                      initiallyExpanded: false,
                     ),
-                  ),
-                  
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: AccordionSection(
+                    
+                    AccordionSection(
                       title: 'Московская биржа',
-                      content: MoscowSPBTable(),
+                      child: MoscowSPBTable(),
+                      initiallyExpanded: false,
                     ),
-                  ),
-                  
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: AccordionSection(
+                    
+                    AccordionSection(
                       title: 'NYSE, NASDAQ, HKEX',
-                      content: MoscowSPBTable(),
+                      child: MoscowSPBTable(),
+                      initiallyExpanded: false,
                     ),
-                  ),
-                  
-                  const SizedBox(height: 16),
-                  
-                  // Call-to-action card
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: CompareTariffsCard(),
-                  ),
-                  
-                  const SizedBox(height: 24),
-                ],
+                    
+                    const SizedBox(height: 16),
+                    
+                    // Call-to-action card
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: CompareTariffsCard(),
+                    ),
+                    
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

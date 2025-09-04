@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../screens/tariff_change_modal.dart';
 
 class TariffCard extends StatelessWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
+  final Widget icon;
   final List<Map<String, String>> services;
   final String maintenanceFee;
   final String buttonText;
   final bool isPersonalTariff;
+  final Color? iconBackgroundColor;
+  final double? iconSize;
 
   const TariffCard({
     super.key,
@@ -19,6 +22,8 @@ class TariffCard extends StatelessWidget {
     required this.maintenanceFee,
     required this.buttonText,
     this.isPersonalTariff = false,
+    this.iconBackgroundColor,
+    this.iconSize,
   });
 
   @override
@@ -44,16 +49,17 @@ class TariffCard extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    width: 48,
-                    height: 48,
+                    width: 70,
+                    height: 70,
                     decoration: BoxDecoration(
-                      color: Colors.orange.shade100,
+                      color: iconBackgroundColor ?? const Color(0xFFF9F9F9),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Icon(
-                      icon,
-                      color: Colors.orange.shade600,
-                      size: 24,
+                    child: Center(
+                      child: Transform.scale(
+                        scale: 1,
+                        child: icon,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -130,29 +136,6 @@ class TariffCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-              ),
-            ),
-          
-            const SizedBox(height: 16),
-            
-            SizedBox(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.compare_arrows,
-                    size: 16,
-                    color: Colors.grey.shade600,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Сравнение тарифов',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                ],
               ),
             ),
           ],

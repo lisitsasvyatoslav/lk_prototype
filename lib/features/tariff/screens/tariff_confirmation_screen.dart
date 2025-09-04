@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/widgets/screen_header.dart';
 import '../../../core/theme/appcolors.dart';
 
@@ -28,25 +29,10 @@ class TariffConfirmationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Иконка подтверждения
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: AppColors.textPositiveDefault.withOpacity(0.1),
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.textPositiveDefault.withOpacity(0.2),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.check,
-                      size: 60,
-                      color: AppColors.textPositiveDefault,
-                    ),
+                  SvgPicture.asset(
+                    'assets/icons/check_circle.svg',
+                    width: 48,
+                    height: 48,
                   ),
                   
                   const SizedBox(height: 24),
@@ -94,6 +80,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Автоследование',
@@ -105,7 +92,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          'Автоследование за опытными трейдерами',
+                          'Автоследование за опытными\nтрейдерами',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -116,8 +103,6 @@ class TariffConfirmationScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Место для будущей картинки
-                  const SizedBox(width: 80),
                 ],
               ),
             ),

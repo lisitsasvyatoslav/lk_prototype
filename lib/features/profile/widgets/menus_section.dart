@@ -23,16 +23,6 @@ class MenusSection extends StatelessWidget {
               onTap: () => debugPrint("Открыть подписку"),
             ),
             MenuItemData(
-              icon: Icons.account_balance_wallet_outlined,
-              title: "Управление счетами",
-              onTap: () => debugPrint("Открыть счета"),
-            ),
-            MenuItemData(
-              icon: Icons.email_outlined,
-              title: "Документы",
-              trailing: const Counter(text: "1"),
-            ),
-            MenuItemData(
               icon: Icons.description_outlined,
               title: "Документы",
               trailing: const Counter(text: "99+", isLarge: true),

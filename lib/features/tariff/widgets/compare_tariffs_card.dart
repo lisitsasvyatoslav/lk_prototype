@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
 
 class CompareTariffsCard extends StatelessWidget {
   const CompareTariffsCard({super.key});
@@ -19,7 +18,7 @@ class CompareTariffsCard extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.grey300, width: 1),
+        border: Border.all(color: const Color(0xFFD1D5DB), width: 1),
       ),
       child: Row(
         children: [
@@ -32,7 +31,7 @@ class CompareTariffsCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
+                    color: const Color(0xFF303441),
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -41,7 +40,7 @@ class CompareTariffsCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: AppColors.textSecondary,
+                    color: const Color(0xFF5E6472),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -52,7 +51,7 @@ class CompareTariffsCard extends StatelessWidget {
                       vertical: 8,
                       horizontal: 8,
                     ),
-                    side: BorderSide(color: AppColors.grey400),
+                    side: BorderSide(color: const Color(0xFF9CA3AF)),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -62,7 +61,7 @@ class CompareTariffsCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.textPrimary,
+                      color: const Color(0xFF303441),
                     ),
                   ),
                 ),

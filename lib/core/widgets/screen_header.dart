@@ -31,15 +31,6 @@ class ScreenHeader extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 8),
-        Container(
-          width: 36,
-          height: 4,
-          decoration: BoxDecoration(
-            color: const Color(0x00000000),
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 12),
         
         Container(
           height: 44,

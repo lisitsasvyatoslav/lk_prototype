@@ -4,7 +4,7 @@ import '../../../core/widgets/tariff_row.dart';
 import '../../../core/widgets/screen_header.dart';
 import 'sms_confirmation_screen.dart';
 import '../../../core/theme/appcolors.dart';
-
+// top to bottom, #F9F9F9 to #DFE4ED
 class TariffChangeScreen extends StatelessWidget {
   final String currentTariff;
   final String newTariff;
@@ -30,12 +30,10 @@ class TariffChangeScreen extends StatelessWidget {
       body: Column(
         children: [
           ScreenHeader(title: 'Смена тарифа'),
-          
-          const SizedBox(height: 16),
           // Верхняя половина - тарифы
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   // Текущий тариф
@@ -49,8 +47,9 @@ class TariffChangeScreen extends StatelessWidget {
                         TariffRow(
                             title: 'Инвестор',
                             subtitle: 'Бесплатно • с 23 дек 2023',
-                            icon: Icons.show_chart,
-                            gradient: const [Color(0xFF9C27B0), Color(0xFFE91E63)],
+                            svgIcon: 'assets/icons/chart_forest.svg',
+                            iconSize: 20.5,
+                            gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
                         ),
                         ],
                     ),
@@ -80,8 +79,9 @@ class TariffChangeScreen extends StatelessWidget {
                     child: TariffRow(
                       title: newTariff,
                       subtitle: '$newTariffCost • $newTariffDate',
-                      icon: Icons.account_balance_wallet,
-                      gradient: const [Colors.lightGreen, Colors.green],
+                      svgIcon: 'assets/icons/wallet_transfer_send.svg',
+                      iconSize: 22.8,
+                      gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
                     ),
                   ),
                 ],
@@ -91,7 +91,7 @@ class TariffChangeScreen extends StatelessWidget {
           
           // Нижняя половина - информация и кнопки
           Container(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 // Информационный текст
@@ -106,7 +106,7 @@ class TariffChangeScreen extends StatelessWidget {
                   ),
                 ),
                 
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 
                 // Кнопка "Отменить смену тарифа"
                 SizedBox(

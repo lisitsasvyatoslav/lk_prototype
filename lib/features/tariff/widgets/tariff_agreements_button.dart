@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
 import '../../agreements/widgets/agreements_modal.dart';
 
 class TariffAgreementsButton extends StatelessWidget {
@@ -9,7 +8,7 @@ class TariffAgreementsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: TextButton.icon(
-        onPressed: () => showAgreementsModal(context),
+        onPressed: () => navigateToAgreementsScreen(context),
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
           minimumSize: Size.zero,
@@ -18,14 +17,14 @@ class TariffAgreementsButton extends StatelessWidget {
         icon: const Icon(
           Icons.description_outlined,
           size: 20,
-          color: AppColors.grey500,
+          color: const Color(0xFF6B7280),
         ),
         label: const Text(
           'Соглашения по тарифу',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
-            color: AppColors.grey500,
+            color: const Color(0xFF6B7280),
           ),
         ),
       ),

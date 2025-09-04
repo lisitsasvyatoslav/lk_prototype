@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
 
 class LearningMenuCard extends StatelessWidget {
@@ -17,20 +18,20 @@ class LearningMenuCard extends StatelessWidget {
       child: Column(
         children: [
           _MenuRow(
-            leading: Icon(
-              CupertinoIcons.gift_fill,
-              color: AppColors.iconBrandDefault,
-              size: 24,
+            leading: SvgPicture.asset(
+              'assets/icons/reward_first.svg',
+              width: 24,
+              height: 24,
             ),
             title: 'Тестирования для инвесторов',
             subtitle: '2 из 4 тестов пройдено',
           ),
           divider,
           _MenuRow(
-            leading: Icon(
-              CupertinoIcons.doc,
-              color: AppColors.iconBrandDefault,
-              size: 24,
+            leading: SvgPicture.asset(
+              'assets/icons/book_center_learning.svg',
+              width: 24,
+              height: 24,
             ),
             title: 'Центр обучения',
           ),

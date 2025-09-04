@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../widgets/index.dart';
 import '../../../core/theme/appcolors.dart';
+import '../widgets/account_chart_card.dart';
+import '../../accounts/widgets/account_list_item.dart';
+import '../../accounts/screens/account_details_modal.dart';
+import '../../tariff/screens/tariffs_sheet.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -23,38 +27,75 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 16),
           AccountCarousel(
             cards: [
-              AccountCard(
-                spots: [
-                  FlSpot(0, 25),
-                  FlSpot(1, 21),
-                  FlSpot(2, 22),
-                  FlSpot(3, 15),
-                  FlSpot(4, 15),
-                  FlSpot(5, 17),
-                  FlSpot(6, 11),
-                ],
+              AccountListItem(
+                balance: '1 593 742,90 ₽',
+                changeText: '−2947,23 ₽',
+                changeColor: AppColors.textNegativeDefault,
+                number: '15185RI112B',
+                subtitle: 'Деньги на ветер',
+                isFavorite: true,
+                tariffType: TariffType.premium,
+                tariffTitle: 'Премиум',
+                tariffSubtitle: 'Текущий тариф',
+                onTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => AccountDetailsScreen(
+                      title: 'Деньги на ветер',
+                      number: '15185RI112B',
+                    ),
+                  ),
+                ),
+                onTariffTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TariffsScreen(),
+                  ),
+                ),
               ),
-              AccountCard(
-                spots: [
-                  FlSpot(0, 15),
-                  FlSpot(1, 15),
-                  FlSpot(2, 15),
-                  FlSpot(3, 15),
-                  FlSpot(4, 15),
-                  FlSpot(5, 15),
-                  FlSpot(6, 15),
-                ],
+              AccountListItem(
+                balance: '448 742,90 ₽',
+                changeText: '+2947,23 ₽',
+                changeColor: AppColors.textPositiveDefault,
+                number: '15185RI112B',
+                subtitle: 'Demo',
+                tariffType: TariffType.portfolio,
+                tariffTitle: 'Долгосрочный портфель',
+                tariffSubtitle: 'Текущий тариф',
+                onTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => AccountDetailsScreen(
+                      title: 'Demo',
+                      number: '15185RI112B',
+                    ),
+                  ),
+                ),
+                onTariffTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TariffsScreen(),
+                  ),
+                ),
               ),
-              AccountCard(
-                spots: [
-                  FlSpot(0, 11),
-                  FlSpot(1, 17),
-                  FlSpot(2, 15),
-                  FlSpot(3, 15),
-                  FlSpot(4, 22),
-                  FlSpot(5, 21),
-                  FlSpot(6, 25),
-                ],
+              AccountListItem(
+                balance: '448 742,90 ₽',
+                changeText: '0,00 ₽',
+                changeColor: AppColors.textBaseSecondary,
+                number: '15185RI112B',
+                subtitle: 'Demo',
+                tariffType: TariffType.portfolio,
+                tariffTitle: 'Долгосрочный портфель',
+                tariffSubtitle: 'Текущий тариф',
+                onTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => AccountDetailsScreen(
+                      title: 'Demo',
+                      number: '15185RI112B',
+                    ),
+                  ),
+                ),
+                onTariffTap: (ctx) => Navigator.of(ctx).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TariffsScreen(),
+                  ),
+                ),
               ),
             ],
           ),

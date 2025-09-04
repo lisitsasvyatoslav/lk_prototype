@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/colors.dart';
 
 class ScrollableTabs extends StatelessWidget {
   const ScrollableTabs({super.key});
@@ -15,7 +14,7 @@ class ScrollableTabs extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
               margin: const EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
-                color: AppColors.grey300,
+                color: const Color(0xFFD1D5DB),
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: const [
                   BoxShadow(
@@ -33,7 +32,7 @@ class ScrollableTabs extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.grey800,
+                  color: const Color(0xFF1F2937),
                 ),
               ),
             ),
@@ -49,7 +48,7 @@ class ScrollableTabs extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.grey500,
+                  color: const Color(0xFF6B7280),
                 ),
               ),
             ),

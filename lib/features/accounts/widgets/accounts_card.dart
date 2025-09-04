@@ -1,7 +1,8 @@
-import 'account_row.dart';
+import 'account_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
+import '../../tariff/screens/tariffs_sheet.dart';
 import '../../../core/theme/appcolors.dart';
 
 class AccountsCard extends StatelessWidget {
@@ -9,68 +10,84 @@ class AccountsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const divider = Divider(height: 1, thickness: 1, color: Color(0xFFEAECEE));
-
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.bgBaseDefault,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          AccountRow(
-            balance: '1 593 742,90 ₽',
-            changeText: '−2947,23 ₽',
-            changeColor: AppColors.textNegativeDefault,
-            number: '15185RI112B',
-            subtitle: 'Деньги на ветер',
-            isFavorite: true,
-            onTap: (ctx) => showAccountDetailsModal(
-              ctx,
-              title: 'Деньги на ветер',
-              number: '15185RI112B',
+    return Column(
+      children: [
+        // Первый счет - Premium с отрицательным изменением
+        AccountListItem(
+          balance: '1 593 742,90 ₽',
+          changeText: '−2947,23 ₽',
+          changeColor: AppColors.textNegativeDefault,
+          number: '15185RI112B',
+          subtitle: 'Деньги на ветер',
+          isFavorite: true,
+          tariffType: TariffType.premium,
+          tariffTitle: 'Премиум',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Деньги на ветер',
+                number: '15185RI112B',
+              ),
             ),
           ),
-          divider,
-          AccountRow(
-            balance: '87 198 345,33 ₽',
-            changeText: '+2947,23 ₽',
-            changeColor: AppColors.textPositiveDefault,
-            number: '15185RI112B',
-            subtitle: 'КЛФ-918353',
-            badge: 'иис',
-            onTap: (ctx) => showAccountDetailsModal(
-              ctx,
-              title: 'КЛФ-918353',
-              number: '15185RI112B',
-              isIIS: true,
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
             ),
           ),
-          divider,
-          AccountRow(
-            balance: '448 742,90 ₽',
-            changeText: '−2947,23 ₽',
-            changeColor: AppColors.textNegativeDefault,
-            number: '15355R1',
-            subtitle: 'Demo',
-            secondaryLine: 'Действует до 26 сент 2025',
-            onTap: (ctx) => showAccountDetailsModal(
-              ctx,
-              title: 'Demo',
-              number: '15355R1',
+        ),
+        const SizedBox(height: 8),
+        // Второй счет - Portfolio с положительным изменением
+        AccountListItem(
+          balance: '448 742,90 ₽',
+          changeText: '+2947,23 ₽',
+          changeColor: AppColors.textPositiveDefault,
+          number: '15185RI112B',
+          subtitle: 'Demo',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Долгосрочный портфель',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Demo',
+                number: '15185RI112B',
+              ),
             ),
           ),
-        ],
-      ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Третий счет - Portfolio с нулевым изменением
+        AccountListItem(
+          balance: '448 742,90 ₽',
+          changeText: '0,00 ₽',
+          changeColor: AppColors.textBaseSecondary,
+          number: '15185RI112B',
+          subtitle: 'Demo',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Долгосрочный портфель',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Demo',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
-
-

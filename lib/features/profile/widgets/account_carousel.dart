@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import "../../../features/accounts/screens/accounts_list.dart" show showAccountsListModal;
+import "../../../features/accounts/screens/accounts_list.dart" show navigateToAccountsListScreen;
 import '../../../core/typography/text_16_medium.dart';
 import '../../../core/theme/appcolors.dart';
+import 'account_chart_card.dart';
+import '../../accounts/widgets/account_list_item.dart';
 
 class AccountCarousel extends StatefulWidget {
   final List<Widget> cards;
@@ -37,7 +39,7 @@ class _AccountCarouselState extends State<AccountCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final cardHeight = 201.0;
+    final cardHeight = 130.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -59,7 +61,7 @@ class _AccountCarouselState extends State<AccountCarousel> {
                 icon: const Icon(Icons.more_horiz, color: AppColors.iconBaseTertiary),
                 iconSize: 28,
                 onPressed: () {
-                  showAccountsListModal(context);
+                  navigateToAccountsListScreen(context);
                 },
               ),
             ],

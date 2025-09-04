@@ -3,6 +3,7 @@ import 'section_label.dart';
 import '../../../core/widgets/tariff_row.dart';
 import '../../../core/typography/text_12_regular.dart';
 import '../../../core/typography/text_12_medium.dart';
+import '../../tariff/screens/tariffs_sheet.dart';
 
 class IISSection extends StatelessWidget {
   const IISSection({super.key});
@@ -40,18 +41,34 @@ class IISSection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              TariffRow(
-                title: 'Инвестор',
-                subtitle: 'Текущий тариф • с 23 дек 2023',
-                icon: Icons.show_chart,
-                gradient: const [Color(0xFF9C27B0), Color(0xFFE91E63)],
+              Builder(
+                builder: (context) => TariffRow(
+                  title: 'Инвестор',
+                  subtitle: 'Текущий тариф • с 23 дек 2023',
+                  svgIcon: 'assets/icons/chart_forest.svg',
+                  iconSize: 20.5,
+                  gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TariffsScreen(),
+                    ),
+                  ),
+                ),
               ),
               const Divider(height: 1, color: Color(0xFFF0F1F4)),
-              TariffRow(
-                title: 'Долгосрочный портфель',
-                subtitle: 'Новый тариф • с 23 авг 2025',
-                icon: Icons.credit_card,
-                gradient: const [Color(0xFFB2FF59), Color(0xFF69F0AE)],
+              Builder(
+                builder: (context) => TariffRow(
+                  title: 'Долгосрочный портфель',
+                  subtitle: 'Новый тариф • с 23 авг 2025',
+                  svgIcon: 'assets/icons/wallet_transfer_send.svg',
+                  iconSize: 22.8,
+                  gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TariffsScreen(),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

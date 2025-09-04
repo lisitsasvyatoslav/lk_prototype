@@ -6,8 +6,8 @@ import '../../../core/widgets/screen_header.dart';
 import '../../../core/typography/text_18_semibold.dart';
 import '../../../core/theme/appcolors.dart';
 
-class AgreementsSheet extends StatelessWidget {
-  const AgreementsSheet({super.key});
+class AgreementsScreen extends StatelessWidget {
+  const AgreementsScreen({super.key});
 
   // Данные для дополнительных соглашений
   static const List<String> _additionalAgreements = [
@@ -21,71 +21,73 @@ class AgreementsSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Column(
-        children: [
-          ScreenHeader(title: 'Соглашения по тарифу'),
-          
-          const SizedBox(height: 16),
-          
-          Flexible(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Main agreement document card
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: AppColors.bgBaseDefault,
-                      borderRadius: BorderRadius.circular(12),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF2F4F6),
+      body: SafeArea(
+        child: Column(
+          children: [
+            ScreenHeader(title: 'Соглашения по тарифу'),
+            
+            const SizedBox(height: 16),
+            
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Main agreement document card
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: AppColors.bgBaseDefault,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: AgreementDocumentCard(
+                         title: 'Соглашение по тарифу инвестор от 17/09/23',
+                         date: '17 сен., 12:12',
+                         metadata: '09 августа, 20:07 • pdf',
+                         onTap: () {},
+                         showDivider: false,
+                       ),
                     ),
-                    child: AgreementDocumentCard(
-                       title: 'Соглашение по тарифу инвестор от 17/09/23',
-                       date: '17 сен., 12:12',
-                       metadata: '09 августа, 20:07 • pdf',
-                       onTap: () {},
-                       showDivider: false,
-                     ),
-                  ),
-                  
-                  const SizedBox(height: 32),
-                  
-                  // Additional agreements section
-                  Text18Semibold(
-                    text: 'Дополнительные соглашения',
-                    color: AppColors.textBaseDefault,
-                  ),
-                  
-                  const SizedBox(height: 12),
-                  
-                  // Additional agreements list in single block
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.bgBaseDefault,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.opacityBase16,
-                          blurRadius: 4,
-                          offset: const Offset(0, 1),
-                        ),
-                      ],
+                    
+                    const SizedBox(height: 32),
+                    
+                    // Additional agreements section
+                    Text18Semibold(
+                      text: 'Дополнительные соглашения',
+                      color: AppColors.textBaseDefault,
                     ),
-                    child: Column(
-                      children: _buildAdditionalAgreementsList(),
+                    
+                    const SizedBox(height: 12),
+                    
+                    // Additional agreements list in single block
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.bgBaseDefault,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.opacityBase16,
+                            blurRadius: 4,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: _buildAdditionalAgreementsList(),
+                      ),
                     ),
-                  ),
-                  
-                  const SizedBox(height: 24),
-                ],
+                    
+                    const SizedBox(height: 24),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
