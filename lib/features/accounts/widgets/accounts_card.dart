@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
 import '../../tariff/screens/tariffs_sheet.dart';
+import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../../core/theme/appcolors.dart';
 
 class AccountsCard extends StatelessWidget {
@@ -31,9 +32,20 @@ class AccountsCard extends StatelessWidget {
               ),
             ),
           ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreen(),
+          onTariffTap: (ctx) => showModalBottomSheet(
+            context: ctx,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => Container(
+              height: MediaQuery.of(context).size.height * 0.95,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF2F4F6),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: const PremiumTariffScreen(),
             ),
           ),
         ),

@@ -75,13 +75,13 @@ class _AccordionSectionState extends State<AccordionSection>
           onTap: _toggleExpanded,
           borderRadius: BorderRadius.circular(12),
           child: Padding(
-            padding: widget.titlePadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: widget.titlePadding ?? const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             child: Row(
               children: [
                 Expanded(
                   child: Text14Semibold(
                     widget.title,
-                    color: AppColors.textBaseSecondary,
+                    color: AppColors.textBaseDefault,
                   ),
                 ),
                 AnimatedBuilder(
@@ -108,7 +108,7 @@ class _AccordionSectionState extends State<AccordionSection>
             return SizeTransition(
               sizeFactor: _animation,
               child: Padding(
-                padding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+                padding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 0),
                 child: widget.child,
               ),
             );

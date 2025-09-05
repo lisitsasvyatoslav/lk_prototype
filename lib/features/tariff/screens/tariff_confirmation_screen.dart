@@ -67,49 +67,81 @@ class TariffConfirmationScreen extends StatelessWidget {
           
           // Баннер автоследования
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
-                 decoration: BoxDecoration(
-                 color: const Color(0xFFEDECF0),
-                 borderRadius: BorderRadius.circular(16),
-               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Автоследование',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textBaseDefault,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Автоследование за опытными\nтрейдерами',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.textBaseSecondary,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              height: 86, // Фиксированная высота баннера
+              decoration: BoxDecoration(
+                color: const Color(0xFFEDECF0),
+                borderRadius: BorderRadius.circular(16),
               ),
+               child: Stack(
+                 children: [
+                   // Image positioned at bottom right (background layer) - no padding
+                   Positioned(
+                     right: 0,
+                     bottom: 0,
+                     child: ClipRRect(
+                       borderRadius: const BorderRadius.only(
+                         topRight: Radius.circular(16),
+                         bottomRight: Radius.circular(16),
+                       ),
+                       child: Image.asset(
+                         '../../../../assets/images/autofollow_banner.png',
+                         width: 140,
+                         height: 86,
+                         fit: BoxFit.cover,
+                         errorBuilder: (context, error, stackTrace) {
+                           return Container(
+                             width: 140,
+                             height: 86,
+                             color: Colors.grey[300],
+                             child: const Center(
+                               child: Text(
+                                 'Изображение не найдено',
+                                 style: TextStyle(color: Colors.red, fontSize: 10),
+                               ),
+                             ),
+                           );
+                         },
+                       ),
+                     ),
+                   ),
+                   // Text content (foreground) - поверх изображения
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                     child: Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text(
+                           'Автоследование',
+                           style: TextStyle(
+                             fontSize: 14,
+                             fontWeight: FontWeight.w500,
+                             color: AppColors.textBaseDefault,
+                           ),
+                         ),
+                         const SizedBox(height: 4),
+                         Text(
+                           'Автоследование за опытными\nтрейдерами',
+                           style: TextStyle(
+                             fontSize: 12,
+                             fontWeight: FontWeight.w400,
+                             color: AppColors.textBaseSecondary,
+                             height: 1.3,
+                           ),
+                         ),
+                       ],
+                     ),
+                   ),
+                 ],
+               ),
             ),
           ),
           
           Container(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 // Кнопка "Вернуться к профилю"

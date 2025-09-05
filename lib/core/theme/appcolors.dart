@@ -15,7 +15,10 @@ class AppColors {
   static const bgBaseSecondary = Color(0xFFFAFAFC);
   static const bgBaseTertiary = Color(0xFFF2F2F7);
 
+  static const bgDisabledDefault = Color(0x14C0C0CC);
+
   static const borderBaseDefault = Color(0xFFEBEBF2);
+  static const borderBaseTertiary = Color(0xFFD3D3DE);
 
   // Positive
   static const textPositiveDefault = Color(0xFF1D9169);
@@ -91,4 +94,12 @@ class AppColors {
 
   // Button label text
   static const buttonLabelText = Color(0xFFE08F05);
+
+  // Gradient colors
+  static const gradientsTextSmallStart = Color(0xFFFDB938);
+  static const gradientsTextSmallEnd = Color(0xFFED6B51);
+
+  // Premium tariff colors
+  static const opacityBase0 = Color(0x00FFFFFF); // 0% opacity
+  static const bgBrandInverseHover = Color(0xFFF9A605);
 }

@@ -9,8 +9,21 @@ import '../../../core/widgets/accordion_section.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/widgets/screen_header.dart';
 
-class TariffsScreen extends StatelessWidget {
+class TariffsScreen extends StatefulWidget {
   const TariffsScreen({super.key});
+
+  @override
+  State<TariffsScreen> createState() => _TariffsScreenState();
+}
+
+class _TariffsScreenState extends State<TariffsScreen> {
+  String _currentTariffTitle = 'Долгосрочный портфель'; // Начальный тариф
+
+  void _onTariffChanged(String tariffTitle) {
+    setState(() {
+      _currentTariffTitle = tariffTitle;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,7 @@ class TariffsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Main tariff card
-                    TariffsCarousel(),
+                    TariffsCarousel(onTariffChanged: _onTariffChanged),
                     
                     const SizedBox(height: 24),
 
@@ -46,7 +59,7 @@ class TariffsScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Все условия тарифа\n"Долгосрочный портфель"',
+                        'Все условия тарифа\n"$_currentTariffTitle"',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -71,7 +84,6 @@ class TariffsScreen extends StatelessWidget {
                     ),
                     
                     const SizedBox(height: 24),
-                    
                     // Segmented control (tabs)
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -81,22 +93,27 @@ class TariffsScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     
                     // Expandable sections
-                    AccordionSection(
-                      title: 'Московская биржа и СПБ Биржа',
-                      child: MoscowSPBTable(),
-                      initiallyExpanded: false,
-                    ),
-                    
-                    AccordionSection(
-                      title: 'Московская биржа',
-                      child: MoscowSPBTable(),
-                      initiallyExpanded: false,
-                    ),
-                    
-                    AccordionSection(
-                      title: 'NYSE, NASDAQ, HKEX',
-                      child: MoscowSPBTable(),
-                      initiallyExpanded: false,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          AccordionSection(
+                            title: 'Московская биржа и СПБ Биржа',
+                            child: MoscowSPBTable(),
+                            initiallyExpanded: false,
+                          ),
+                          AccordionSection(
+                            title: 'Московская биржа',
+                            child: MoscowSPBTable(),
+                            initiallyExpanded: false,
+                          ),
+                          AccordionSection(
+                            title: 'NYSE, NASDAQ, HKEX',
+                            child: MoscowSPBTable(),
+                            initiallyExpanded: false,
+                          ),
+                        ],
+                      ),
                     ),
                     
                     const SizedBox(height: 16),

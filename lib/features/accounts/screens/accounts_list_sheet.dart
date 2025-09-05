@@ -21,12 +21,11 @@ class AccountsListScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 children: [
                   // Аккордеон "Брокерские счета"
                   AccordionSection(
                     title: 'Брокерские счета',
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 24),
                       child: AccountsCard(),
@@ -36,7 +35,6 @@ class AccountsListScreen extends StatelessWidget {
                   // Аккордеон "ИИС"
                   AccordionSection(
                     title: 'ИИС',
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 24),
                       child: InvestAccountsCard(),

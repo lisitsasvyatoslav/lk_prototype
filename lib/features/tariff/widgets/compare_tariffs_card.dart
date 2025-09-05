@@ -7,7 +7,6 @@ class CompareTariffsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -20,9 +19,11 @@ class CompareTariffsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFD1D5DB), width: 1),
       ),
-      child: Row(
+      child: Stack(
         children: [
-          Expanded(
+          // Text content (foreground)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12), // 12px padding + 238px for larger image
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -31,7 +32,8 @@ class CompareTariffsCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF303441),
+                    color: Color(0xFF303441),
+                    height: 1.2,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -40,7 +42,8 @@ class CompareTariffsCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
-                    color: const Color(0xFF5E6472),
+                    color: Color(0xFF5E6472),
+                    height: 1.3,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -66,6 +69,33 @@ class CompareTariffsCard extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          // Image positioned at bottom right (background layer) - no padding
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(16),
+              ),
+              child: Image.asset(
+                '../../../../assets/images/compare_tariffs.png',
+                width: 199,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: 199,
+                    color: Colors.grey[300],
+                    child: const Center(
+                      child: Text(
+                        'Изображение не найдено',
+                        style: TextStyle(color: Colors.red, fontSize: 10),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

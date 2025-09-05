@@ -8,6 +8,7 @@ import '../../../core/typography/text_10_regular.dart';
 import '../../../core/typography/text_12_regular.dart';
 import '../../../core/typography/text_12_medium.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../tariff/screens/premium_tariff_screen.dart';
 
 enum TariffType { premium, portfolio }
 
@@ -58,10 +59,18 @@ class AccountListItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
-            child: SvgPicture.asset(
-              'assets/icons/chart_forest.svg',
-              width: 20.5,
-              height: 20.5,
+            child: ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [AppColors.gradientsTextSmallStart, AppColors.gradientsTextSmallEnd],
+              ).createShader(bounds),
+              child: SvgPicture.asset(
+                'assets/icons/diamond.svg',
+                width: 20.5,
+                height: 20.5,
+                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+              ),
             ),
           ),
         );

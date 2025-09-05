@@ -10,7 +10,7 @@ class TariffAgreementsButton extends StatelessWidget {
       child: TextButton.icon(
         onPressed: () => navigateToAgreementsScreen(context),
         style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           minimumSize: Size.zero,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
