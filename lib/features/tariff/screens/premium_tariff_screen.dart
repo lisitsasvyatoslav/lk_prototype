@@ -173,6 +173,18 @@ class PremiumTariffScreen extends StatelessWidget {
                       child: MoscowSPBTable(),
                       initiallyExpanded: false,
                     ),
+                    
+                    AccordionSection(
+                      title: 'Московская биржа',
+                      child: MoscowSPBTable(),
+                      initiallyExpanded: false,
+                    ),
+                    
+                    AccordionSection(
+                      title: 'NYSE, NASDAQ, HKEX',
+                      child: MoscowSPBTable(),
+                      initiallyExpanded: false,
+                    ),
                   ],
                 ),
               ),

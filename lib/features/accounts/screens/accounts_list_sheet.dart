@@ -19,18 +19,48 @@ class AccountsListScreen extends StatelessWidget {
           children: [
             ScreenHeader(title: 'Счета'),
             const SizedBox(height: 8),
+            // Фиксированная шапка аккордиона "Брокерские счета"
+            Container(
+              color: const Color(0xFFF2F4F6),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: InkWell(
+                onTap: () {
+                  // Здесь можно добавить логику для переключения состояния аккордиона
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Брокерские счета',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textBaseDefault,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        CupertinoIcons.chevron_down,
+                        color: AppColors.iconBaseTertiary,
+                        size: 16,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Прокручиваемый контент
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 children: [
-                  // Аккордеон "Брокерские счета"
-                  AccordionSection(
-                    title: 'Брокерские счета',
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: AccountsCard(),
-                    ),
-                    initiallyExpanded: true,
+                  // Контент аккордиона "Брокерские счета"
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: AccountsCard(),
                   ),
                   // Аккордеон "ИИС"
                   AccordionSection(
