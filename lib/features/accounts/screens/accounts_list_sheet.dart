@@ -7,8 +7,15 @@ import '../../../core/widgets/accordion_section.dart';
 import '../../../core/widgets/screen_header.dart';
 import '../../../core/theme/appcolors.dart';
 
-class AccountsListScreen extends StatelessWidget {
+class AccountsListScreen extends StatefulWidget {
   const AccountsListScreen({super.key});
+
+  @override
+  State<AccountsListScreen> createState() => _AccountsListScreenState();
+}
+
+class _AccountsListScreenState extends State<AccountsListScreen> {
+  bool _isBrokerAccountsExpanded = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,9 @@ class AccountsListScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: InkWell(
                 onTap: () {
-                  // Здесь можно добавить логику для переключения состояния аккордиона
+                  setState(() {
+                    _isBrokerAccountsExpanded = !_isBrokerAccountsExpanded;
+                  });
                 },
                 borderRadius: BorderRadius.circular(12),
                 child: Padding(
@@ -42,10 +51,14 @@ class AccountsListScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Icon(
-                        CupertinoIcons.chevron_down,
-                        color: AppColors.iconBaseTertiary,
-                        size: 16,
+                      AnimatedRotation(
+                        turns: _isBrokerAccountsExpanded ? 0.5 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: Icon(
+                          CupertinoIcons.chevron_down,
+                          color: AppColors.iconBaseTertiary,
+                          size: 16,
+                        ),
                       ),
                     ],
                   ),
@@ -58,9 +71,16 @@ class AccountsListScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 children: [
                   // Контент аккордиона "Брокерские счета"
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 24),
-                    child: AccountsCard(),
+                  AnimatedCrossFade(
+                    duration: const Duration(milliseconds: 300),
+                    crossFadeState: _isBrokerAccountsExpanded
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                    firstChild: Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: AccountsCard(),
+                    ),
+                    secondChild: const SizedBox.shrink(),
                   ),
                   // Аккордеон "ИИС"
                   AccordionSection(

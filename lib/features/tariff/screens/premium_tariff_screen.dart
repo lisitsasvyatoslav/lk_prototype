@@ -17,14 +17,13 @@ class PremiumTariffScreen extends StatelessWidget {
       width: 70,
       height: 70,
       decoration: BoxDecoration(
-        gradient: const RadialGradient(
-          center: Alignment.center,
-          radius: 1,
-          stops: [0.0, 0.6, 1.0],
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
           colors: [
-            Color(0xFFFFFFFF), // Белый центр
-            Color(0xFFFFFFFF), // Очень светло-серый
-            Color(0xFFFFFFFF), // Светло-серый по краям
+            Color(0xFFFFFFFF), // Белый в верхнем левом углу
+            Color(0xFFF8F9FA), // Светло-серый в центре
+            Color(0xFFEDEDED), // Темнее в нижнем правом углу
           ],
         ),
         borderRadius: BorderRadius.circular(12),
@@ -33,25 +32,12 @@ class PremiumTariffScreen extends StatelessWidget {
           color: Color(0xFFE5E7EB),
         ),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.transparent,
-              Color(0xFFEDEDED),
-            ],
-          ),
-        ),
-        child: Center(
-          child: SvgPicture.asset(
-            'assets/icons/diamond.svg',
-            width: 38.2,
-            height: 33.42,
-            colorFilter: const ColorFilter.mode(AppColors.bgBrandInverseHover, BlendMode.srcIn),
-          ),
+      child: Center(
+        child: SvgPicture.asset(
+          'assets/icons/diamond.svg',
+          width: 38.2,
+          height: 33.42,
+          colorFilter: const ColorFilter.mode(AppColors.bgBrandInverseHover, BlendMode.srcIn),
         ),
       ),
     );
@@ -60,18 +46,25 @@ class PremiumTariffScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F4F6),
-      body: SafeArea(
-        child: Column(
-          children: [
-            ScreenHeader(title: 'Тариф Премиум'),
-            
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+      backgroundColor: Colors.transparent,
+      body: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+        child: Container(
+          color: const Color(0xFFF2F4F6),
+          child: SafeArea(
+            child: Column(
+              children: [
+                ScreenHeader(title: 'Тариф Премиум'),
+                
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
                     // Subtitle
                     Text(
                       'У вас персональный Премиум тариф',
@@ -84,10 +77,10 @@ class PremiumTariffScreen extends StatelessWidget {
                     ),
                     
                     const SizedBox(height: 24),
-                    // Premium icon
-                    Center(
-                      child: _buildPremiumIcon(),
-                    ),
+                                          // Premium icon
+                      Center(
+                        child: _buildPremiumIcon(),
+                      ),
                     
                     const SizedBox(height: 24),
                     
@@ -190,6 +183,8 @@ class PremiumTariffScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        ),
         ),
       ),
       bottomNavigationBar: Container(

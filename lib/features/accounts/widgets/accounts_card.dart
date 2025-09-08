@@ -110,8 +110,8 @@ class AccountsCard extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color(0xFFF2F4F6),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
               ),
               child: const PremiumTariffScreen(),
@@ -124,6 +124,81 @@ class AccountsCard extends StatelessWidget {
           balance: '448 742,90 ₽',
           changeText: '+2947,23 ₽',
           changeColor: AppColors.textPositiveDefault,
+          number: '15185RI112B',
+          subtitle: 'Demo',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Долгосрочный портфель',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Demo',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Третий счет - Portfolio с нулевым изменением
+        AccountListItem(
+          balance: '448 742,90 ₽',
+          changeText: '0,00 ₽',
+          changeColor: AppColors.textBaseSecondary,
+          number: '15185RI112B',
+          subtitle: 'Demo',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Долгосрочный портфель',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Demo',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Третий счет - Portfolio с нулевым изменением
+        AccountListItem(
+          balance: '448 742,90 ₽',
+          changeText: '0,00 ₽',
+          changeColor: AppColors.textBaseSecondary,
+          number: '15185RI112B',
+          subtitle: 'Demo',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Долгосрочный портфель',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: 'Demo',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // Третий счет - Portfolio с нулевым изменением
+        AccountListItem(
+          balance: '448 742,90 ₽',
+          changeText: '0,00 ₽',
+          changeColor: AppColors.textBaseSecondary,
           number: '15185RI112B',
           subtitle: 'Demo',
           tariffType: TariffType.portfolio,
