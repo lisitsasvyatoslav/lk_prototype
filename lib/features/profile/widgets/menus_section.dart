@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'custom_menu.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../accounts/widgets/index.dart';
+import '../../tariff/screens/tariffs_sheet.dart';
 
 class MenusSection extends StatelessWidget {
   const MenusSection({super.key});
@@ -21,6 +23,28 @@ class MenusSection extends StatelessWidget {
               title: "Подписка",
               trailing: const CustomBadge(text: "BASIC"),
               onTap: () => debugPrint("Открыть подписку"),
+            ),
+            MenuItemData(
+              icon: Icons.account_balance_wallet_outlined,
+              title: "Управление счетами",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AccountsListScreen(),
+                  ),
+                );
+              },
+            ),
+            MenuItemData(
+              icon: Icons.credit_card_outlined,
+              title: "Тарифы",
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const TariffsScreen(),
+                  ),
+                );
+              },
             ),
             MenuItemData(
               icon: Icons.description_outlined,

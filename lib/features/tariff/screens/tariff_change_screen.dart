@@ -12,6 +12,8 @@ class TariffChangeScreen extends StatelessWidget {
   final String newTariffCost;
   final String currentTariffDate;
   final String newTariffDate;
+  final String? selectedAccountId;
+  final String? selectedAccountName;
 
   const TariffChangeScreen({
     super.key,
@@ -21,6 +23,8 @@ class TariffChangeScreen extends StatelessWidget {
     required this.newTariffCost,
     required this.currentTariffDate,
     required this.newTariffDate,
+    this.selectedAccountId,
+    this.selectedAccountName,
   });
 
   @override
@@ -30,6 +34,33 @@ class TariffChangeScreen extends StatelessWidget {
       body: Column(
         children: [
           ScreenHeader(title: 'Смена тарифа'),
+          
+          // Информация о выбранном счете
+          if (selectedAccountId != null && selectedAccountName != null)
+            Container(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Text(
+                    'Вы меняете тариф на счете',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.textBaseSecondary,
+                    ),
+                  ),
+                  Text(
+                    selectedAccountId!,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textBaseDefault,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          
           // Верхняя половина - тарифы
           Expanded(
             child: Padding(

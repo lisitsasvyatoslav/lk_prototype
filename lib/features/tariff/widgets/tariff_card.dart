@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../screens/tariff_change_modal.dart';
+import '../screens/account_selection_modal.dart';
+import '../../../core/theme/appcolors.dart';
 
 class TariffCard extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String description;
+  final String price;
+  final String priceDetail;
   final Widget icon;
-  final List<Map<String, String>> services;
-  final String maintenanceFee;
   final String buttonText;
   final bool isPersonalTariff;
   final Color? iconBackgroundColor;
@@ -17,9 +20,10 @@ class TariffCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.subtitle,
+    required this.description,
+    required this.price,
+    required this.priceDetail,
     required this.icon,
-    required this.services,
-    required this.maintenanceFee,
     required this.buttonText,
     this.isPersonalTariff = false,
     this.iconBackgroundColor,
@@ -41,89 +45,101 @@ class TariffCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Иконка
             Center(
-              child: Column(
-                children: [
-                  Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: iconBackgroundColor ?? const Color(0xFFF9F9F9),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Transform.scale(
-                        scale: 1,
-                        child: icon,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF303441),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    subtitle,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF5E6472),
-                    ),
-                  ),
-                ],
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: iconBackgroundColor ?? const Color(0xFFF9F9F9),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: icon,
+                ),
               ),
             ),
             
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             
-            ...services.map((service) => Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      service['name']!,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF303441),
-                      ),
-                    ),
-                    Text(
-                      service['fee']!,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF303441),
-                      ),
-                    ),
-                  ],
+            // Заголовок
+            Center(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textBaseDefault,
                 ),
-                const Divider(height: 24, color: Color(0xFFF0F1F4)),
-              ],
-            )),
+              ),
+            ),
             
+            const SizedBox(height: 12),
+            
+            // Описание
+            Center(
+              child: Text(
+                description,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textOnLightDefault,
+                  height: 1.3,
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 12),
+            
+            // Цена
+            Center(
+              child: Text(
+                price,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textPositiveDefault,
+                ),
+              ),
+            ),
+            
+            const Spacer(),
+            
+            // Детали цены
+            Center(
+              child: Text(
+                priceDetail,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textBaseSecondary,
+                ),
+              ),
+            ),
+
             const SizedBox(height: 16),
             
+            // Кнопка
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
-                onPressed: () => showTariffChangeModal(context, isPersonalTariff: isPersonalTariff),
+                onPressed: () => showAccountSelectionModal(context, tariffTitle: title),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey.shade200,
-                  foregroundColor: const Color(0xFF303441),
+                  backgroundColor: const Color(0xFFF3F4F6),
+                  foregroundColor: const Color(0xFF000000),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

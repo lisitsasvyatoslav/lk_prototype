@@ -29,5 +29,3 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/images/compare_tariffs.png
-    - assets/images/autofollow_banner.png

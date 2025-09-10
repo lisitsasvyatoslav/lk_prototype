@@ -9,15 +9,19 @@ import '../../tariff/screens/tariffs_sheet.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../accounts/screens/test_list.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfileScreenA extends StatelessWidget {
+  const ProfileScreenA({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    return SingleChildScrollView(
-        child: Column(
-        children: [
+    return Scaffold(
+      backgroundColor: AppColors.bgBaseTertiary,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
           const UserProfileBlock(
             avatarUrl: 'https://i.pravatar.cc/150?img=3',
             userName: 'Александр Воронов',
@@ -147,8 +151,11 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
-        ],
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

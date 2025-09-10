@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'features/profile/screens/profile_screen.dart';
+import 'features/profile/screens/profile_version_selector_screen.dart';
 import 'core/theme/appcolors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -80,13 +80,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-          child: ProfileScreen(),
-        ),
-      ),
-    );
+    return const ProfileVersionSelectorScreen();
   }
 }

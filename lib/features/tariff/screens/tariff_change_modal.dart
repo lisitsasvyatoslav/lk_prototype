@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/widgets/modal_header.dart';
 import 'tariff_change_screen.dart';
 import '../widgets/tariff_agreements_button.dart';
 
@@ -34,26 +35,10 @@ class TariffChangeModal extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-               Row(
-                 children: [
-                   const SizedBox(width: 48), // Заглушка для баланса
-                   const Expanded(
-                     child: Text(
-                       'Смена тарифа',
-                       textAlign: TextAlign.center,
-                       style: TextStyle(
-                         fontSize: 17,
-                         fontWeight: FontWeight.w500,
-                         color: Color(0xFF303441),
-                       ),
-                     ),
-                   ),
-                   IconButton(
-                     icon: const Icon(Icons.close, size: 24),
-                     onPressed: () => Navigator.of(context).pop(),
-                   ),
-                 ],
-               ),
+              ModalHeader(
+                title: 'Смена тарифа',
+                onClose: () => Navigator.of(context).pop(),
+              ),
               
               const SizedBox(height: 40),
               

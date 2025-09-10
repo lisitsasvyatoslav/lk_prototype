@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../typography/text_14_semibold.dart';
+import '../typography/text_18_semibold.dart';
 import '../theme/appcolors.dart';
 
 class AccordionSection extends StatefulWidget {
@@ -73,14 +73,14 @@ class _AccordionSectionState extends State<AccordionSection>
         // Заголовок аккордеона
         InkWell(
           onTap: _toggleExpanded,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(0),
           child: Padding(
-            padding: widget.titlePadding ?? const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+            padding: widget.titlePadding ?? const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
             child: Row(
               children: [
                 Expanded(
-                  child: Text14Semibold(
-                    widget.title,
+                  child: Text18Semibold(
+                    text: widget.title,
                     color: AppColors.textBaseDefault,
                   ),
                 ),
