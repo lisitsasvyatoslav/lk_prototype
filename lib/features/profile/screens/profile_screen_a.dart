@@ -114,6 +114,154 @@ class ProfileScreenA extends StatelessWidget {
                         ),
                       ),
                     ),
+                    AccountListItem(
+                      balance: '2 100 000,00 ₽',
+                      changeText: '+15 000,00 ₽',
+                      changeColor: AppColors.textPositiveDefault,
+                      number: '15185RI113C',
+                      subtitle: 'Инвестиционный',
+                      tariffType: TariffType.premium,
+                      tariffTitle: 'Премиум',
+                      tariffSubtitle: 'Текущий тариф',
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: 'Инвестиционный',
+                            number: '15185RI113C',
+                          ),
+                        ),
+                      ),
+                      onTariffTap: (ctx) => showModalBottomSheet(
+                        context: ctx,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => Container(
+                          height: MediaQuery.of(context).size.height * 0.95,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF2F4F6),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          child: const PremiumTariffScreen(),
+                        ),
+                      ),
+                    ),
+                    AccountListItem(
+                      balance: '750 000,00 ₽',
+                      changeText: '−5 000,00 ₽',
+                      changeColor: AppColors.textNegativeDefault,
+                      number: '15185RI114D',
+                      subtitle: 'Сберегательный',
+                      tariffType: TariffType.portfolio,
+                      tariffTitle: 'Долгосрочный портфель',
+                      tariffSubtitle: 'Текущий тариф',
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: 'Сберегательный',
+                            number: '15185RI114D',
+                          ),
+                        ),
+                      ),
+                      onTariffTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => const TariffsScreen(),
+                        ),
+                      ),
+                    ),
+                    AccountListItem(
+                      balance: '3 250 000,00 ₽',
+                      changeText: '+25 000,00 ₽',
+                      changeColor: AppColors.textPositiveDefault,
+                      number: '15185RI115E',
+                      subtitle: 'VIP Портфель',
+                      tariffType: TariffType.premium,
+                      tariffTitle: 'Премиум',
+                      tariffSubtitle: 'Текущий тариф',
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: 'VIP Портфель',
+                            number: '15185RI115E',
+                          ),
+                        ),
+                      ),
+                      onTariffTap: (ctx) => showModalBottomSheet(
+                        context: ctx,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => Container(
+                          height: MediaQuery.of(context).size.height * 0.95,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF2F4F6),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          child: const PremiumTariffScreen(),
+                        ),
+                      ),
+                    ),
+                    AccountListItem(
+                      balance: '890 000,00 ₽',
+                      changeText: '−12 500,00 ₽',
+                      changeColor: AppColors.textNegativeDefault,
+                      number: '15185RI116F',
+                      subtitle: 'Консервативный',
+                      tariffType: TariffType.portfolio,
+                      tariffTitle: 'Долгосрочный портфель',
+                      tariffSubtitle: 'Текущий тариф',
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: 'Консервативный',
+                            number: '15185RI116F',
+                          ),
+                        ),
+                      ),
+                      onTariffTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => const TariffsScreen(),
+                        ),
+                      ),
+                    ),
+                    AccountListItem(
+                      balance: '1 500 000,00 ₽',
+                      changeText: '+8 750,00 ₽',
+                      changeColor: AppColors.textPositiveDefault,
+                      number: '15185RI117G',
+                      subtitle: 'Агрессивный',
+                      tariffType: TariffType.premium,
+                      tariffTitle: 'Премиум',
+                      tariffSubtitle: 'Текущий тариф',
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: 'Агрессивный',
+                            number: '15185RI117G',
+                          ),
+                        ),
+                      ),
+                      onTariffTap: (ctx) => showModalBottomSheet(
+                        context: ctx,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => Container(
+                          height: MediaQuery.of(context).size.height * 0.95,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFF2F4F6),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          child: const PremiumTariffScreen(),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),

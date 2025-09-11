@@ -21,12 +21,20 @@ class _AccountCarouselState extends State<AccountCarousel>
   late Animation<double> _slideAnimation;
   bool _isAnimating = false;
   bool _isGoingBack = false;
+  
+  // Константы для оптимизации
+  static const double _cardHeight = 110.0;
+  static const double _animationDuration = 500.0;
+  static const int _maxVisibleCards = 3; // Максимум видимых карточек
+  
+  // Кэш для мемоизированных виджетов
+  final Map<int, Widget> _cachedCards = {};
 
   @override
   void initState() {
     super.initState();
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 500), // 0.5 секунды
+      duration: Duration(milliseconds: _animationDuration.round()),
       vsync: this,
     );
 
@@ -42,7 +50,16 @@ class _AccountCarouselState extends State<AccountCarousel>
   @override
   void dispose() {
     _animationController.dispose();
+    _cachedCards.clear();
     super.dispose();
+  }
+  
+  // Получение мемоизированной карточки для оптимизации
+  Widget _getCachedCard(int index) {
+    if (!_cachedCards.containsKey(index)) {
+      _cachedCards[index] = widget.cards[index];
+    }
+    return _cachedCards[index]!;
   }
 
   void _onSwipe(DragEndDetails details) {
@@ -99,7 +116,6 @@ class _AccountCarouselState extends State<AccountCarousel>
 
   @override
   Widget build(BuildContext context) {
-    final cardHeight = 110.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -130,11 +146,12 @@ class _AccountCarouselState extends State<AccountCarousel>
         GestureDetector(
           onHorizontalDragEnd: _onSwipe,
           child: SizedBox(
-            height: cardHeight + 40, // Увеличиваем высоту для стопки карточек
+            height: _cardHeight + 40, // Увеличиваем высоту для стопки карточек
             child: Stack(
               children: [
-                // Третья карточка (самая нижняя)
-                if (widget.cards.length >= 3)
+                // Оптимизированная стопка карточек (только видимые + эффект глубины)
+                if (widget.cards.length >= 3) ...[
+                  // 3-я карточка (реальная)
                   Positioned(
                     top: 20,
                     left: 0,
@@ -150,31 +167,80 @@ class _AccountCarouselState extends State<AccountCarousel>
                           shadowColor: Colors.black.withOpacity(0.05),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: widget.cards[2],
+                            child: _getCachedCard(2),
                           ),
                         ),
                       ),
                     ),
                   ),
+                  
+                  // Эффект стопки для дополнительных карточек (4-я и далее)
+                  if (widget.cards.length > 3)
+                    Positioned(
+                      top: 22,
+                      left: 0,
+                      right: 0,
+                      child: Transform.scale(
+                        scale: 0.84,
+                        child: Opacity(
+                          opacity: 0.3,
+                          child: Material(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                            elevation: 1,
+                            shadowColor: Colors.black.withOpacity(0.03),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                height: _cardHeight,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.grey.withOpacity(0.1),
+                                      Colors.grey.withOpacity(0.05),
+                                    ],
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '+${widget.cards.length - 3}',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
                 
-                // Вторая карточка (средняя)
+                // Вторая карточка (средняя) - с RepaintBoundary для оптимизации
                 if (widget.cards.length >= 2)
                   Positioned(
                     top: 10,
                     left: 0,
                     right: 0,
-                    child: Transform.scale(
-                      scale: 0.9,
-                      child: Opacity(
-                        opacity: 0.7,
-                        child: Material(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                          elevation: 4,
-                          shadowColor: Colors.black.withOpacity(0.1),
-                          child: ClipRRect(
+                    child: RepaintBoundary(
+                      child: Transform.scale(
+                        scale: 0.9,
+                        child: Opacity(
+                          opacity: 0.7,
+                          child: Material(
+                            color: Colors.transparent,
                             borderRadius: BorderRadius.circular(20),
-                            child: widget.cards[1],
+                            elevation: 4,
+                            shadowColor: Colors.black.withOpacity(0.1),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: _getCachedCard(1),
+                            ),
                           ),
                         ),
                       ),
@@ -202,7 +268,7 @@ class _AccountCarouselState extends State<AccountCarousel>
                               shadowColor: Colors.black.withOpacity(0.1 + (0.05 * _slideAnimation.value)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: widget.cards[nextIndex],
+                                child: _getCachedCard(nextIndex),
                               ),
                             ),
                           ),
@@ -232,7 +298,7 @@ class _AccountCarouselState extends State<AccountCarousel>
                               shadowColor: Colors.black.withOpacity(0.05 + (0.1 * _slideAnimation.value)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: widget.cards[prevIndex],
+                                child: _getCachedCard(prevIndex),
                               ),
                             ),
                           ),
@@ -249,28 +315,30 @@ class _AccountCarouselState extends State<AccountCarousel>
                       top: 0,
                       left: 0,
                       right: 0,
-                      child: Transform.translate(
-                        offset: Offset(
-                          _slideAnimation.value * 400 * 
-                          (widget.cards.length > 1 ? 1 : 0) *
-                          (_isGoingBack ? -1 : 1), // Уходит влево при движении назад
-                          0,
-                        ),
-                        child: Transform.scale(
-                          scale: 1.0 - (_slideAnimation.value * 0.1),
-                          child: Transform.rotate(
-                            angle: _slideAnimation.value * 0.3 * (_isGoingBack ? -1 : 1), // Поворот в зависимости от направления
-                            child: Material(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(20),
-                              elevation: 8,
-                              shadowColor: Colors.black.withOpacity(0.15),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: widget.cards[_currentPage],
-                              ),
-                            ),
+                      child: RepaintBoundary(
+                        child: Transform.translate(
+                          offset: Offset(
+                            _slideAnimation.value * 400 * 
+                            (widget.cards.length > 1 ? 1 : 0) *
+                            (_isGoingBack ? -1 : 1), // Уходит влево при движении назад
+                            0,
                           ),
+                          child: Transform.scale(
+                            scale: 1.0 - (_slideAnimation.value * 0.1),
+                            child: Transform.rotate(
+                              angle: _slideAnimation.value * 0.3 * (_isGoingBack ? -1 : 1), // Поворот в зависимости от направления
+            child: Material(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(20),
+                                elevation: 8,
+                                shadowColor: Colors.black.withOpacity(0.15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                                child: _getCachedCard(_currentPage),
+              ),
+            ),
+          ),
+        ),
                         ),
                       ),
                     );
