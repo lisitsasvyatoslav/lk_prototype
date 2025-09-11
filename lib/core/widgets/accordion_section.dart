@@ -119,7 +119,7 @@ class _AccordionSectionState extends State<AccordionSection>
           const Divider(
             height: 1,
             thickness: 1,
-            color: AppColors.borderBaseDefault,
+            color: AppColors.borderBaseSecondary,
           ),
       ],
     );

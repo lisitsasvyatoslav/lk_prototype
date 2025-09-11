@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../screens/tariffs_sheet.dart';
+import '../screens/tariffs_sheet_a.dart';
 
 void navigateToTariffsScreen(BuildContext context) {
   Navigator.of(context).push(

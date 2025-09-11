@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/widgets/tariff_row.dart';
-import '../../tariff/screens/tariffs_sheet.dart';
+import '../../tariff/screens/tariffs_sheet_a.dart';
 
 class InvestorCard extends StatelessWidget {
   const InvestorCard({super.key});

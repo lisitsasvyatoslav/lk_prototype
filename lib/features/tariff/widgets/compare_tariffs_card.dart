@@ -79,8 +79,8 @@ class CompareTariffsCard extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(16),
               ),
-              child: Image.asset(
-                '../../../../assets/images/compare_tariffs.png',
+              child: Image(
+                image: AssetImage('assets/images/compare_tariffs.png'),
                 width: 199,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {

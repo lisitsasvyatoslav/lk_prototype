@@ -5,7 +5,7 @@ import '../../../core/theme/appcolors.dart';
 import '../widgets/account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
 import '../../accounts/screens/account_details_modal.dart';
-import '../../tariff/screens/tariffs_sheet.dart';
+import '../../tariff/screens/tariffs_sheet_a.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../accounts/screens/test_list.dart';
 

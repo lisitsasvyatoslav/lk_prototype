@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'custom_menu.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../accounts/widgets/index.dart';
-import '../../tariff/screens/tariffs_sheet.dart';
+import '../../tariff/screens/tariffs_sheet_a.dart';
 
 class MenusSection extends StatelessWidget {
   const MenusSection({super.key});

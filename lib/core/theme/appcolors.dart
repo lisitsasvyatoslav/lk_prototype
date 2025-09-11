@@ -18,6 +18,7 @@ class AppColors {
   static const bgDisabledDefault = Color(0x14C0C0CC);
 
   static const borderBaseDefault = Color(0xFFEBEBF2);
+  static const borderBaseSecondary = Color(0xFFDFDFE8);
   static const borderBaseTertiary = Color(0xFFD3D3DE);
 
   // Positive

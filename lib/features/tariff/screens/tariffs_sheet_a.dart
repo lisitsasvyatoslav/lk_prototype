@@ -158,69 +158,6 @@ class _TariffsScreenState extends State<TariffsScreen> {
                     
                     const SizedBox(height: 16),
                     
-                    // Main title
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Все условия тарифа\n"$_currentTariffTitle"',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.textBaseDefault,
-                        ),
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 8),
-                    
-                    // Description text
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        'Покупайте российские акции, облигации и фонды на Московской и СПБ биржах без брокерской комиссии и абонентской платы при любом обороте',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.textOnLightDefault,
-                        ),
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 24),
-                    // Segmented control (tabs)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: const ScrollableTabs(),
-                    ),
-                    
-                    const SizedBox(height: 16),
-                    
-                    // Expandable sections
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        children: [
-                          AccordionSection(
-                            title: 'Московская биржа и СПБ Биржа',
-                            child: MoscowSPBTable(),
-                            initiallyExpanded: false,
-                          ),
-                          AccordionSection(
-                            title: 'Московская биржа',
-                            child: MoscowSPBTable(),
-                            initiallyExpanded: false,
-                          ),
-                          AccordionSection(
-                            title: 'NYSE, NASDAQ, HKEX',
-                            child: MoscowSPBTable(),
-                            initiallyExpanded: false,
-                          ),
-                        ],
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 16),
-                    
                     // Call-to-action card
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -2,7 +2,7 @@ import 'account_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
-import '../../tariff/screens/tariffs_sheet.dart';
+import '../../tariff/screens/tariffs_sheet_a.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../../core/theme/appcolors.dart';
 

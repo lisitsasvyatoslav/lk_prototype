@@ -7,7 +7,7 @@ import '../widgets/tariff_agreements_button.dart';
 import '../../../core/widgets/accordion_section.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/widgets/screen_header.dart';
-import 'tariffs_sheet.dart';
+import 'tariffs_sheet_a.dart';
 
 class PremiumTariffScreen extends StatelessWidget {
   const PremiumTariffScreen({super.key});

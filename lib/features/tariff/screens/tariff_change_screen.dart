@@ -50,7 +50,7 @@ class TariffChangeScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    selectedAccountId!,
+                    selectedAccountName!,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,

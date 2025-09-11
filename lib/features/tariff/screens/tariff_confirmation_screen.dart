@@ -86,8 +86,8 @@ class TariffConfirmationScreen extends StatelessWidget {
                          topRight: Radius.circular(16),
                          bottomRight: Radius.circular(16),
                        ),
-                       child: Image.asset(
-                         '../../../../assets/images/autofollow_banner.png',
+                       child: Image(
+                         image: AssetImage('assets/images/autofollow_banner.png'),
                          width: 140,
                          height: 86,
                          fit: BoxFit.cover,
