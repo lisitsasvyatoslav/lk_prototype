@@ -127,10 +127,10 @@ class TariffChangeScreen extends StatelessWidget {
               children: [
                 // Информационный текст
                 Text(
-                  'Смена тарифа происходит на следующий день',
+                  'Смена тарифа происходит\nна следующий день',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: AppColors.textBaseSecondary,
                     height: 1.4,
