@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/widgets/modal_header.dart';
+import '../../../core/providers/account_provider.dart';
 import '../widgets/account_selection_card.dart';
 import 'tariff_change_screen.dart';
 
 void showAccountSelectionModal(
   BuildContext context, {
   required String tariffTitle,
-  Function(Map<String, dynamic>)? onAccountSelected,
 }) {
   showModalBottomSheet(
     context: context,
@@ -18,19 +19,16 @@ void showAccountSelectionModal(
     ),
     builder: (context) => AccountSelectionModal(
       tariffTitle: tariffTitle,
-      onAccountSelected: onAccountSelected,
     ),
   );
 }
 
 class AccountSelectionModal extends StatefulWidget {
   final String tariffTitle;
-  final Function(Map<String, dynamic>)? onAccountSelected;
   
   const AccountSelectionModal({
     super.key, 
     required this.tariffTitle,
-    this.onAccountSelected,
   });
 
   @override
@@ -38,7 +36,7 @@ class AccountSelectionModal extends StatefulWidget {
 }
 
 class _AccountSelectionModalState extends State<AccountSelectionModal> {
-  int _selectedAccountIndex = 1; // По умолчанию выбран второй счет
+  late int _selectedAccountIndex;
 
   final List<Map<String, dynamic>> _accounts = [
     {
@@ -84,6 +82,19 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // Находим индекс счета по имени из глобального состояния
+    final accountProvider = Provider.of<AccountProvider>(context, listen: false);
+    _selectedAccountIndex = _accounts.indexWhere(
+      (account) => account['name'] == accountProvider.selectedAccountName,
+    );
+    if (_selectedAccountIndex == -1) {
+      _selectedAccountIndex = 1; // По умолчанию второй счет
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -99,6 +110,7 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
               // Header
               ModalHeader(
                 title: 'Выберите счет',
+                subtitle: 'Тариф привязывается к счету',
                 onClose: () => Navigator.of(context).pop(),
               ),
               
@@ -147,29 +159,12 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                   onPressed: () {
                     final selectedAccount = _accounts[_selectedAccountIndex];
                     
-                    // Вызываем callback с выбранным счетом
-                    if (widget.onAccountSelected != null) {
-                      widget.onAccountSelected!(selectedAccount);
-                    }
+                    // Обновляем глобальное состояние
+                    final accountProvider = Provider.of<AccountProvider>(context, listen: false);
+                    accountProvider.selectAccountFromMap(selectedAccount);
                     
                     // Закрываем модальное окно выбора счета
                     Navigator.of(context).pop();
-                    
-                    // Открываем экран смены тарифа с данными о выбранном счете
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TariffChangeScreen(
-                          currentTariff: 'Инвестор',
-                          newTariff: 'Долгосрочный портфель',
-                          currentTariffCost: 'Бесплатно',
-                          newTariffCost: '200 ₽/мес',
-                          currentTariffDate: 'с 23 дек 2023',
-                          newTariffDate: 'с 23 авг 2025',
-                          selectedAccountId: selectedAccount['id'],
-                          selectedAccountName: selectedAccount['name'],
-                        ),
-                      ),
-                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonBgPrimaryDefault,
@@ -180,7 +175,7 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                     ),
                   ),
                   child: const Text(
-                    'Подключить тариф',
+                    'Выбрать счет',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,

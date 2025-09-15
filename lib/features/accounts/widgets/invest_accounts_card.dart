@@ -17,6 +17,7 @@ class InvestAccountsCard extends StatelessWidget {
           changeColor: AppColors.textNegativeDefault,
           number: '15185RI112B',
           subtitle: 'КЛФ-9182323',
+          showIISIcon: true,
           tariffType: TariffType.portfolio,
           tariffTitle: 'Долгосрочный портфель',
           tariffSubtitle: 'Текущий тариф',

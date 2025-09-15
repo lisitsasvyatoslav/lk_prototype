@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'features/profile/screens/profile_version_selector_screen.dart';
 import 'core/theme/appcolors.dart';
+import 'core/providers/account_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -27,42 +29,45 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme(),
-        brightness: Brightness.light,
-        primarySwatch: Colors.orange,
-        scaffoldBackgroundColor: AppColors.bgBaseTertiary,
-        colorScheme: ColorScheme.light(
-          primary: AppColors.bgBrandDefault,
-          onPrimary: AppColors.textOnBrandDefault,
-          secondary: AppColors.bgBaseSecondary,
-          onSecondary: AppColors.textBaseDefault,
-          surface: AppColors.bgBaseDefault,
-          onSurface: AppColors.textBaseDefault,
-          background: AppColors.bgBaseTertiary,
-          onBackground: AppColors.textBaseDefault,
+    return ChangeNotifierProvider(
+      create: (context) => AccountProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: GoogleFonts.interTextTheme(),
+          brightness: Brightness.light,
+          primarySwatch: Colors.orange,
+          scaffoldBackgroundColor: AppColors.bgBaseTertiary,
+          colorScheme: ColorScheme.light(
+            primary: AppColors.bgBrandDefault,
+            onPrimary: AppColors.textOnBrandDefault,
+            secondary: AppColors.bgBaseSecondary,
+            onSecondary: AppColors.textBaseDefault,
+            surface: AppColors.bgBaseDefault,
+            onSurface: AppColors.textBaseDefault,
+            background: AppColors.bgBaseTertiary,
+            onBackground: AppColors.textBaseDefault,
+          ),
         ),
-      ),
-      darkTheme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
-        brightness: Brightness.dark,
-        primarySwatch: Colors.orange,
-        scaffoldBackgroundColor: AppColors.bgBaseTertiary,
-        colorScheme: ColorScheme.dark(
-          primary: AppColors.bgBrandDefault,
-          onPrimary: AppColors.textOnBrandDefault,
-          secondary: AppColors.bgBaseSecondary,
-          onSecondary: AppColors.textBaseDefault,
-          surface: AppColors.bgInverseDefault,
-          onSurface: AppColors.textOnLightDefault,
-          background: AppColors.bgBaseTertiary,
-          onBackground: AppColors.textOnLightDefault,
+        darkTheme: ThemeData(
+          textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+          brightness: Brightness.dark,
+          primarySwatch: Colors.orange,
+          scaffoldBackgroundColor: AppColors.bgBaseTertiary,
+          colorScheme: ColorScheme.dark(
+            primary: AppColors.bgBrandDefault,
+            onPrimary: AppColors.textOnBrandDefault,
+            secondary: AppColors.bgBaseSecondary,
+            onSecondary: AppColors.textBaseDefault,
+            surface: AppColors.bgInverseDefault,
+            onSurface: AppColors.textOnLightDefault,
+            background: AppColors.bgBaseTertiary,
+            onBackground: AppColors.textOnLightDefault,
+          ),
         ),
+        themeMode: _themeMode,
+        home: MainScreen(toggleTheme: toggleTheme),
       ),
-      themeMode: _themeMode,
-      home: MainScreen(toggleTheme: toggleTheme),
     );
   }
 }

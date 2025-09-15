@@ -4,6 +4,16 @@ import '../screens/tariff_change_modal.dart';
 import '../screens/account_selection_modal.dart';
 import '../../../core/theme/appcolors.dart';
 
+class TariffCharacteristic {
+  final String name;
+  final String value;
+
+  const TariffCharacteristic({
+    required this.name,
+    required this.value,
+  });
+}
+
 class TariffCard extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -15,6 +25,7 @@ class TariffCard extends StatelessWidget {
   final bool isPersonalTariff;
   final Color? iconBackgroundColor;
   final double? iconSize;
+  final List<TariffCharacteristic> characteristics;
 
   const TariffCard({
     super.key,
@@ -28,6 +39,7 @@ class TariffCard extends StatelessWidget {
     this.isPersonalTariff = false,
     this.iconBackgroundColor,
     this.iconSize,
+    this.characteristics = const [],
   });
 
   @override
@@ -79,7 +91,7 @@ class TariffCard extends StatelessWidget {
               ),
             ),
             
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             
             // Описание
             Center(
@@ -97,46 +109,79 @@ class TariffCard extends StatelessWidget {
               ),
             ),
             
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             
             // Цена
             Center(
               child: Text(
                 price,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPositiveDefault,
+                  color: price == 'Бесплатно' 
+                    ? AppColors.textPositiveDefault 
+                    : AppColors.textOnBrandDefault,
                 ),
               ),
             ),
             
-            const Spacer(),
-            
-            // Детали цены
-            Center(
-              child: Text(
-                priceDetail,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.textBaseSecondary,
-                ),
-              ),
-            ),
-
             const SizedBox(height: 16),
+            
+            // Характеристики тарифа
+            if (characteristics.isNotEmpty) ...[
+              Column(
+                children: characteristics.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final characteristic = entry.value;
+                  
+                  return Container(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Color(0xFFE5E5E7),
+                          width: 0.5,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          characteristic.name,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.textBaseSecondary,
+                          ),
+                        ),
+                        Text(
+                          characteristic.value,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.textBaseDefault,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+              
+              const SizedBox(height: 16),
+            ],
             
             // Кнопка
             SizedBox(
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
-                onPressed: () => showAccountSelectionModal(context, tariffTitle: title),
+                onPressed: () => showAccountSelectionModal(
+                  context, 
+                  tariffTitle: title,
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFF3F4F6),
                   foregroundColor: const Color(0xFF000000),

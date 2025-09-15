@@ -24,6 +24,7 @@ class AccountListItem extends StatelessWidget {
   final TariffType? tariffType;
   final String? tariffTitle;
   final String? tariffSubtitle;
+  final bool showIISIcon;
   final void Function(BuildContext context)? onTap;
   final void Function(BuildContext context)? onTariffTap;
 
@@ -40,6 +41,7 @@ class AccountListItem extends StatelessWidget {
     this.tariffType,
     this.tariffTitle,
     this.tariffSubtitle,
+    this.showIISIcon = false,
     this.onTap,
     this.onTariffTap,
   });
@@ -154,6 +156,15 @@ class AccountListItem extends StatelessWidget {
                                 text: subtitle,
                                 color: AppColors.textBaseSecondary,
                               ),
+                              // Иконка ИИС после названия счета
+                              if (showIISIcon) ...[
+                                const SizedBox(width: 4),
+                                SvgPicture.asset(
+                                  'assets/icons/individual-invest.account.colored.24.svg',
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ],
                             ],
                           ),
                         ],

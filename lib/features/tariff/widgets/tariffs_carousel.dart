@@ -5,7 +5,10 @@ import 'tariff_card.dart';
 class TariffsCarousel extends StatefulWidget {
   final Function(String)? onTariffChanged;
   
-  const TariffsCarousel({super.key, this.onTariffChanged});
+  const TariffsCarousel({
+    super.key, 
+    this.onTariffChanged,
+  });
 
   @override
   State<TariffsCarousel> createState() => _TariffsCarouselState();
@@ -19,18 +22,23 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     {
       'title': 'Единый дневной',
       'subtitle': '177 ₽/мес',
-      'description': 'Для активных трейдеров, совершающих сделки ежедневно',
+      'description': 'Для активных трейдеров',
       'price': '177 ₽/мес',
       'priceDetail': 'от 0,0354% за операции',
       'icon': 'assets/icons/daily_tariff.svg',
       'buttonText': 'Подключить',
       'iconBackgroundColor': const Color(0x1AFFB23F), // #FFB23F 10%
       'iconSize': 41.4,
+      'characteristics': [
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0354%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0354%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0354%'),
+      ],
     },
     {
       'title': 'Долгосрочный портфель',
       'subtitle': 'Бесплатно',
-      'description': 'Для начинающих инвесторов, формирующих портфель. Для стратегии «купи и держи»',
+      'description': 'Для стратегии «Купи и держи»',
       'price': 'Бесплатно',
       'priceDetail': 'от 0% за покупку ценных бумаг',
       'icon': 'assets/icons/wallet_transfer_send.svg',
@@ -38,39 +46,59 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'isPersonalTariff': true,
       'iconBackgroundColor': const Color(0x1A6FFF22), // #6FFF22 10%
       'iconSize': 37.57,
+      'characteristics': [
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,1%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,45 Р'),
+      ],
     },
     {
       'title': 'Инвестор',
       'subtitle': '200 ₽/мес',
-      'description': 'Для опытных инвесторов с большим объемом операций. Максимально выгодные условия',
+      'description': 'Выгодная торговля на иностранных рынках',
       'price': '200 ₽/мес',
       'priceDetail': 'от 0,0154% за операции',
       'icon': 'assets/icons/chart_forest.svg',
       'buttonText': 'Подключить',
       'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
       'iconSize': 33.73,
+      'characteristics': [
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0154%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0154%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0154%'),
+      ],
     },
     {
       'title': 'Стартег',
       'subtitle': 'Бесплатно',
-      'description': 'Для долгосрочных целей и редких сделок',
+      'description': 'Для долгосрочных целей',
       'price': 'Бесплатно',
       'priceDetail': 'от 0,5% за сделки с ценными бумагами',
       'icon': 'assets/icons/rocket.24.svg',
       'buttonText': 'Подключить',
       'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
       'iconSize': 33.73,
+      'characteristics': [
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,5%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,5%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,5%'),
+      ],
     },
     {
       'title': 'Единый Консультанционный',
       'subtitle': '177 ₽/мес',
-      'description': 'С инвестидеями от профи',
+      'description': 'Инвестидет от профессионалов Финама',
       'price': '177 ₽/мес',
       'priceDetail': 'от 0,0354% за сделки с ценными бумагами',
       'icon': 'assets/icons/bubble.chart.24.svg',
       'buttonText': 'Подключить',
       'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
       'iconSize': 33.73,
+      'characteristics': [
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0354%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0354%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0354%'),
+      ],
     },
   ];
 
@@ -89,6 +117,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     iconBackgroundColor: data['iconBackgroundColor'],
     iconSize: data['iconSize'],
     isPersonalTariff: data['isPersonalTariff'] ?? false,
+    characteristics: (data['characteristics'] as List<TariffCharacteristic>?) ?? [],
   )).toList();
 
   @override
@@ -116,7 +145,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     return Column(
       children: [
         SizedBox(
-          height: 337,
+          height: 426,
           child: PageView.builder(
             controller: _pageController,
             itemBuilder: (context, index) {

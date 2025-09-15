@@ -30,7 +30,7 @@ class IISSection extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -55,7 +55,33 @@ class IISSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const Divider(height: 1, color: Color(0xFFF0F1F4)),
+              // Секция со стрелочкой и divider
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                child: Row(
+                  children: [
+                    // Контейнер для стрелочки шириной 40px
+                    Container(
+                      width: 40,
+                      child: Center(
+                        child: const Icon(
+                          Icons.arrow_downward,
+                          color: Color(0xFF9AA0AA),
+                          size: 16,
+                        ),
+                      ),
+                    ),
+                    // Divider занимает оставшуюся ширину
+                    Expanded(
+                      child: Container(
+                        height: 1,
+                        color: const Color(0xFFF0F1F4),
+                        margin: const EdgeInsets.only(left: 12),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Builder(
                 builder: (context) => TariffRow(
                   title: 'Долгосрочный портфель',

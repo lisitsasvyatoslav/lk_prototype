@@ -11,6 +11,8 @@ class ScreenHeader extends StatelessWidget {
   final Color? titleColor;
   final Color? subtitleColor;
   final Color? iconColor;
+  final bool isSubtitleClickable;
+  final VoidCallback? onSubtitlePressed;
 
   const ScreenHeader({
     super.key,
@@ -24,6 +26,8 @@ class ScreenHeader extends StatelessWidget {
     this.titleColor,
     this.subtitleColor,
     this.iconColor,
+    this.isSubtitleClickable = false,
+    this.onSubtitlePressed,
   });
 
   @override
@@ -73,14 +77,37 @@ class ScreenHeader extends StatelessWidget {
                     ),
                     if (subtitle != null) ...[
                       const SizedBox(height: 2),
-                      Text(
-                        subtitle!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: subtitleColor ?? const Color(0xFF9AA0AA),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+                      isSubtitleClickable
+                          ? GestureDetector(
+                              onTap: onSubtitlePressed,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    subtitle!,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: subtitleColor ?? const Color(0xFF9AA0AA),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 16,
+                                    color: subtitleColor ?? const Color(0xFF9AA0AA),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Text(
+                              subtitle!,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: subtitleColor ?? const Color(0xFF9AA0AA),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                     ],
                   ],
                 ),
