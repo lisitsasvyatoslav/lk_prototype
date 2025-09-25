@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
 
 class MenuItemData {
-  final IconData icon;
+  final IconData? icon;
+  final String? svgIcon;
   final String title;
   final Widget? trailing;
   final VoidCallback? onTap;
 
   const MenuItemData({
-    required this.icon,
+    this.icon,
+    this.svgIcon,
     required this.title,
     this.trailing,
     this.onTap,
-  });
+  }) : assert(icon != null || svgIcon != null, 'Either icon or svgIcon must be provided');
 }
 
 class CustomMenu extends StatelessWidget {
@@ -32,6 +35,7 @@ class CustomMenu extends StatelessWidget {
             .map(
               (item) => _MenuItem(
                 icon: item.icon,
+                svgIcon: item.svgIcon,
                 title: item.title,
                 trailing: item.trailing,
                 onTap: item.onTap,
@@ -44,17 +48,44 @@ class CustomMenu extends StatelessWidget {
 }
 
 class _MenuItem extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
+  final String? svgIcon;
   final String title;
   final Widget? trailing;
   final VoidCallback? onTap;
 
   const _MenuItem({
-    required this.icon,
+    this.icon,
+    this.svgIcon,
     required this.title,
     this.trailing,
     this.onTap,
   });
+
+  Widget _buildIcon() {
+    if (svgIcon != null) {
+      return SvgPicture.asset(
+        svgIcon!,
+        width: 24,
+        height: 24,
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          print('SVG Error: $error for path: $svgIcon');
+          return Container(
+            width: 24,
+            height: 24,
+            color: Colors.red.withOpacity(0.3),
+            child: const Center(
+              child: Text('!', style: TextStyle(fontSize: 12, color: Colors.red)),
+            ),
+          );
+        },
+      );
+    } else if (icon != null) {
+      return Icon(icon, color: AppColors.iconBaseDefault, size: 24);
+    }
+    return const SizedBox.shrink();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +97,7 @@ class _MenuItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: [
-            Icon(icon, color: AppColors.iconBaseDefault, size: 24),
+            _buildIcon(),
             const SizedBox(width: 16),
             Expanded(
               child: Text(

@@ -14,14 +14,232 @@ import '../../../core/providers/account_provider.dart';
 import 'account_selection_modal.dart';
 
 class TariffsScreen extends StatefulWidget {
-  const TariffsScreen({super.key});
+  final String? selectedTariff;
+  
+  const TariffsScreen({super.key, this.selectedTariff});
 
   @override
   State<TariffsScreen> createState() => _TariffsScreenState();
 }
 
 class _TariffsScreenState extends State<TariffsScreen> {
-  String _currentTariffTitle = 'Долгосрочный портфель'; // Начальный тариф
+  late String _currentTariffTitle;
+
+  // Данные для аккордионов по тарифам
+  final Map<String, Map<String, dynamic>> _accordionContent = {
+    'Единый дневной': {
+      'Комиссия по инструментам': [
+        {
+          'title': 'ЦБ Российских эмитентов',
+          'items': [
+            {'value': '0,0354 %', 'description': 'при обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+        {
+          'title': 'Фьючерсы',
+          'items': [
+            {'value': '0,45 ₽', 'description': 'за контракт'},
+          ],
+        },
+        {
+          'title': 'Драгоценные металлы',
+          'items': [
+            {'value': '0,05 %', 'description': 'при обороте до 1000000'},
+          ],
+        },
+        {
+          'title': 'Иностранные ценные бумаги',
+          'items': [
+            {'value': '0,0354 %', 'description': 'при обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+        {
+          'title': 'Валюта',
+          'items': [
+            {'value': '0,03682%', 'description': 'при обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+      ],
+      'Стоимость обслуживания': '177 ₽ в месяц (400 руб. - если СЧА менее 2000 руб.). Депозитарное обслуживание бесплатно для новых клиентов',
+      'Кому подходит': 'Для активных трейдеров с большим торговым оборотом',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта, драгоценные металлы, фьючерсы), внебиржевому рынку. Доступны длинные позиции и пониженное ГО на срочном рынке.',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные), валюта, драгоценные металлы, фьючерсы, опционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade (мобильное и веб), Transaq, MetaTrader, QUIK. Бесплатное пополнение счета.',
+    },
+    'Инвестор': {
+      'Комиссия по инструментам': [
+        {
+          'title': 'Московская биржа и СПБ Биржа',
+          'items': [
+            {'value': '0,035 %', 'description': 'при обороте в день до 1 млн ₽.'},
+            {'value': '0,28 %', 'description': 'комиссия брокера за продажу'},
+          ],
+        },
+        {
+          'title': 'Фьючерсы',
+          'items': [
+            {'value': '0,45 ₽', 'description': 'за контракт'},
+          ],
+        },
+        {
+          'title': 'Драгоценные металлы',
+          'items': [
+            {'value': '0,05 %', 'description': 'при обороте до 1000000'},
+          ],
+        },
+        {
+          'title': 'Иностранные ценные бумаги',
+          'items': [
+            {'value': '0,035 %', 'description': 'при обороте в день до 1 млн ₽'},
+          ],
+        },
+        {
+          'title': 'Валюта',
+          'items': [
+            {'value': '0,03682 %', 'description': 'при обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+      ],
+      'Стоимость обслуживания': '200 ₽ в месяц. Депозитарное обслуживание бесплатно для новых клиентов',
+      'Кому подходит': 'Для сделок на иностранных рынках. Выгодные условия для торговли на иностранных рынках',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта, драгоценные металлы, фьючерсы), внебиржевому рынку. Доступны длинные позиции и пониженное ГО на срочном рынке.',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные), валюта, драгоценные металлы, фьючерсы, опционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade (мобильное и веб), Transaq, MetaTrader, QUIK. Бесплатное пополнение счета.',
+    },
+    'Стратег': {
+      'Комиссия по инструментам': [
+        {
+          'title': 'ЦБ Российских эмитентов',
+          'items': [
+            {'value': '0,05%, мин. 50 ₽', 'description': 'за исполненное поручение.'},
+          ],
+        },
+        {
+          'title': 'Фьючерсы',
+          'items': [
+            {'value': '0,9 ₽', 'description': 'за контракт'},
+          ],
+        },
+        {
+          'title': 'Драгоценные металлы',
+          'items': [
+            {'value': '0,3 %', 'description': 'не включая оборот по сделкам своп'},
+          ],
+        },
+        {
+          'title': 'Иностранные ценные бумаги',
+          'items': [
+            {'value': '0,05%, мин. 50 ₽', 'description': 'за исполненное поручение.'},
+          ],
+        },
+        {
+          'title': 'Валюта',
+          'items': [
+            {'value': '0,03682%', 'description': 'при обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+      ],
+      'Стоимость обслуживания': 'Бесплатно. Депозитарное обслуживание бесплатно для новых клиентов',
+      'Кому подходит': 'Для долгосрочной стратегии, для редких сделок. Если редко инвестируете и планируете держать приобретённые активы',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта, драгоценные металлы, фьючерсы), внебиржевому рынку. Доступны длинные позиции и пониженное ГО на срочном рынке.',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные), валюта, драгоценные металлы, фьючерсы, опционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade (мобильное и веб), Transaq, MetaTrader, QUIK. Бесплатное пополнение счета.',
+    },
+    'Единый Консультационный': {
+      'Комиссия по инструментам': [
+        {
+          'title': 'ЦБ Российских эмитентов',
+          'items': [
+            {'value': '0,108324%', 'description': 'при обороте в день до 10 млн ₽'},
+          ],
+        },
+        {
+          'title': 'Фьючерсы',
+          'items': [
+            {'value': '4,65 ₽', 'description': 'за контракт'},
+          ],
+        },
+        {
+          'title': 'Драгоценные металлы',
+          'items': [
+            {'value': '0,3%', 'description': 'не включая оборот по сделкам своп'},
+          ],
+        },
+        {
+          'title': 'Иностранные ценные бумаги',
+          'items': [
+            {'value': '0,108324%', 'description': 'при обороте в день до 10 млн ₽'},
+          ],
+        },
+        {
+          'title': 'Валюта',
+          'items': [
+            {'value': '0,08262%', 'description': ''},
+          ],
+        },
+      ],
+      'Стоимость обслуживания': '177 ₽ в месяц (400 руб. - если СЧА менее 2000 руб.). Депозитарное обслуживание бесплатно для новых клиентов',
+      'Кому подходит': 'Для тех, кто хочет получать инвестиционные идеи, аналитику и консультационную поддержку от профессиональных трейдеров Финама',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта, драгоценные металлы, фьючерсы), внебиржевому рынку. Доступны длинные позиции и пониженное ГО на срочном рынке.',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные), валюта, драгоценные металлы, фьючерсы, опционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade (мобильное и веб), Transaq, MetaTrader, QUIK. Бесплатное пополнение счета.',
+    },
+    'Долгосрочный портфель': {
+      'Комиссия по инструментам': [
+        {
+          'title': 'ЦБ Российских эмитентов',
+          'items': [
+            {'value': '0 %', 'description': 'комиссия брокера за покупку'},
+            {'value': '0,28 %', 'description': 'комиссия брокера за продажу'},
+          ],
+        },
+        {
+          'title': 'Фьючерсы',
+          'items': [
+            {'value': '0,45 ₽', 'description': 'за контракт'},
+          ],
+        },
+        {
+          'title': 'Драгоценные металлы',
+          'items': [
+            {'value': '0,3 %', 'description': 'не включая оборот по сделкам своп'},
+          ],
+        },
+        {
+          'title': 'Иностранные ценные бумаги',
+          'items': [
+            {'value': '0 %', 'description': 'комиссия брокера за покупку'},
+            {'value': '0,28 %', 'description': 'комиссия брокера за продажу'},
+          ],
+        },
+        {
+          'title': 'Валюта',
+          'items': [
+            {'value': '0,03682%', 'description': 'при обороте в день до млн ₽ (мин. 41,3 ₽ за поручение)'},
+          ],
+        },
+      ],
+      'Стоимость обслуживания': 'Московская биржа и СПБ Бесплатно. Депозитарное обслуживание бесплатно для новых клиентов',
+      'Кому подходит': 'Для начинающих инвесторов, формирующих портфель. Инвестиции на годы, низкие комиссии. Покупка акции и облигации без комиссии брокера',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта, драгоценные металлы, фьючерсы), внебиржевому рынку. Доступны длинные позиции и пониженное ГО на срочном рынке',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные), валюта, драгоценные металлы, фьючерсы, опционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade (мобильное и веб), Transaq, MetaTrader, QUIK. Бесплатное пополнение счета.',
+    },
+    // Для остальных тарифов используем дефолтный контент
+    'default': {
+      'Стоимость обслуживания': 'Московская биржа и СПБ Бесплатно.\nДепозитарное обслуживание бесплатно для\nновых клиентов.',
+      'Кому подходит': 'Для начинающих инвесторов, формирующих\nпортфель. Инвестиции на годы, низкие комиссии.\nПокупка акций и облигаций без комиссии\nброкера.',
+      'Что входит в обслуживание/\nусловия': 'Доступ к МосБирже (ценные бумаги, валюта,\nдрагоценные металлы, фьючерсы),\nвнебиржевому рынку. Доступны длинные\nпозиции и пониженное ГО на срочном рынке.',
+      'Доступные инструменты/валюты': 'Ценные бумаги (российские и иностранные),\nвалюта, драгоценные металлы, фьючерсы,\nопционы',
+      'Дополнительные опции': 'Доступные торговые платформы: FinamTrade\n(мобильное и веб), Transaq, MetaTrader, QUIK.\nБесплатное пополнение счета.',
+    },
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _currentTariffTitle = widget.selectedTariff ?? 'Долгосрочный портфель';
+  }
 
   void _onTariffChanged(String tariffTitle) {
     setState(() {
@@ -29,10 +247,20 @@ class _TariffsScreenState extends State<TariffsScreen> {
     });
   }
 
+  dynamic _getAccordionContent(String accordionTitle) {
+    final tariffContent = _accordionContent[_currentTariffTitle] ?? _accordionContent['default']!;
+    return tariffContent[accordionTitle] ?? '';
+  }
+
   void _showAccountSelectionModal() {
+    // Определяем, является ли текущий тариф персональным
+    // Для примера считаем "Долгосрочный портфель" персональным тарифом
+    bool isPersonalTariff = _currentTariffTitle == 'Долгосрочный портфель';
+    
     showAccountSelectionModal(
       context,
       tariffTitle: _currentTariffTitle,
+      isPersonalTariff: isPersonalTariff,
     );
   }
 
@@ -64,6 +292,7 @@ class _TariffsScreenState extends State<TariffsScreen> {
                         // Main tariff card
                         TariffsCarousel(
                           onTariffChanged: _onTariffChanged,
+                          initialTariff: _currentTariffTitle,
                         ),
                         
                         const SizedBox(height: 24),
@@ -82,7 +311,11 @@ class _TariffsScreenState extends State<TariffsScreen> {
                             children: [
                               AccordionSection(
                                 title: 'Комиссия по инструментам',
-                                child: const CommissionsTable(),
+                                child: CommissionsTable(
+                                  commissionData: _getAccordionContent('Комиссия по инструментам') is List 
+                                    ? _getAccordionContent('Комиссия по инструментам') as List<Map<String, dynamic>>
+                                    : null,
+                                ),
                                 initiallyExpanded: false,
                                 contentPadding: EdgeInsets.zero,
                               ),
@@ -90,9 +323,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
                                 title: 'Стоимость обслуживания',
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: const Text(
-                                    'Московская биржа и СПБ Бесплатно.\nДепозитарное обслуживание бесплатно для\nновых клиентов.',
-                                    style: TextStyle(
+                                  child: Text(
+                                    _getAccordionContent('Стоимость обслуживания').toString(),
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textBaseDefault,
@@ -107,9 +340,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
                                 title: 'Кому подходит',
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: const Text(
-                                    'Для начинающих инвесторов, формирующих\nпортфель. Инвестиции на годы, низкие комиссии.\nПокупка акций и облигаций без комиссии\nброкера.',
-                                    style: TextStyle(
+                                  child: Text(
+                                    _getAccordionContent('Кому подходит').toString(),
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textBaseDefault,
@@ -124,9 +357,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
                                 title: 'Что входит в обслуживание/\nусловия',
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: const Text(
-                                    'Доступ к МосБирже (ценные бумаги, валюта,\nдрагоценные металлы, фьючерсы),\nвнебиржевому рынку. Доступны длинные\nпозиции и пониженное ГО на срочном рынке.',
-                                    style: TextStyle(
+                                  child: Text(
+                                    _getAccordionContent('Что входит в обслуживание/\nусловия').toString(),
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textBaseDefault,
@@ -141,9 +374,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
                                 title: 'Доступные инструменты/валюты',
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: const Text(
-                                    'Ценные бумаги (российские и иностранные),\nвалюта, драгоценные металлы, фьючерсы,\nопционы',
-                                    style: TextStyle(
+                                  child: Text(
+                                    _getAccordionContent('Доступные инструменты/валюты').toString(),
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textBaseDefault,
@@ -158,9 +391,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
                                 title: 'Дополнительные опции',
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(vertical: 12),
-                                  child: const Text(
-                                    'Доступные торговые платформы: FinamTrade\n(мобильное и веб), Transaq, MetaTrader, QUIK.\nБесплатное пополнение счета.',
-                                    style: TextStyle(
+                                  child: Text(
+                                    _getAccordionContent('Дополнительные опции').toString(),
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       color: AppColors.textBaseDefault,

@@ -14,12 +14,21 @@ class TariffConfirmationScreen extends StatelessWidget {
     required this.effectiveDate,
   });
 
+  String _getCurrentDate() {
+    final now = DateTime.now();
+    final day = now.day.toString().padLeft(2, '0');
+    final month = now.month.toString().padLeft(2, '0');
+    final year = now.year.toString();
+    return '$day.$month.$year';
+  }
+
   @override
   Widget build(BuildContext context) {
      return Scaffold(
        backgroundColor: AppColors.bgBaseTertiary,
       body: Column(
         children: [
+          SizedBox(height: 0),
           ScreenHeader(title: 'Подтверждение'),
           // Верхняя половина - контент
           Expanded(
@@ -52,7 +61,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                   
                   // Дата вступления в силу
                   Text(
-                    'Изменения вступят в силу $effectiveDate',
+                    'Изменения вступят в силу ${_getCurrentDate()}',
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,

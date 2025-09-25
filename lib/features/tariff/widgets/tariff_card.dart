@@ -26,6 +26,7 @@ class TariffCard extends StatelessWidget {
   final Color? iconBackgroundColor;
   final double? iconSize;
   final List<TariffCharacteristic> characteristics;
+  final String? iconPath;
 
   const TariffCard({
     super.key,
@@ -40,6 +41,7 @@ class TariffCard extends StatelessWidget {
     this.iconBackgroundColor,
     this.iconSize,
     this.characteristics = const [],
+    this.iconPath,
   });
 
   @override
@@ -181,6 +183,11 @@ class TariffCard extends StatelessWidget {
                 onPressed: () => showAccountSelectionModal(
                   context, 
                   tariffTitle: title,
+                  isPersonalTariff: isPersonalTariff,
+                  tariffPrice: price,
+                  tariffIcon: iconPath,
+                  tariffIconSize: iconSize,
+                  tariffIconBackgroundColor: iconBackgroundColor,
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFF3F4F6),

@@ -14,18 +14,18 @@ class MenusSection extends StatelessWidget {
         CustomMenu(
           items: [
             MenuItemData(
-              icon: Icons.person_outline,
+              svgIcon: 'assets/icons/person.svg',
               title: "Личный кабинет",
               onTap: () => debugPrint("Открыть личный кабинет"),
             ),
             MenuItemData(
-              icon: Icons.currency_ruble_outlined,
+              svgIcon: 'assets/icons/ruble_coin.svg',
               title: "Подписка",
               trailing: const CustomBadge(text: "BASIC"),
               onTap: () => debugPrint("Открыть подписку"),
             ),
             MenuItemData(
-              icon: Icons.account_balance_wallet_outlined,
+              svgIcon: 'assets/icons/wallet.svg',
               title: "Управление счетами",
               onTap: () {
                 Navigator.of(context).push(
@@ -36,7 +36,7 @@ class MenusSection extends StatelessWidget {
               },
             ),
             MenuItemData(
-              icon: Icons.credit_card_outlined,
+              svgIcon: 'assets/icons/tariffs.svg',
               title: "Тарифы",
               onTap: () {
                 Navigator.of(context).push(
@@ -47,7 +47,12 @@ class MenusSection extends StatelessWidget {
               },
             ),
             MenuItemData(
-              icon: Icons.description_outlined,
+              svgIcon: 'assets/icons/envelope.svg',
+              title: "Уведомления",
+              trailing: const Counter(text: "1", isLarge: true),
+            ),
+            MenuItemData(
+              svgIcon: 'assets/icons/doc.svg',
               title: "Документы",
               trailing: const Counter(text: "99+", isLarge: true),
             ),
@@ -57,7 +62,7 @@ class MenusSection extends StatelessWidget {
         CustomMenu(
           items: [
             MenuItemData(
-              icon: Icons.settings,
+              svgIcon: 'assets/icons/cog.svg',
               title: "Настройки приложения",
               onTap: () => debugPrint("Открыть настройки приложения"),
             ),
@@ -67,22 +72,22 @@ class MenusSection extends StatelessWidget {
         CustomMenu(
           items: [
             MenuItemData(
-              icon: Icons.mobile_friendly_outlined,
+              svgIcon: 'assets/icons/phone_magic.svg',
               title: "Возможности FinamTrade",
               onTap: () => debugPrint("Возможности FinamTrade"),
             ),
             MenuItemData(
-              icon: Icons.help_outline,
+              svgIcon: 'assets/icons/question_circle.svg',
               title: "Частые вопросы",
               onTap: () => debugPrint("Частые вопросы"),
             ),
             MenuItemData(
-              icon: Icons.star_border,
+              svgIcon: 'assets/icons/star_outlined.svg',
               title: "Оценить приложение",
               onTap: () => debugPrint("Оценить приложение"),
             ),
             MenuItemData(
-              icon: Icons.share_outlined,
+              svgIcon: 'assets/icons/share.svg',
               title: "Поделиться приложением",
               onTap: () => debugPrint("Поделиться приложением"),
             ),
@@ -92,17 +97,17 @@ class MenusSection extends StatelessWidget {
         CustomMenu(
           items: [
             MenuItemData(
-              icon: Icons.description_outlined,
+              svgIcon: 'assets/icons/doc.svg',
               title: "Пользовательское соглашение",
               onTap: () => debugPrint("Пользовательское соглашение"),
             ),
             MenuItemData(
-              icon: Icons.description_outlined,
+              svgIcon: 'assets/icons/doc.svg',
               title: "Политика конфиденциальности",
               onTap: () => debugPrint("Политика конфиденциальности"),
             ),
             MenuItemData(
-              icon: Icons.email_outlined,
+              svgIcon: 'assets/icons/envelope.svg',
               title: "Обращение в компанию",
               onTap: () => debugPrint("Обращение в компанию"),
             ),
@@ -112,7 +117,7 @@ class MenusSection extends StatelessWidget {
         CustomMenu(
           items: [
             MenuItemData(
-              icon: Icons.logout_outlined,
+              svgIcon: 'assets/icons/logout.svg',
               title: "Выйти",
               onTap: () => debugPrint("Выйти из аккаунта"),
             ),

@@ -12,13 +12,13 @@ class InvestAccountsCard extends StatelessWidget {
     return Column(
       children: [
         AccountListItem(
-          balance: '87 198 345,33 ₽',
+          balance: '1 593 742,90 ₽',
           changeText: '−2947,23 ₽',
           changeColor: AppColors.textNegativeDefault,
           number: '15185RI112B',
-          subtitle: 'КЛФ-9182323',
+          subtitle: 'Деньги на ветер',
           showIISIcon: true,
-          tariffType: TariffType.portfolio,
+          tariffType: TariffType.longTerm,
           tariffTitle: 'Долгосрочный портфель',
           tariffSubtitle: 'Текущий тариф',
           onTap: (ctx) => Navigator.of(ctx).push(

@@ -2,64 +2,66 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/appcolors.dart';
 
 class CommissionsTable extends StatelessWidget {
-  const CommissionsTable({super.key});
+  final List<Map<String, dynamic>>? commissionData;
+  
+  const CommissionsTable({super.key, this.commissionData});
 
   @override
   Widget build(BuildContext context) {
+    // Если данные не переданы, используем дефолтные
+    final data = commissionData ?? _getDefaultCommissionData();
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Московская биржа и СПБ Биржа
-        _buildCommissionSection(
-          'Московская биржа и СПБ Биржа',
-          [
-            _buildCommissionItem('0 %', 'комиссия брокера за покупку'),
-            _buildCommissionItem('0,28 %', 'комиссия брокера за продажу'),
-          ],
-        ),
-        
-        const SizedBox(height: 16),
-        
-        // Фьючерсы
-        _buildCommissionSection(
-          'Фьючерсы',
-          [
-            _buildCommissionItem('0,45 ₽', 'за контракт'),
-          ],
-        ),
-        
-        const SizedBox(height: 16),
-        
-        // Драгоценные металлы
-        _buildCommissionSection(
-          'Драгоценные металлы',
-          [
-            _buildCommissionItem('0,3 %', 'не включая оборот по сделкам своп'),
-          ],
-        ),
-        
-        const SizedBox(height: 16),
-        
-        // Иностранные ценные бумаги
-        _buildCommissionSection(
-          'Иностранные ценные бумаги',
-          [
-            _buildCommissionItem('0 %', 'комиссия брокера за покупку'),
-            _buildCommissionItem('0,28 %', 'комиссия брокера за продажу'),
-          ],
-        ),
-        
-        const SizedBox(height: 16),
-        
-        // Валюта
-        _buildCommissionSection(
-          'Валюта',
-          [
-            _buildCommissionItem('0,03682 %', 'при обороте в день до млн ₽ (мин., ₽ за поручение)'),
-          ],
-        ),
-      ],
+      children: data.map((section) => Column(
+        children: [
+          _buildCommissionSection(
+            section['title'],
+            (section['items'] as List).map((item) => 
+              _buildCommissionItem(item['value'], item['description'])
+            ).toList(),
+          ),
+          const SizedBox(height: 16),
+        ],
+      )).toList(),
     );
+  }
+
+  List<Map<String, dynamic>> _getDefaultCommissionData() {
+    return [
+      {
+        'title': 'Московская биржа и СПБ Биржа',
+        'items': [
+          {'value': '0 %', 'description': 'комиссия брокера за покупку'},
+          {'value': '0,28 %', 'description': 'комиссия брокера за продажу'},
+        ],
+      },
+      {
+        'title': 'Фьючерсы',
+        'items': [
+          {'value': '0,45 ₽', 'description': 'за контракт'},
+        ],
+      },
+      {
+        'title': 'Драгоценные металлы',
+        'items': [
+          {'value': '0,3 %', 'description': 'не включая оборот по сделкам своп'},
+        ],
+      },
+      {
+        'title': 'Иностранные ценные бумаги',
+        'items': [
+          {'value': '0 %', 'description': 'комиссия брокера за покупку'},
+          {'value': '0,28 %', 'description': 'комиссия брокера за продажу'},
+        ],
+      },
+      {
+        'title': 'Валюта',
+        'items': [
+          {'value': '0,03682 %', 'description': 'при обороте в день до млн ₽ (мин., ₽ за поручение)'},
+        ],
+      },
+    ];
   }
 
   Widget _buildCommissionSection(String title, List<Widget> items) {

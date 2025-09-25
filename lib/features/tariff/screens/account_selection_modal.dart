@@ -5,10 +5,16 @@ import '../../../core/widgets/modal_header.dart';
 import '../../../core/providers/account_provider.dart';
 import '../widgets/account_selection_card.dart';
 import 'tariff_change_screen.dart';
+import 'tariff_change_modal.dart';
 
 void showAccountSelectionModal(
   BuildContext context, {
   required String tariffTitle,
+  bool isPersonalTariff = false,
+  String? tariffPrice,
+  String? tariffIcon,
+  double? tariffIconSize,
+  Color? tariffIconBackgroundColor,
 }) {
   showModalBottomSheet(
     context: context,
@@ -19,16 +25,31 @@ void showAccountSelectionModal(
     ),
     builder: (context) => AccountSelectionModal(
       tariffTitle: tariffTitle,
+      isPersonalTariff: isPersonalTariff,
+      tariffPrice: tariffPrice,
+      tariffIcon: tariffIcon,
+      tariffIconSize: tariffIconSize,
+      tariffIconBackgroundColor: tariffIconBackgroundColor,
     ),
   );
 }
 
 class AccountSelectionModal extends StatefulWidget {
   final String tariffTitle;
+  final bool isPersonalTariff;
+  final String? tariffPrice;
+  final String? tariffIcon;
+  final double? tariffIconSize;
+  final Color? tariffIconBackgroundColor;
   
   const AccountSelectionModal({
     super.key, 
     required this.tariffTitle,
+    this.isPersonalTariff = false,
+    this.tariffPrice,
+    this.tariffIcon,
+    this.tariffIconSize,
+    this.tariffIconBackgroundColor,
   });
 
   @override
@@ -143,6 +164,10 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                         setState(() {
                           _selectedAccountIndex = index;
                         });
+                        
+                        // Сразу обновляем глобальное состояние при выборе счета
+                        final accountProvider = Provider.of<AccountProvider>(context, listen: false);
+                        accountProvider.selectAccountFromMap(account);
                       },
                     );
                   }),
@@ -157,14 +182,19 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    final selectedAccount = _accounts[_selectedAccountIndex];
-                    
-                    // Обновляем глобальное состояние
-                    final accountProvider = Provider.of<AccountProvider>(context, listen: false);
-                    accountProvider.selectAccountFromMap(selectedAccount);
-                    
                     // Закрываем модальное окно выбора счета
                     Navigator.of(context).pop();
+                    
+                    // Открываем модальное окно смены тарифа
+                    showTariffChangeModal(
+                      context,
+                      isPersonalTariff: widget.isPersonalTariff,
+                      tariffTitle: widget.tariffTitle,
+                      tariffPrice: widget.tariffPrice,
+                      tariffIcon: widget.tariffIcon,
+                      tariffIconSize: widget.tariffIconSize,
+                      tariffIconBackgroundColor: widget.tariffIconBackgroundColor,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.buttonBgPrimaryDefault,

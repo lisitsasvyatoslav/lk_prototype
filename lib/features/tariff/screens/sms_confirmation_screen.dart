@@ -165,6 +165,7 @@ class _SmsConfirmationScreenState extends State<SmsConfirmationScreen>
       backgroundColor: AppColors.bgBaseTertiary,
       body: Column(
         children: [
+          SizedBox(height: 0),
           // Шапка экрана
           ScreenHeader(title: 'Подтверждение'),
           
@@ -234,7 +235,7 @@ class _SmsConfirmationScreenState extends State<SmsConfirmationScreen>
                                     child: TextField(
                                       controller: _codeController,
                                       focusNode: _focusNode,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: TextInputType.phone,
                                       maxLength: 6,
                                       textAlign: TextAlign.center,
                                       inputFormatters: [

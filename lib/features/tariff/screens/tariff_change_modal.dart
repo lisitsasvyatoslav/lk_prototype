@@ -5,7 +5,15 @@ import '../../../core/widgets/modal_header.dart';
 import 'tariff_change_screen.dart';
 import '../widgets/tariff_agreements_button.dart';
 
-void showTariffChangeModal(BuildContext context, {bool isPersonalTariff = false}) {
+void showTariffChangeModal(
+  BuildContext context, {
+  bool isPersonalTariff = false,
+  String? tariffTitle,
+  String? tariffPrice,
+  String? tariffIcon,
+  double? tariffIconSize,
+  Color? tariffIconBackgroundColor,
+}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -13,14 +21,46 @@ void showTariffChangeModal(BuildContext context, {bool isPersonalTariff = false}
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
-    builder: (context) => TariffChangeModal(isPersonalTariff: isPersonalTariff),
+    builder: (context) => TariffChangeModal(
+      isPersonalTariff: isPersonalTariff,
+      tariffTitle: tariffTitle,
+      tariffPrice: tariffPrice,
+      tariffIcon: tariffIcon,
+      tariffIconSize: tariffIconSize,
+      tariffIconBackgroundColor: tariffIconBackgroundColor,
+    ),
   );
 }
 
 class TariffChangeModal extends StatelessWidget {
   final bool isPersonalTariff;
+  final String? tariffTitle;
+  final String? tariffPrice;
+  final String? tariffIcon;
+  final double? tariffIconSize;
+  final Color? tariffIconBackgroundColor;
   
-  const TariffChangeModal({super.key, this.isPersonalTariff = false});
+  const TariffChangeModal({
+    super.key, 
+    this.isPersonalTariff = false,
+    this.tariffTitle,
+    this.tariffPrice,
+    this.tariffIcon,
+    this.tariffIconSize,
+    this.tariffIconBackgroundColor,
+  });
+
+  String _getCurrentDateFormatted() {
+    final now = DateTime.now();
+    final months = [
+      'янв', 'фев', 'мар', 'апр', 'май', 'июн',
+      'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'
+    ];
+    final day = now.day;
+    final month = months[now.month - 1];
+    final year = now.year;
+    return 'с $day $month $year';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +71,7 @@ class TariffChangeModal extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -141,13 +181,16 @@ class TariffChangeModal extends StatelessWidget {
                           Navigator.of(context).pop();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const TariffChangeScreen(
+                              builder: (context) => TariffChangeScreen(
                                 currentTariff: 'Инвестор',
-                                newTariff: 'Долгосрочный портфель',
+                                newTariff: tariffTitle ?? 'Долгосрочный портфель',
                                 currentTariffCost: 'Бесплатно',
-                                newTariffCost: '200 ₽/мес',
+                                newTariffCost: tariffPrice ?? '200 ₽/мес',
                                 currentTariffDate: 'с 23 дек 2023',
-                                newTariffDate: 'с 23 авг 2025',
+                                newTariffDate: _getCurrentDateFormatted(),
+                                newTariffIcon: tariffIcon,
+                                newTariffIconSize: tariffIconSize,
+                                newTariffIconBackgroundColor: tariffIconBackgroundColor,
                               ),
                             ),
                           );

@@ -10,7 +10,7 @@ import '../../../core/typography/text_12_medium.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 
-enum TariffType { premium, portfolio }
+enum TariffType { premium, portfolio, daily, longTerm }
 
 class AccountListItem extends StatelessWidget {
   final String balance;
@@ -91,6 +91,46 @@ class AccountListItem extends StatelessWidget {
           child: Center(
             child: SvgPicture.asset(
               'assets/icons/chart_forest.svg',
+              width: 20.5,
+              height: 20.5,
+            ),
+          ),
+        );
+      case TariffType.daily:
+        return Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+            ),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/icons/daily_tariff.svg',
+              width: 20.5,
+              height: 20.5,
+            ),
+          ),
+        );
+      case TariffType.longTerm:
+        return Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+            ),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              'assets/icons/wallet_transfer_send.svg',
               width: 20.5,
               height: 20.5,
             ),

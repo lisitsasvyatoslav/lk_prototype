@@ -14,6 +14,9 @@ class TariffChangeScreen extends StatelessWidget {
   final String newTariffDate;
   final String? selectedAccountId;
   final String? selectedAccountName;
+  final String? newTariffIcon;
+  final double? newTariffIconSize;
+  final Color? newTariffIconBackgroundColor;
 
   const TariffChangeScreen({
     super.key,
@@ -25,6 +28,9 @@ class TariffChangeScreen extends StatelessWidget {
     required this.newTariffDate,
     this.selectedAccountId,
     this.selectedAccountName,
+    this.newTariffIcon,
+    this.newTariffIconSize,
+    this.newTariffIconBackgroundColor,
   });
 
   @override
@@ -33,6 +39,7 @@ class TariffChangeScreen extends StatelessWidget {
       backgroundColor: AppColors.bgBaseTertiary,
       body: Column(
         children: [
+          SizedBox(height: 0),
           ScreenHeader(title: 'Смена тарифа'),
           
           // Информация о выбранном счете
@@ -95,7 +102,7 @@ class TariffChangeScreen extends StatelessWidget {
                     child: Icon(
                       CupertinoIcons.arrow_down,
                       color: AppColors.opacityBase72,
-                      size: 24,
+                      size: 16,
                     ),
                   ),
                   
@@ -110,9 +117,11 @@ class TariffChangeScreen extends StatelessWidget {
                     child: TariffRow(
                       title: newTariff,
                       subtitle: '$newTariffCost • $newTariffDate',
-                      svgIcon: 'assets/icons/wallet_transfer_send.svg',
+                      svgIcon: newTariffIcon ?? 'assets/icons/wallet_transfer_send.svg',
                       iconSize: 22.8,
-                      gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
+                      gradient: newTariffIconBackgroundColor != null 
+                        ? [newTariffIconBackgroundColor!.withOpacity(0.1), newTariffIconBackgroundColor!.withOpacity(0.2)]
+                        : const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
                     ),
                   ),
                 ],

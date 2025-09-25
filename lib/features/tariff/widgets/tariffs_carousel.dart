@@ -4,10 +4,12 @@ import 'tariff_card.dart';
 
 class TariffsCarousel extends StatefulWidget {
   final Function(String)? onTariffChanged;
+  final String? initialTariff;
   
   const TariffsCarousel({
     super.key, 
     this.onTariffChanged,
+    this.initialTariff,
   });
 
   @override
@@ -69,7 +71,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       ],
     },
     {
-      'title': 'Стартег',
+      'title': 'Стратег',
       'subtitle': 'Бесплатно',
       'description': 'Для долгосрочных целей',
       'price': 'Бесплатно',
@@ -85,7 +87,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       ],
     },
     {
-      'title': 'Единый Консультанционный',
+      'title': 'Единый Консультационный',
       'subtitle': '177 ₽/мес',
       'description': 'Инвестидет от профессионалов Финама',
       'price': '177 ₽/мес',
@@ -118,16 +120,30 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     iconSize: data['iconSize'],
     isPersonalTariff: data['isPersonalTariff'] ?? false,
     characteristics: (data['characteristics'] as List<TariffCharacteristic>?) ?? [],
+    iconPath: data['icon'],
   )).toList();
 
   @override
   void initState() {
     super.initState();
+    
+    // Находим индекс начального тарифа
+    int initialIndex = 0;
+    if (widget.initialTariff != null) {
+      for (int i = 0; i < _tariffData.length; i++) {
+        if (_tariffData[i]['title'] == widget.initialTariff) {
+          initialIndex = i;
+          break;
+        }
+      }
+    }
+    
     _pageController = PageController(
       viewportFraction: 0.9,
-      initialPage: _tariffData.length * 1000,
+      initialPage: _tariffData.length * 1000 + initialIndex,
     );
-    _currentPage = 0;
+    _currentPage = initialIndex;
+    
     // Уведомляем о начальном тарифе
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.onTariffChanged?.call(_tariffData[_currentPage]['title']);

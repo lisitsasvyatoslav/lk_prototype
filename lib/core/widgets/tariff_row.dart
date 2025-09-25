@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../features/tariff/screens/tariffs_sheet_a.dart';
 
 class TariffRow extends StatelessWidget {
   final String title;
@@ -10,6 +11,7 @@ class TariffRow extends StatelessWidget {
   final double? iconSize;
   final List<Color> gradient;
   final VoidCallback? onTap;
+  final String? tariffName; // Название тарифа для передачи на экран тарифов
 
   const TariffRow({
     super.key,
@@ -20,7 +22,74 @@ class TariffRow extends StatelessWidget {
     this.iconSize,
     required this.gradient,
     this.onTap,
+    this.tariffName,
   });
+
+  // Метод для создания onTap с передачей тарифа
+  static VoidCallback createTariffOnTap(BuildContext context, String tariffName) {
+    return () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TariffsScreen(selectedTariff: tariffName),
+        ),
+      );
+    };
+  }
+
+  Widget _buildSubtitleText(String subtitle) {
+    // Разделяем subtitle на цену и дату по разделителю " • "
+    final parts = subtitle.split(' • ');
+    if (parts.length != 2) {
+      // Если формат не соответствует ожидаемому, возвращаем обычный текст
+      return Text(
+        subtitle,
+        style: const TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w400,
+          color: AppColors.textBaseSecondary,
+        ),
+      );
+    }
+
+    final price = parts[0].trim();
+    final date = parts[1].trim();
+    final isFree = price.toLowerCase().contains('бесплатно');
+
+    return RichText(
+      text: TextSpan(
+        children: [
+          // Цена
+          TextSpan(
+            text: price,
+            style: TextStyle(
+              fontSize: 10,
+              fontWeight: isFree ? FontWeight.w400 : FontWeight.w500,
+              color: isFree ? AppColors.textBaseSecondary : AppColors.textOnLightDefault,
+            ),
+          ),
+          // Разделительная точка
+          TextSpan(
+            text: ' • ',
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textBaseSecondary,
+            ),
+          ),
+          // Дата
+          TextSpan(
+            text: date,
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.w400,
+              color: AppColors.textBaseSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +137,7 @@ class TariffRow extends StatelessWidget {
                   )
                 ),
                 const SizedBox(height: 2),
-                Text(
-                  subtitle, 
-                  style: const TextStyle(
-                    fontSize: 10, 
-                    fontWeight: FontWeight.w400, 
-                    color: AppColors.textBaseSecondary
-                  )
-                ),
+                _buildSubtitleText(subtitle),
               ],
             ),
           ),
