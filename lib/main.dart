@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'features/profile/screens/profile_version_selector_screen.dart';
 import 'core/theme/appcolors.dart';
 import 'core/providers/account_provider.dart';
+import 'core/providers/profile_version_provider.dart';
+import 'core/providers/tariff_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -29,8 +31,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AccountProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AccountProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileVersionProvider()),
+        ChangeNotifierProvider(create: (context) => TariffProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../../../core/widgets/screen_header.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/providers/profile_version_provider.dart';
+import '../../../core/providers/tariff_provider.dart';
 
 class TariffConfirmationScreen extends StatelessWidget {
   final String newTariff;
@@ -22,6 +25,21 @@ class TariffConfirmationScreen extends StatelessWidget {
     return '$day.$month.$year';
   }
 
+  void _navigateToSelectedProfile(BuildContext context) {
+    final profileProvider = Provider.of<ProfileVersionProvider>(context, listen: false);
+    final tariffProvider = Provider.of<TariffProvider>(context, listen: false);
+    
+    // Обновляем подключенный тариф
+    tariffProvider.setConnectedTariff(newTariff);
+    
+    final profileScreen = profileProvider.getProfileScreen();
+    
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => profileScreen),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
      return Scaffold(
@@ -29,7 +47,10 @@ class TariffConfirmationScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 0),
-          ScreenHeader(title: 'Подтверждение'),
+          ScreenHeader(
+            title: 'Подтверждение',
+            onClosePressed: () => _navigateToSelectedProfile(context),
+          ),
           // Верхняя половина - контент
           Expanded(
             child: Padding(
@@ -158,10 +179,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Возвращаемся к профилю
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    },
+                    onPressed: () => _navigateToSelectedProfile(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.buttonBgSecondaryDefault,
                       foregroundColor: AppColors.buttonLabelSecondary,

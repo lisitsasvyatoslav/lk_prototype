@@ -11,6 +11,7 @@ import '../../../core/widgets/accordion_section.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/widgets/screen_header.dart';
 import '../../../core/providers/account_provider.dart';
+import '../../../core/providers/tariff_provider.dart';
 import 'account_selection_modal.dart';
 
 class TariffsScreen extends StatefulWidget {
@@ -238,7 +239,15 @@ class _TariffsScreenState extends State<TariffsScreen> {
   @override
   void initState() {
     super.initState();
-    _currentTariffTitle = widget.selectedTariff ?? 'Долгосрочный портфель';
+    _currentTariffTitle = widget.selectedTariff ?? 'Инвестор';
+  }
+
+  @override
+  void didUpdateWidget(TariffsScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedTariff != widget.selectedTariff) {
+      _currentTariffTitle = widget.selectedTariff ?? 'Инвестор';
+    }
   }
 
   void _onTariffChanged(String tariffTitle) {
@@ -266,8 +275,8 @@ class _TariffsScreenState extends State<TariffsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AccountProvider>(
-      builder: (context, accountProvider, child) {
+    return Consumer2<AccountProvider, TariffProvider>(
+      builder: (context, accountProvider, tariffProvider, child) {
         return Scaffold(
           backgroundColor: const Color(0xFFF2F4F6),
           body: SafeArea(
@@ -292,7 +301,7 @@ class _TariffsScreenState extends State<TariffsScreen> {
                         // Main tariff card
                         TariffsCarousel(
                           onTariffChanged: _onTariffChanged,
-                          initialTariff: _currentTariffTitle,
+                          initialTariff: widget.selectedTariff ?? tariffProvider.connectedTariff,
                         ),
                         
                         const SizedBox(height: 24),

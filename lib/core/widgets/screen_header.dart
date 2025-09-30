@@ -11,6 +11,7 @@ class ScreenHeader extends StatelessWidget {
   final Color? titleColor;
   final Color? subtitleColor;
   final Color? iconColor;
+  final double? titleFontSize;
   final bool isSubtitleClickable;
   final VoidCallback? onSubtitlePressed;
 
@@ -26,6 +27,7 @@ class ScreenHeader extends StatelessWidget {
     this.titleColor,
     this.subtitleColor,
     this.iconColor,
+    this.titleFontSize,
     this.isSubtitleClickable = false,
     this.onSubtitlePressed,
   });
@@ -70,7 +72,7 @@ class ScreenHeader extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: titleFontSize ?? 15,
                         fontWeight: FontWeight.w600,
                         color: titleColor ?? Colors.black,
                       ),

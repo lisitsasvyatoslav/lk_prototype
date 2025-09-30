@@ -1,4 +1,5 @@
 import 'account_list_item.dart';
+import 'tariff_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
@@ -71,7 +72,7 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(),
+              builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
             ),
           ),
         ),
@@ -97,7 +98,7 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(),
+              builder: (context) => const TariffsScreen(selectedTariff: 'Единый дневной'),
             ),
           ),
         ),
@@ -123,7 +124,59 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(),
+              builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // 5-й счет - Стратег
+        AccountListItem(
+          balance: '248 742,90 ₽',
+          changeText: '+1 247,93 ₽',
+          changeColor: AppColors.textPositiveDefault,
+          number: '15185RI112B',
+          subtitle: '123234',
+          isFavorite: false,
+          tariffType: TariffType.strategist,
+          tariffTitle: 'Стратег',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: '123234',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(selectedTariff: 'Стратег'),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        // 6-й счет - Единый Консультационный
+        AccountListItem(
+          balance: '348 742,90 ₽',
+          changeText: '+2 147,93 ₽',
+          changeColor: AppColors.textPositiveDefault,
+          number: '15185RI112B',
+          subtitle: '123234',
+          isFavorite: false,
+          tariffType: TariffType.consultative,
+          tariffTitle: 'Единый Консультационный',
+          tariffSubtitle: 'Текущий тариф',
+          onTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => AccountDetailsScreen(
+                title: '123234',
+                number: '15185RI112B',
+              ),
+            ),
+          ),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreen(selectedTariff: 'Единый Консультационный'),
             ),
           ),
         ),

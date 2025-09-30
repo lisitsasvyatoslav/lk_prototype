@@ -185,10 +185,10 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                     // Закрываем модальное окно выбора счета
                     Navigator.of(context).pop();
                     
-                    // Открываем модальное окно смены тарифа
+                    // Открываем модальное окно смены тарифа (всегда не персональный тариф)
                     showTariffChangeModal(
                       context,
-                      isPersonalTariff: widget.isPersonalTariff,
+                      isPersonalTariff: false,
                       tariffTitle: widget.tariffTitle,
                       tariffPrice: widget.tariffPrice,
                       tariffIcon: widget.tariffIcon,

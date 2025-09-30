@@ -4,7 +4,7 @@ import '../../../core/typography/text_16_medium.dart';
 import '../../../core/theme/appcolors.dart';
 import 'account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
-
+// 343 333 317 height 3px 2px
 class AccountCarousel extends StatefulWidget {
   final List<Widget> cards;
 
@@ -24,7 +24,7 @@ class _AccountCarouselState extends State<AccountCarousel>
   
   // Константы для оптимизации
   static const double _cardHeight = 110.0;
-  static const double _animationDuration = 500.0;
+  static const double _animationDuration = 600.0;
   static const int _maxVisibleCards = 3; // Максимум видимых карточек
   
   // Кэш для мемоизированных виджетов
@@ -68,9 +68,9 @@ class _AccountCarouselState extends State<AccountCarousel>
     if (details.primaryVelocity == null) return;
 
     if (details.primaryVelocity! < 0) {
-      _animateToNext(); // Всегда можно перейти вперед
+      _animateToNext(); // Свайп влево - переход вперед
     } else if (details.primaryVelocity! > 0) {
-      _animateToPrevious(); // Всегда можно перейти назад
+      _animateToPrevious(); // Свайп вправо - переход назад
     }
   }
 
@@ -153,11 +153,11 @@ class _AccountCarouselState extends State<AccountCarousel>
                 if (widget.cards.length >= 3) ...[
                   // 3-я карточка (реальная)
                   Positioned(
-                    top: 20,
+                    top: 14,
                     left: 0,
                     right: 0,
                     child: Transform.scale(
-                      scale: 0.85,
+                      scale: 0.92,
                       child: Opacity(
                         opacity: 0.5,
                         child: Material(
@@ -224,12 +224,12 @@ class _AccountCarouselState extends State<AccountCarousel>
                 // Вторая карточка (средняя) - с RepaintBoundary для оптимизации
                 if (widget.cards.length >= 2)
                   Positioned(
-                    top: 10,
+                    top: 6,
                     left: 0,
                     right: 0,
                     child: RepaintBoundary(
                       child: Transform.scale(
-                        scale: 0.9,
+                        scale: 0.97,
                         child: Opacity(
                           opacity: 0.7,
                           child: Material(
@@ -254,13 +254,13 @@ class _AccountCarouselState extends State<AccountCarousel>
                     builder: (context, child) {
                       final nextIndex = (_currentPage + 1) % widget.cards.length;
                       return Positioned(
-                        top: 10 - (10 * _slideAnimation.value), // Поднимается с позиции 10px до 0px
+                        top: 6 - (6 * _slideAnimation.value), // Поднимается с позиции 6px до 0px
                         left: 0,
                         right: 0,
                         child: Transform.scale(
-                          scale: 0.9 + (_slideAnimation.value * 0.1), // Увеличивается с 0.9 до 1.0
+                          scale: 0.97 + (_slideAnimation.value * 0.03), // Увеличивается с 0.97 до 1.0
                           child: Opacity(
-                            opacity: 0.7 + (_slideAnimation.value * 0.3), // Появляется с 0.7 до 1.0
+                            opacity: 1.0, // Всегда полная непрозрачность
                             child: Material(
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
@@ -284,18 +284,18 @@ class _AccountCarouselState extends State<AccountCarousel>
                     builder: (context, child) {
                       final prevIndex = (_currentPage - 1 + widget.cards.length) % widget.cards.length;
                       return Positioned(
-                        top: 20 - (20 * _slideAnimation.value), // Поднимается с позиции 20px до 0px
+                        top: 6 - (6 * _slideAnimation.value), // Поднимается с позиции 6px до 0px (как при движении вперед)
                         left: 0,
                         right: 0,
                         child: Transform.scale(
-                          scale: 0.85 + (_slideAnimation.value * 0.15), // Увеличивается с 0.85 до 1.0
+                          scale: 0.97 + (_slideAnimation.value * 0.03), // Увеличивается с 0.97 до 1.0 (как при движении вперед)
                           child: Opacity(
-                            opacity: 0.5 + (_slideAnimation.value * 0.5), // Появляется с 0.5 до 1.0
+                            opacity: 1.0, // Всегда полная непрозрачность
                             child: Material(
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
-                              elevation: 2 + (6 * _slideAnimation.value), // Тень увеличивается с 2 до 8
-                              shadowColor: Colors.black.withOpacity(0.05 + (0.1 * _slideAnimation.value)),
+                              elevation: 4 + (4 * _slideAnimation.value), // Тень увеличивается с 4 до 8 (как при движении вперед)
+                              shadowColor: Colors.black.withOpacity(0.1 + (0.05 * _slideAnimation.value)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: _getCachedCard(prevIndex),
@@ -320,13 +320,13 @@ class _AccountCarouselState extends State<AccountCarousel>
                           offset: Offset(
                             _slideAnimation.value * 400 * 
                             (widget.cards.length > 1 ? 1 : 0) *
-                            (_isGoingBack ? -1 : 1), // Уходит влево при движении назад
+                            (_isGoingBack ? 1 : -1), // Уходит вправо при движении назад, влево при движении вперед
                             0,
                           ),
                           child: Transform.scale(
                             scale: 1.0 - (_slideAnimation.value * 0.1),
                             child: Transform.rotate(
-                              angle: _slideAnimation.value * 0.3 * (_isGoingBack ? -1 : 1), // Поворот в зависимости от направления
+                              angle: _slideAnimation.value * 0.3 * (_isGoingBack ? 1 : -1), // Поворот в зависимости от направления
             child: Material(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(20),

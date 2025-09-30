@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import '../../../core/widgets/tariff_row.dart';
 import '../../../core/widgets/screen_header.dart';
 import 'sms_confirmation_screen.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/providers/tariff_provider.dart';
 // top to bottom, #F9F9F9 to #DFE4ED
 class TariffChangeScreen extends StatelessWidget {
   final String currentTariff;
@@ -35,12 +37,14 @@ class TariffChangeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.bgBaseTertiary,
-      body: Column(
-        children: [
-          SizedBox(height: 0),
-          ScreenHeader(title: 'Смена тарифа'),
+    return Consumer<TariffProvider>(
+      builder: (context, tariffProvider, child) {
+        return Scaffold(
+          backgroundColor: AppColors.bgBaseTertiary,
+          body: Column(
+            children: [
+              SizedBox(height: 0),
+              ScreenHeader(title: 'Смена тарифа'),
           
           // Информация о выбранном счете
           if (selectedAccountId != null && selectedAccountName != null)
@@ -83,7 +87,7 @@ class TariffChangeScreen extends StatelessWidget {
                     child: Column(
                         children: [
                         TariffRow(
-                            title: 'Инвестор',
+                            title: tariffProvider.connectedTariff,
                             subtitle: 'Бесплатно • с 23 дек 2023',
                             svgIcon: 'assets/icons/chart_forest.svg',
                             iconSize: 20.5,
@@ -210,8 +214,10 @@ class TariffChangeScreen extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

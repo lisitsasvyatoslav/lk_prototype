@@ -62,7 +62,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'priceDetail': 'от 0,0154% за операции',
       'icon': 'assets/icons/chart_forest.svg',
       'buttonText': 'Подключить',
-      'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
+      'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10% - дефолтный цвет
       'iconSize': 33.73,
       'characteristics': [
         TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0154%'),
@@ -78,7 +78,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'priceDetail': 'от 0,5% за сделки с ценными бумагами',
       'icon': 'assets/icons/rocket.24.svg',
       'buttonText': 'Подключить',
-      'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
+      'iconBackgroundColor': const Color(0x1A93C7FF), // #93C7FF 10%
       'iconSize': 33.73,
       'characteristics': [
         TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,5%'),
@@ -94,7 +94,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'priceDetail': 'от 0,0354% за сделки с ценными бумагами',
       'icon': 'assets/icons/bubble.chart.24.svg',
       'buttonText': 'Подключить',
-      'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
+      'iconBackgroundColor': const Color(0x1AFF7A7C), // #FF7A7C 10%
       'iconSize': 33.73,
       'characteristics': [
         TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0354%'),
@@ -126,7 +126,18 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
   @override
   void initState() {
     super.initState();
-    
+    _initializePageController();
+  }
+
+  @override
+  void didUpdateWidget(TariffsCarousel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialTariff != widget.initialTariff) {
+      _initializePageController();
+    }
+  }
+
+  void _initializePageController() {
     // Находим индекс начального тарифа
     int initialIndex = 0;
     if (widget.initialTariff != null) {

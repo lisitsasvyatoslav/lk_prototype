@@ -24,7 +24,11 @@ class _AccountsListScreenState extends State<AccountsListScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            ScreenHeader(title: 'Счета'),
+            ScreenHeader(
+              title: 'Счета',
+              titleColor: AppColors.textBaseSecondary,
+              titleFontSize: 14,
+            ),
             const SizedBox(height: 8),
             // Прокручиваемый контент
             Expanded(
@@ -39,6 +43,8 @@ class _AccountsListScreenState extends State<AccountsListScreen> {
                       child: AccountsCard(),
                     ),
                     initiallyExpanded: true,
+                    titleColor: AppColors.textBaseSecondary,
+                    iconColor: AppColors.textBaseSecondary,
                   ),
                   // Аккордеон "ИИС"
                   AccordionSection(
@@ -48,6 +54,8 @@ class _AccountsListScreenState extends State<AccountsListScreen> {
                       child: InvestAccountsCard(),
                     ),
                     initiallyExpanded: true,
+                    titleColor: AppColors.textBaseSecondary,
+                    iconColor: AppColors.textBaseSecondary,
                   ),
                 ],
               ),

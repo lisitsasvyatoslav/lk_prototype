@@ -37,6 +37,21 @@ class TariffRow extends StatelessWidget {
     };
   }
 
+  // Метод для создания onTap с использованием tariffName из параметров
+  VoidCallback? _createDefaultOnTap(BuildContext context) {
+    if (tariffName != null) {
+      return () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TariffsScreen(selectedTariff: tariffName!),
+          ),
+        );
+      };
+    }
+    return null;
+  }
+
   Widget _buildSubtitleText(String subtitle) {
     // Разделяем subtitle на цену и дату по разделителю " • "
     final parts = subtitle.split(' • ');
@@ -93,6 +108,9 @@ class TariffRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Используем переданный onTap или создаем автоматический на основе tariffName
+    final effectiveOnTap = onTap ?? _createDefaultOnTap(context);
+    
     Widget rowContent = Padding(
       padding: const EdgeInsets.all(12),
       child: Row(
@@ -141,16 +159,16 @@ class TariffRow extends StatelessWidget {
               ],
             ),
           ),
-          if (onTap != null)
+          if (effectiveOnTap != null)
             const Icon(Icons.chevron_right, color: Color(0xFF9AA0AA)),
         ],
       ),
     );
 
-    if (onTap != null) {
+    if (effectiveOnTap != null) {
       return InkWell(
         borderRadius: BorderRadius.circular(14),
-        onTap: onTap,
+        onTap: effectiveOnTap,
         child: rowContent,
       );
     }

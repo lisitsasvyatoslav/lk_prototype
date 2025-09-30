@@ -48,11 +48,7 @@ class IISSection extends StatelessWidget {
                   svgIcon: 'assets/icons/chart_forest.svg',
                   iconSize: 20.5,
                   gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TariffsScreen(),
-                    ),
-                  ),
+                  tariffName: 'Инвестор',
                 ),
               ),
               // Секция со стрелочкой и divider
@@ -89,11 +85,7 @@ class IISSection extends StatelessWidget {
                   svgIcon: 'assets/icons/wallet_transfer_send.svg',
                   iconSize: 22.8,
                   gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const TariffsScreen(),
-                    ),
-                  ),
+                  tariffName: 'Долгосрочный портфель',
                 ),
               ),
             ],

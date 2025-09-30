@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'account_list_item.dart';
+import 'tariff_section.dart';
 import '../screens/account_details_modal.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../tariff/screens/tariffs_sheet_a.dart';
@@ -32,7 +33,7 @@ class InvestAccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(),
+              builder: (context) => const TariffsScreen(selectedTariff: 'Долгосрочный портфель'),
             ),
           ),
         ),

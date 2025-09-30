@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../screens/tariff_change_modal.dart';
 import '../screens/account_selection_modal.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/providers/tariff_provider.dart';
 
 class TariffCharacteristic {
   final String name;
@@ -46,23 +48,27 @@ class TariffCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x11000000),
-            blurRadius: 8,
-            offset: Offset(0, 2),
+    return Consumer<TariffProvider>(
+      builder: (context, tariffProvider, child) {
+        final isConnected = tariffProvider.isTariffConnected(title);
+        
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x11000000),
+                blurRadius: 8,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             // Иконка
             Center(
               child: Container(
@@ -175,40 +181,74 @@ class TariffCard extends StatelessWidget {
               const SizedBox(height: 16),
             ],
             
-            // Кнопка
+            // Кнопка или статус подключения
             SizedBox(
               width: double.infinity,
               height: 48,
-              child: ElevatedButton(
-                onPressed: () => showAccountSelectionModal(
-                  context, 
-                  tariffTitle: title,
-                  isPersonalTariff: isPersonalTariff,
-                  tariffPrice: price,
-                  tariffIcon: iconPath,
-                  tariffIconSize: iconSize,
-                  tariffIconBackgroundColor: iconBackgroundColor,
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFF3F4F6),
-                  foregroundColor: const Color(0xFF000000),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              child: isConnected
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/check.svg',
+                            width: 16,
+                            height: 16,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.buttonLabelGhost,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Подключен',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.buttonLabelGhost,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
+                    onPressed: () => showAccountSelectionModal(
+                      context, 
+                      tariffTitle: title,
+                      isPersonalTariff: isPersonalTariff,
+                      tariffPrice: price,
+                      tariffIcon: iconPath,
+                      tariffIconSize: iconSize,
+                      tariffIconBackgroundColor: iconBackgroundColor,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFF3F4F6),
+                      foregroundColor: const Color(0xFF000000),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      buttonText,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                ),
-                child: Text(
-                  buttonText,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
             ),
-          ],
-        ),
-      ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -10,6 +10,8 @@ class AccordionSection extends StatefulWidget {
   final EdgeInsets? titlePadding;
   final EdgeInsets? contentPadding;
   final bool showDivider;
+  final Color? titleColor;
+  final Color? iconColor;
 
   const AccordionSection({
     super.key,
@@ -19,6 +21,8 @@ class AccordionSection extends StatefulWidget {
     this.titlePadding,
     this.contentPadding,
     this.showDivider = true,
+    this.titleColor,
+    this.iconColor,
   });
 
   @override
@@ -81,7 +85,7 @@ class _AccordionSectionState extends State<AccordionSection>
                 Expanded(
                   child: Text18Semibold(
                     text: widget.title,
-                    color: AppColors.textBaseDefault,
+                    color: widget.titleColor ?? AppColors.textBaseDefault,
                   ),
                 ),
                 AnimatedBuilder(
@@ -89,9 +93,9 @@ class _AccordionSectionState extends State<AccordionSection>
                   builder: (context, child) {
                     return Transform.rotate(
                       angle: _animation.value * 3.14159, // 180 градусов
-                      child: const Icon(
+                      child: Icon(
                         CupertinoIcons.chevron_down,
-                        color: AppColors.iconBaseTertiary,
+                        color: widget.iconColor ?? AppColors.iconBaseTertiary,
                         size: 16,
                       ),
                     );

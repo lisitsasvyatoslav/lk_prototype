@@ -169,7 +169,7 @@ class AccountChartCard extends StatelessWidget {
                   svgIcon: 'assets/icons/chart_forest.svg',
                   iconSize: 20.5,
                   gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-                  onTap: () => navigateToTariffsScreen(context),
+                  tariffName: 'Инвестор',
                 ),
               ],
             ),
