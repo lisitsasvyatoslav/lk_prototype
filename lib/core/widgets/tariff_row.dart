@@ -31,7 +31,10 @@ class TariffRow extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TariffsScreen(selectedTariff: tariffName),
+          builder: (context) => TariffsScreen(
+            selectedTariff: tariffName,
+            connectedTariff: tariffName, // Передаем тот же тариф как подключенный
+          ),
         ),
       );
     };
@@ -44,7 +47,10 @@ class TariffRow extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TariffsScreen(selectedTariff: tariffName!),
+            builder: (context) => TariffsScreen(
+              selectedTariff: tariffName!,
+              connectedTariff: tariffName!, // Передаем тот же тариф как подключенный
+            ),
           ),
         );
       };

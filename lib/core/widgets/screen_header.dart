@@ -36,7 +36,8 @@ class ScreenHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 8),
+        // Учитываем системные отступы (status bar + notch)
+        SizedBox(height: MediaQuery.of(context).padding.top + 8),
         
         Container(
           height: 44,

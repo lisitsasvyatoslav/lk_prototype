@@ -24,7 +24,7 @@ class _AccountCarouselState extends State<AccountCarousel>
   
   // Константы для оптимизации
   static const double _cardHeight = 110.0;
-  static const double _animationDuration = 600.0;
+  static const double _animationDuration = 700.0;
   static const int _maxVisibleCards = 3; // Максимум видимых карточек
   
   // Кэш для мемоизированных виджетов
@@ -148,6 +148,7 @@ class _AccountCarouselState extends State<AccountCarousel>
           child: SizedBox(
             height: _cardHeight + 40, // Увеличиваем высоту для стопки карточек
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
                 // Оптимизированная стопка карточек (только видимые + эффект глубины)
                 if (widget.cards.length >= 3) ...[
@@ -318,7 +319,7 @@ class _AccountCarouselState extends State<AccountCarousel>
                       child: RepaintBoundary(
                         child: Transform.translate(
                           offset: Offset(
-                            _slideAnimation.value * 400 * 
+                            _slideAnimation.value * 500 * 
                             (widget.cards.length > 1 ? 1 : 0) *
                             (_isGoingBack ? 1 : -1), // Уходит вправо при движении назад, влево при движении вперед
                             0,

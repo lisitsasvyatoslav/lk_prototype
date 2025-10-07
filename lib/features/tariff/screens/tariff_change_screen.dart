@@ -43,7 +43,6 @@ class TariffChangeScreen extends StatelessWidget {
           backgroundColor: AppColors.bgBaseTertiary,
           body: Column(
             children: [
-              SizedBox(height: 0),
               ScreenHeader(title: 'Смена тарифа'),
           
           // Информация о выбранном счете

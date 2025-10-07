@@ -128,58 +128,6 @@ class AccountsCard extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        // 5-й счет - Стратег
-        AccountListItem(
-          balance: '248 742,90 ₽',
-          changeText: '+1 247,93 ₽',
-          changeColor: AppColors.textPositiveDefault,
-          number: '15185RI112B',
-          subtitle: '123234',
-          isFavorite: false,
-          tariffType: TariffType.strategist,
-          tariffTitle: 'Стратег',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
-              ),
-            ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreen(selectedTariff: 'Стратег'),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        // 6-й счет - Единый Консультационный
-        AccountListItem(
-          balance: '348 742,90 ₽',
-          changeText: '+2 147,93 ₽',
-          changeColor: AppColors.textPositiveDefault,
-          number: '15185RI112B',
-          subtitle: '123234',
-          isFavorite: false,
-          tariffType: TariffType.consultative,
-          tariffTitle: 'Единый Консультационный',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
-              ),
-            ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreen(selectedTariff: 'Единый Консультационный'),
-            ),
-          ),
-        ),
       ],
     );
   }

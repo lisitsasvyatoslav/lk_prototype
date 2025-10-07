@@ -5,11 +5,13 @@ import 'tariff_card.dart';
 class TariffsCarousel extends StatefulWidget {
   final Function(String)? onTariffChanged;
   final String? initialTariff;
+  final String? connectedTariff;
   
   const TariffsCarousel({
     super.key, 
     this.onTariffChanged,
     this.initialTariff,
+    this.connectedTariff,
   });
 
   @override

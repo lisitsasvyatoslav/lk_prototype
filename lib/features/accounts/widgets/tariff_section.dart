@@ -21,6 +21,21 @@ class TariffSection extends StatelessWidget {
     this.onTariffTap,
   });
 
+  Color _getTariffBackgroundColor() {
+    switch (tariffType) {
+      case TariffType.premium:
+        return const Color(0xFF82746B).withOpacity(0.1); // #82746B 10%
+      case TariffType.portfolio:
+        return const Color(0xFFFF91C1).withOpacity(0.1); // #FF91C1 10%
+      case TariffType.daily:
+        return const Color(0xFFFFB23F).withOpacity(0.1); // #FFB23F 10%
+      case TariffType.longTerm:
+        return const Color(0xFF6FFF22).withOpacity(0.1); // #6FFF22 10%
+      default:
+        return const Color(0xFFF9F9F9); // Текущий цвет по умолчанию
+    }
+  }
+
   Widget _buildTariffIcon() {
     switch (tariffType) {
       case TariffType.premium:
@@ -28,11 +43,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -56,11 +67,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -76,11 +83,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -96,11 +99,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -116,11 +115,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -136,11 +131,7 @@ class TariffSection extends StatelessWidget {
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            ),
+            color: _getTariffBackgroundColor(),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Center(
@@ -200,7 +191,7 @@ class TariffSection extends StatelessWidget {
               const Icon(
                 CupertinoIcons.chevron_right,
                 color: AppColors.iconBaseTertiary,
-                size: 8,
+                size: 16,
               ),
             ],
           ),

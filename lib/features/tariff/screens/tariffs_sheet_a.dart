@@ -5,7 +5,7 @@ import '../widgets/tariffs_carousel.dart';
 import '../widgets/moscow_spb_table.dart';
 import '../widgets/compare_tariffs_card.dart';
 import '../widgets/scrollable_tabs.dart';
-import '../widgets/tariff_agreements_button.dart';
+import '../widgets/animated_tariff_agreements_button.dart';
 import '../widgets/commissions_table.dart';
 import '../../../core/widgets/accordion_section.dart';
 import '../../../core/theme/appcolors.dart';
@@ -16,8 +16,9 @@ import 'account_selection_modal.dart';
 
 class TariffsScreen extends StatefulWidget {
   final String? selectedTariff;
+  final String? connectedTariff;
   
-  const TariffsScreen({super.key, this.selectedTariff});
+  const TariffsScreen({super.key, this.selectedTariff, this.connectedTariff});
 
   @override
   State<TariffsScreen> createState() => _TariffsScreenState();
@@ -240,6 +241,14 @@ class _TariffsScreenState extends State<TariffsScreen> {
   void initState() {
     super.initState();
     _currentTariffTitle = widget.selectedTariff ?? 'Инвестор';
+    
+    // Устанавливаем подключенный тариф в TariffProvider
+    // Если connectedTariff передан, используем его, иначе используем selectedTariff
+    final connectedTariff = widget.connectedTariff ?? widget.selectedTariff ?? 'Инвестор';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final tariffProvider = Provider.of<TariffProvider>(context, listen: false);
+      tariffProvider.setConnectedTariff(connectedTariff);
+    });
   }
 
   @override
@@ -247,6 +256,13 @@ class _TariffsScreenState extends State<TariffsScreen> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.selectedTariff != widget.selectedTariff) {
       _currentTariffTitle = widget.selectedTariff ?? 'Инвестор';
+    }
+    
+    // Обновляем подключенный тариф в TariffProvider
+    if (oldWidget.selectedTariff != widget.selectedTariff || oldWidget.connectedTariff != widget.connectedTariff) {
+      final connectedTariff = widget.connectedTariff ?? widget.selectedTariff ?? 'Инвестор';
+      final tariffProvider = Provider.of<TariffProvider>(context, listen: false);
+      tariffProvider.setConnectedTariff(connectedTariff);
     }
   }
 
@@ -308,7 +324,9 @@ class _TariffsScreenState extends State<TariffsScreen> {
 
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: const TariffAgreementsButton(),
+                          child: AnimatedTariffAgreementsButton(
+                            currentTariff: _currentTariffTitle,
+                          ),
                         ),
                         
                         const SizedBox(height: 16),

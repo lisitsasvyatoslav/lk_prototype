@@ -134,7 +134,10 @@ class AccountListItem extends StatelessWidget {
                   onTariffTap: (context, selectedTariff) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => TariffsScreen(selectedTariff: selectedTariff),
+                        builder: (context) => TariffsScreen(
+                          selectedTariff: tariffTitle, // Устанавливаем текущий тариф как активный
+                          connectedTariff: tariffTitle, // И как подключенный
+                        ),
                       ),
                     );
                   },

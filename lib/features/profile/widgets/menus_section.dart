@@ -5,58 +5,76 @@ import '../../accounts/widgets/index.dart';
 import '../../tariff/screens/tariffs_sheet_a.dart';
 
 class MenusSection extends StatelessWidget {
-  const MenusSection({super.key});
+  final bool showAccountManagement;
+  
+  const MenusSection({
+    super.key,
+    this.showAccountManagement = true,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Создаем список элементов меню
+    List<MenuItemData> menuItems = [
+      MenuItemData(
+        svgIcon: 'assets/icons/person.svg',
+        title: "Личный кабинет",
+        onTap: () => debugPrint("Открыть личный кабинет"),
+      ),
+      MenuItemData(
+        svgIcon: 'assets/icons/ruble_coin.svg',
+        title: "Подписка",
+        trailing: const CustomBadge(text: "BASIC"),
+        onTap: () => debugPrint("Открыть подписку"),
+      ),
+    ];
+    
+    // Добавляем элементы управления счетами и тарифами только если нужно
+    if (showAccountManagement) {
+      menuItems.addAll([
+        MenuItemData(
+          svgIcon: 'assets/icons/wallet.svg',
+          title: "Управление счетами",
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AccountsListScreen(),
+              ),
+            );
+          },
+        ),
+        MenuItemData(
+          svgIcon: 'assets/icons/tariffs.svg',
+          title: "Тарифы",
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const TariffsScreen(),
+              ),
+            );
+          },
+        ),
+      ]);
+    }
+    
+    // Добавляем остальные элементы
+    menuItems.addAll([
+      MenuItemData(
+        svgIcon: 'assets/icons/envelope.svg',
+        title: "Уведомления",
+        trailing: const Counter(text: "1", isLarge: true),
+      ),
+      MenuItemData(
+        svgIcon: 'assets/icons/doc.svg',
+        title: "Документы",
+        trailing: const Counter(text: "99+", isLarge: true),
+      ),
+    ]);
+
     return Column(
       children: [
         CustomMenu(
-          items: [
-            MenuItemData(
-              svgIcon: 'assets/icons/person.svg',
-              title: "Личный кабинет",
-              onTap: () => debugPrint("Открыть личный кабинет"),
-            ),
-            MenuItemData(
-              svgIcon: 'assets/icons/ruble_coin.svg',
-              title: "Подписка",
-              trailing: const CustomBadge(text: "BASIC"),
-              onTap: () => debugPrint("Открыть подписку"),
-            ),
-            MenuItemData(
-              svgIcon: 'assets/icons/wallet.svg',
-              title: "Управление счетами",
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const AccountsListScreen(),
-                  ),
-                );
-              },
-            ),
-            MenuItemData(
-              svgIcon: 'assets/icons/tariffs.svg',
-              title: "Тарифы",
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const TariffsScreen(),
-                  ),
-                );
-              },
-            ),
-            MenuItemData(
-              svgIcon: 'assets/icons/envelope.svg',
-              title: "Уведомления",
-              trailing: const Counter(text: "1", isLarge: true),
-            ),
-            MenuItemData(
-              svgIcon: 'assets/icons/doc.svg',
-              title: "Документы",
-              trailing: const Counter(text: "99+", isLarge: true),
-            ),
-          ],
+          items: menuItems,
         ),
         const SizedBox(height: 24),
         CustomMenu(

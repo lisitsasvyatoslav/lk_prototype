@@ -165,7 +165,6 @@ class _SmsConfirmationScreenState extends State<SmsConfirmationScreen>
       backgroundColor: AppColors.bgBaseTertiary,
       body: Column(
         children: [
-          SizedBox(height: 0),
           // Шапка экрана
           ScreenHeader(title: 'Подтверждение'),
           

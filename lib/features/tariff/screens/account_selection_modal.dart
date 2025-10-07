@@ -5,7 +5,6 @@ import '../../../core/widgets/modal_header.dart';
 import '../../../core/providers/account_provider.dart';
 import '../widgets/account_selection_card.dart';
 import 'tariff_change_screen.dart';
-import 'tariff_change_modal.dart';
 
 void showAccountSelectionModal(
   BuildContext context, {
@@ -115,6 +114,18 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
     }
   }
 
+  String _getCurrentDateFormatted() {
+    final now = DateTime.now();
+    final months = [
+      'янв', 'фев', 'мар', 'апр', 'май', 'июн',
+      'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'
+    ];
+    final day = now.day;
+    final month = months[now.month - 1];
+    final year = now.year;
+    return 'с $day $month $year';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -182,18 +193,29 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Получаем выбранный счет
+                    final selectedAccount = _accounts[_selectedAccountIndex];
+                    
                     // Закрываем модальное окно выбора счета
                     Navigator.of(context).pop();
                     
-                    // Открываем модальное окно смены тарифа (всегда не персональный тариф)
-                    showTariffChangeModal(
-                      context,
-                      isPersonalTariff: false,
-                      tariffTitle: widget.tariffTitle,
-                      tariffPrice: widget.tariffPrice,
-                      tariffIcon: widget.tariffIcon,
-                      tariffIconSize: widget.tariffIconSize,
-                      tariffIconBackgroundColor: widget.tariffIconBackgroundColor,
+                    // Сразу переходим на экран смены тарифа
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => TariffChangeScreen(
+                          currentTariff: 'Инвестор', // Текущий тариф (можно сделать динамическим)
+                          newTariff: widget.tariffTitle,
+                          currentTariffCost: 'Бесплатно', // Текущая стоимость (можно сделать динамической)
+                          newTariffCost: widget.tariffPrice ?? 'Бесплатно',
+                          currentTariffDate: 'с 23 дек 2023', // Текущая дата (можно сделать динамической)
+                          newTariffDate: _getCurrentDateFormatted(),
+                          selectedAccountId: selectedAccount['id'],
+                          selectedAccountName: selectedAccount['name'],
+                          newTariffIcon: widget.tariffIcon,
+                          newTariffIconSize: widget.tariffIconSize,
+                          newTariffIconBackgroundColor: widget.tariffIconBackgroundColor,
+                        ),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
