@@ -6,7 +6,7 @@ import '../widgets/account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
 import '../../accounts/widgets/tariff_section.dart';
 import '../../accounts/screens/account_details_modal.dart';
-import '../../tariff/screens/tariffs_sheet_a.dart';
+import '../../tariff/screens/tariffs_sheet_c.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../accounts/screens/test_list.dart';
 
@@ -84,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 onTariffTap: (ctx) => Navigator.of(ctx).push(
                   MaterialPageRoute(
-                    builder: (context) => const TariffsScreen(selectedTariff: 'Долгосрочный портфель'),
+                    builder: (context) => const TariffsScreenC(selectedTariff: 'Долгосрочный портфель'),
                   ),
                 ),
               ),
@@ -107,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 onTariffTap: (ctx) => Navigator.of(ctx).push(
                   MaterialPageRoute(
-                    builder: (context) => const TariffsScreen(selectedTariff: 'Долгосрочный портфель'),
+                    builder: (context) => const TariffsScreenC(selectedTariff: 'Долгосрочный портфель'),
                   ),
                 ),
               ),

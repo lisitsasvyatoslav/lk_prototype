@@ -3,7 +3,7 @@ import 'tariff_section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
-import '../../tariff/screens/tariffs_sheet_a.dart';
+import '../../tariff/screens/tariffs_sheet_c.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../../core/theme/appcolors.dart';
 
@@ -20,7 +20,7 @@ class AccountsCard extends StatelessWidget {
           changeText: '−2947,23 ₽',
           changeColor: AppColors.textNegativeDefault,
           number: '15185RI112B',
-          subtitle: '123234',
+          subtitle: 'Деньги на ветер',
           isFavorite: true,
           tariffType: TariffType.premium,
           tariffTitle: 'Премиум',
@@ -54,7 +54,7 @@ class AccountsCard extends StatelessWidget {
         // 2-й счет - Инвестор с положительным изменением
         AccountListItem(
           balance: '448 742,90 ₽',
-          changeText: '+2947,23 ₽',
+          changeText: '0,00 ₽',
           changeColor: AppColors.textPositiveDefault,
           number: '15185RI112B',
           subtitle: '123234',
@@ -72,7 +72,7 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
             ),
           ),
         ),
@@ -98,7 +98,7 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(selectedTariff: 'Единый дневной'),
+              builder: (context) => const TariffsScreenC(selectedTariff: 'Единый дневной'),
             ),
           ),
         ),
@@ -124,7 +124,7 @@ class AccountsCard extends StatelessWidget {
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
             ),
           ),
         ),

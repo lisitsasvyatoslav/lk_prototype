@@ -48,6 +48,7 @@ class TariffConfirmationScreen extends StatelessWidget {
         children: [
           ScreenHeader(
             title: 'Подтверждение',
+            showBackButton: false,
             onClosePressed: () => _navigateToSelectedProfile(context),
           ),
           // Верхняя половина - контент
@@ -170,7 +171,7 @@ class TariffConfirmationScreen extends StatelessWidget {
           ),
           
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
             child: Column(
               children: [
                 // Кнопка "Вернуться к профилю"

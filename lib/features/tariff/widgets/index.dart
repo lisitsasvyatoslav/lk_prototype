@@ -8,6 +8,7 @@ export 'scrollable_tabs.dart';
 export 'tariff_card.dart';
 export 'tariff_change_modal.dart';
 export 'tariff_agreements_button.dart';
+export 'tariff_details_modal.dart';
 export '../screens/tariff_change_screen.dart';
 export '../screens/tariff_confirmation_screen.dart';
 export '../../constants/colors.dart';

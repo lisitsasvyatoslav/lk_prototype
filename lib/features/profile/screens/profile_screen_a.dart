@@ -6,7 +6,7 @@ import '../widgets/account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
 import '../../accounts/widgets/tariff_section.dart';
 import '../../accounts/screens/account_details_modal.dart';
-import '../../tariff/screens/tariffs_sheet_a.dart';
+import '../../tariff/screens/tariffs_sheet_c.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../accounts/screens/test_list.dart';
 
@@ -48,7 +48,7 @@ class ProfileScreenA extends StatelessWidget {
                     changeText: '−2947,23 ₽',
                     changeColor: AppColors.textNegativeDefault,
                     number: '15185RI112B',
-                    subtitle: 'Название счета',
+                    subtitle: 'Деньги на ветер',
                     isFavorite: true,
                     tariffType: TariffType.portfolio,
                     tariffTitle: 'Инвестор',
@@ -56,14 +56,14 @@ class ProfileScreenA extends StatelessWidget {
                     onTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
                         builder: (context) => AccountDetailsScreen(
-                          title: 'Название счета',
+                          title: 'Деньги на ветер',
                           number: '15185RI112B',
                         ),
                       ),
                     ),
                     onTariffTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
-                        builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
                       ),
                     ),
                   ),
@@ -72,7 +72,7 @@ class ProfileScreenA extends StatelessWidget {
                     changeText: '0,00 ₽',
                     changeColor: AppColors.textBaseSecondary,
                     number: '15185RI112B',
-                    subtitle: 'Название счета',
+                    subtitle: 'Деньги на ветер',
                     isFavorite: false,
                     tariffType: TariffType.portfolio,
                     tariffTitle: 'Инвестор',
@@ -80,14 +80,14 @@ class ProfileScreenA extends StatelessWidget {
                     onTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
                         builder: (context) => AccountDetailsScreen(
-                          title: 'Название счета',
+                          title: 'Деньги на ветер',
                           number: '15185RI112B',
                         ),
                       ),
                     ),
                     onTariffTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
-                        builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
                       ),
                     ),
                   ),
@@ -96,7 +96,7 @@ class ProfileScreenA extends StatelessWidget {
                     changeText: '+2947,23 ₽',
                     changeColor: AppColors.textPositiveDefault,
                     number: '15185RI112B',
-                    subtitle: 'Название счета',
+                    subtitle: 'Деньги на ветер',
                     isFavorite: false,
                     tariffType: TariffType.portfolio,
                     tariffTitle: 'Инвестор',
@@ -104,14 +104,14 @@ class ProfileScreenA extends StatelessWidget {
                     onTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
                         builder: (context) => AccountDetailsScreen(
-                          title: 'Название счета',
+                          title: 'Деньги на ветер',
                           number: '15185RI112B',
                         ),
                       ),
                     ),
                     onTariffTap: (ctx) => Navigator.of(ctx).push(
                       MaterialPageRoute(
-                        builder: (context) => const TariffsScreen(selectedTariff: 'Инвестор'),
+                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
                       ),
                     ),
                   ),

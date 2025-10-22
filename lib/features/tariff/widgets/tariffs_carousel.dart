@@ -34,9 +34,9 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'iconBackgroundColor': const Color(0x1AFFB23F), // #FFB23F 10%
       'iconSize': 41.4,
       'characteristics': [
-        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0354%'),
-        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0354%'),
-        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0354%'),
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: 'до 0,0354%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: 'от 0,06%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,45 ₽'),
       ],
     },
     {
@@ -53,7 +53,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'characteristics': [
         TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0%'),
         TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,1%'),
-        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,45 Р'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,45 ₽'),
       ],
     },
     {
@@ -67,9 +67,9 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'iconBackgroundColor': const Color(0x1AFF91C1), // #FF91C1 10% - дефолтный цвет
       'iconSize': 33.73,
       'characteristics': [
-        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0154%'),
-        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0154%'),
-        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0154%'),
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,035%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,1%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,45 ₽'),
       ],
     },
     {
@@ -83,15 +83,15 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'iconBackgroundColor': const Color(0x1A93C7FF), // #93C7FF 10%
       'iconSize': 33.73,
       'characteristics': [
-        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,5%'),
-        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,5%'),
-        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,5%'),
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,05%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,1%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,9 ₽'),
       ],
     },
     {
       'title': 'Единый Консультационный',
       'subtitle': '177 ₽/мес',
-      'description': 'Инвестидет от профессионалов Финама',
+      'description': 'Инвестидеи от профессионалов "Финама"',
       'price': '177 ₽/мес',
       'priceDetail': 'от 0,0354% за сделки с ценными бумагами',
       'icon': 'assets/icons/bubble.chart.24.svg',
@@ -99,9 +99,9 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
       'iconBackgroundColor': const Color(0x1AFF7A7C), // #FF7A7C 10%
       'iconSize': 33.73,
       'characteristics': [
-        TariffCharacteristic(name: 'Ценные бумаги РФ', value: '0,0354%'),
-        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,0354%'),
-        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '0,0354%'),
+        TariffCharacteristic(name: 'Ценные бумаги РФ', value: 'до 0,1%'),
+        TariffCharacteristic(name: 'NASDAQ, HKEX, NYSE', value: '0,17%'),
+        TariffCharacteristic(name: 'Фьючерсы и опционы РФ', value: '4,65 ₽'),
       ],
     },
   ];
@@ -174,7 +174,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     return Column(
       children: [
         SizedBox(
-          height: 426,
+          height: 550,
           child: PageView.builder(
             controller: _pageController,
             itemBuilder: (context, index) {

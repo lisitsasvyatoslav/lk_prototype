@@ -9,7 +9,7 @@ import '../../../core/typography/text_12_regular.dart';
 import '../../../core/typography/text_12_medium.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
-import '../../tariff/screens/tariffs_sheet_a.dart';
+import '../../tariff/screens/tariffs_sheet_c.dart';
 import 'tariff_section.dart';
 
 class AccountListItem extends StatelessWidget {
@@ -134,7 +134,7 @@ class AccountListItem extends StatelessWidget {
                   onTariffTap: (context, selectedTariff) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => TariffsScreen(
+                        builder: (context) => TariffsScreenC(
                           selectedTariff: tariffTitle, // Устанавливаем текущий тариф как активный
                           connectedTariff: tariffTitle, // И как подключенный
                         ),

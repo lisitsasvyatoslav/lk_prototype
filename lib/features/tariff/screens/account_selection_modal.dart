@@ -59,43 +59,58 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
   late int _selectedAccountIndex;
 
   final List<Map<String, dynamic>> _accounts = [
+    // 1-й счет - Премиум с отрицательным изменением
     {
-      'id': 'B0389',
-      'name': 'Наименование счёта',
-      'balance': '0,00 Р',
-      'change': '0,00 Р',
+      'id': '15185RI112B',
+      'name': 'Деньги на ветер',
+      'balance': '1 593 742,90 ₽',
+      'change': '−2947,23 ₽',
+      'changeType': 'negative',
+      'icon': 'wallet',
+      'iconColor': AppColors.iconBaseSecondary,
+      'backgroundColor': AppColors.opacityBase24,
+    },
+    // 2-й счет - Инвестор с положительным изменением
+    {
+      'id': '15185RI112B',
+      'name': '123234',
+      'balance': '448 742,90 ₽',
+      'change': '0,00 ₽',
+      'changeType': 'neutral',
+      'icon': 'wallet',
+      'iconColor': const Color(0xFF3178D7),
+      'backgroundColor': const Color(0x1A3178D7), // 10% opacity
+    },
+    // 3-й счет - Единый дневной с нулевым изменением
+    {
+      'id': '15185RI112B',
+      'name': '123234',
+      'balance': '448 742,90 ₽',
+      'change': '0,00 ₽',
       'changeType': 'neutral',
       'icon': 'wallet',
       'iconColor': AppColors.iconBaseSecondary,
       'backgroundColor': AppColors.opacityBase24,
     },
+    // 4-й счет - Инвестор с положительным изменением
     {
-      'id': '15185RAUZE',
-      'name': 'Деньги на ветер',
-      'balance': '193 451,00 Р',
-      'change': '+542,90 Р',
+      'id': '15185RI112B',
+      'name': '123234',
+      'balance': '448 742,90 ₽',
+      'change': '+2947,93 ₽',
       'changeType': 'positive',
       'icon': 'wallet',
       'iconColor': const Color(0xFF3178D7),
       'backgroundColor': const Color(0x1A3178D7), // 10% opacity
     },
-    {
-      'id': '15185RI112В',
-      'name': 'КЛФ-918353',
-      'balance': '87 198 345,33 P',
-      'change': '+25 947,23 P',
-      'changeType': 'positive',
-      'icon': 'iis',
-      'iconColor': const Color(0xFFEE8F4C),
-      'backgroundColor': const Color(0x1AEE8F4C), // 10% opacity
-    },
+    // 5-й счет - ИИС
     {
       'id': '15185RI112B',
-      'name': 'Account name',
-      'balance': '50 742,90 Р',
-      'change': '-147,00 Р',
+      'name': 'Деньги на ветер',
+      'balance': '1 593 742,90 ₽',
+      'change': '−2947,23 ₽',
       'changeType': 'negative',
-      'icon': 'wallet',
+      'icon': 'iis',
       'iconColor': const Color(0xFFEE8F4C),
       'backgroundColor': const Color(0x1AEE8F4C), // 10% opacity
     },
@@ -185,7 +200,7 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                 ),
               ),
               
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
               
               // Connect tariff button
               SizedBox(
@@ -235,6 +250,8 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                   ),
                 ),
               ),
+              
+              const SizedBox(height: 8),
             ],
           ),
         ),

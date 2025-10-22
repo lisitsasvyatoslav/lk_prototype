@@ -3,7 +3,7 @@ import 'section_label.dart';
 import '../../../core/widgets/tariff_row.dart';
 import '../../../core/typography/text_12_regular.dart';
 import '../../../core/typography/text_12_medium.dart';
-import '../../tariff/screens/tariffs_sheet_a.dart';
+import '../../tariff/screens/tariffs_sheet_c.dart';
 
 class IISSection extends StatelessWidget {
   const IISSection({super.key});

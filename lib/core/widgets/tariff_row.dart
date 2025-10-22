@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/theme/appcolors.dart';
-import '../../features/tariff/screens/tariffs_sheet_a.dart';
+import '../../features/tariff/screens/tariffs_sheet_c.dart';
 
 class TariffRow extends StatelessWidget {
   final String title;
@@ -31,7 +31,7 @@ class TariffRow extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => TariffsScreen(
+          builder: (context) => TariffsScreenC(
             selectedTariff: tariffName,
             connectedTariff: tariffName, // Передаем тот же тариф как подключенный
           ),
@@ -47,7 +47,7 @@ class TariffRow extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TariffsScreen(
+            builder: (context) => TariffsScreenC(
               selectedTariff: tariffName!,
               connectedTariff: tariffName!, // Передаем тот же тариф как подключенный
             ),

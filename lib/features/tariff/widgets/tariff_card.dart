@@ -5,6 +5,8 @@ import '../screens/tariff_change_modal.dart';
 import '../screens/account_selection_modal.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/providers/tariff_provider.dart';
+import 'tariff_details_modal.dart';
+import 'tariff_agreements_button.dart';
 
 class TariffCharacteristic {
   final String name;
@@ -45,6 +47,300 @@ class TariffCard extends StatelessWidget {
     this.characteristics = const [],
     this.iconPath,
   });
+
+  List<TariffDetailSection> _getTariffDetails() {
+    switch (title) {
+      case 'Долгосрочный портфель':
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+          TariffDetailSection(
+            title: 'Комиссии',
+            groups: [
+              TariffDetailGroup(
+                title: 'ЦБ Российских эмитентов',
+                items: [
+                  TariffDetailItem(
+                    label: 'Комиссия брокера за покупку',
+                    value: '0 %',
+                  ),
+                  TariffDetailItem(
+                    label: 'Комиссия брокера за продажу',
+                    value: '0,28 %',
+                  ),
+                ],
+              ),
+            ],
+            items: [
+              TariffDetailItem(
+                label: 'Фьючерсы',
+                subLabel: 'За контракт',
+                value: '0,45 ₽',
+              ),
+              TariffDetailItem(
+                label: 'Драгоценные металлы',
+                subLabel: 'Не включая оборот по сделкам своп',
+                value: '0,3 %',
+              ),
+              TariffDetailItem(
+                label: 'Иностранные ценные бумаги',
+                subLabel: 'Комиссия брокера за покупку ценных бумаг (за исключением облигаций)',
+                value: '0,1%',
+              ),
+              TariffDetailItem(
+                label: 'Валюта',
+                subLabel: 'При обороте в день до млн ₽ (мин. 41,3 ₽ за поручение)',
+                value: '0,03682%',
+              ),
+              TariffDetailItem(
+                label: 'Биржи',
+                subLabel: 'Мосбиржа, СПБ биржа, NYSE, NASDAQ, HKEX, SSE, SZSE',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+      case 'Единый дневной':
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+          TariffDetailSection(
+            title: 'Комиссии',
+            groups: [
+              TariffDetailGroup(
+                title: 'ЦБ Российских эмитентов',
+                items: [
+                  TariffDetailItem(
+                    label: 'Комиссия брокера за покупку',
+                    value: '0 %',
+                  ),
+                  TariffDetailItem(
+                    label: 'Комиссия брокера за продажу',
+                    value: '0,28 %',
+                  ),
+                ],
+              ),
+            ],
+            items: [
+              TariffDetailItem(
+                label: 'Фьючерсы',
+                subLabel: 'За контракт',
+                value: '0,45 ₽',
+              ),
+              TariffDetailItem(
+                label: 'Драгоценные металлы',
+                subLabel: 'Не включая оборот по сделкам своп',
+                value: '0,3 %',
+              ),
+              TariffDetailItem(
+                label: 'Иностранные ценные бумаги',
+                subLabel: 'Комиссия брокера за покупку ценных бумаг (за исключением облигаций)',
+                value: '0,1 %',
+              ),
+              TariffDetailItem(
+                label: 'Валюта',
+                subLabel: 'При обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)',
+                value: '0,03682%',
+              ),
+              TariffDetailItem(
+                label: 'Биржи',
+                subLabel: 'Мосбиржа, СПБ биржа, NYSE, NASDAQ, HKEX, SSE, SZSE',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+      case 'Инвестор':
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+          TariffDetailSection(
+            title: 'Комиссии',
+            groups: [
+              TariffDetailGroup(
+                title: 'Московская биржа и СПБ Биржа',
+                items: [
+                  TariffDetailItem(
+                    label: 'При обороте в день до 1 млн ₽.',
+                    value: '0,035%',
+                  ),
+                  TariffDetailItem(
+                    label: 'Комиссия брокера за продажу',
+                    value: '0,28 %',
+                  ),
+                ],
+              ),
+            ],
+            items: [
+              TariffDetailItem(
+                label: 'Фьючерсы',
+                subLabel: 'За контракт',
+                value: '0,45₽',
+              ),
+              TariffDetailItem(
+                label: 'Драгоценные металлы',
+                subLabel: 'Не включая оборот по сделкам своп',
+                value: '0,05%',
+              ),
+              TariffDetailItem(
+                label: 'Иностранные ценные бумаги',
+                subLabel: 'Комиссия брокера за покупку ценных бумаг (за исключением облигаций)',
+                value: '0,035%',
+              ),
+              TariffDetailItem(
+                label: 'Валюта',
+                subLabel: 'При обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)',
+                value: '0,03682%',
+              ),
+              TariffDetailItem(
+                label: 'Биржи',
+                subLabel: 'Мосбиржа, СПБ биржа, NYSE, NASDAQ, HKEX, SSE, SZSE',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+      case 'Стратег':
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+          TariffDetailSection(
+            title: 'Комиссии',
+            groups: [
+              TariffDetailGroup(
+                title: 'ЦБ Российских эмитентов',
+                items: [
+                  TariffDetailItem(
+                    label: 'За исполненное поручение',
+                    value: '0,05 (мин. 50₽)',
+                  ),
+                ],
+              ),
+            ],
+            items: [
+              TariffDetailItem(
+                label: 'Фьючерсы',
+                subLabel: 'За контракт',
+                value: '0,9₽',
+              ),
+              TariffDetailItem(
+                label: 'Драгоценные металлы',
+                subLabel: 'Не включая оборот по сделкам своп',
+                value: '0,3%',
+              ),
+              TariffDetailItem(
+                label: 'Иностранные ценные бумаги',
+                subLabel: 'Комиссия брокера за покупку ценных бумаг (за исключением облигаций)',
+                value: '0,05% (мин. 50₽)',
+              ),
+              TariffDetailItem(
+                label: 'Валюта',
+                subLabel: 'При обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)',
+                value: '0,03682%',
+              ),
+              TariffDetailItem(
+                label: 'Биржи',
+                subLabel: 'Мосбиржа, СПБ биржа, NYSE, NASDAQ, HKEX, SSE, SZSE',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+      case 'Единый Консультационный':
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+          TariffDetailSection(
+            title: 'Комиссии',
+            groups: [
+              TariffDetailGroup(
+                title: 'ЦБ Российских эмитентов',
+                items: [
+                  TariffDetailItem(
+                    label: 'При обороте в день до 10 млн ₽',
+                    value: '0,108324%',
+                  ),
+                ],
+              ),
+            ],
+            items: [
+              TariffDetailItem(
+                label: 'Фьючерсы',
+                subLabel: 'За контракт',
+                value: '4,65₽',
+              ),
+              TariffDetailItem(
+                label: 'Драгоценные металлы',
+                subLabel: 'Не включая оборот по сделкам своп',
+                value: '0,3%',
+              ),
+              TariffDetailItem(
+                label: 'Иностранные ценные бумаги',
+                subLabel: 'Комиссия брокера за покупку ценных бумаг (за исключением облигаций)',
+                value: '0,108324%',
+              ),
+              TariffDetailItem(
+                label: 'Валюта',
+                subLabel: 'При обороте в день до 1 млн ₽ (мин. 41,3 ₽ за поручение)',
+                value: '0,08262%',
+              ),
+              TariffDetailItem(
+                label: 'Биржи',
+                subLabel: 'Мосбиржа, СПБ биржа, NYSE, NASDAQ, HKEX, SSE, SZSE',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+      default:
+        return [
+          TariffDetailSection(
+            title: 'Инструменты',
+            items: [
+              TariffDetailItem(
+                label: 'Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок',
+                value: '',
+              ),
+            ],
+          ),
+        ];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,17 +432,24 @@ class TariffCard extends StatelessWidget {
             
             const SizedBox(height: 16),
             
+            // Кнопка "Соглашения по тарифу" для подключенных тарифов
+            if (isConnected) ...[
+              const TariffAgreementsButton(),
+              const SizedBox(height: 16),
+            ],
+            
             // Характеристики тарифа
             if (characteristics.isNotEmpty) ...[
               Column(
                 children: characteristics.asMap().entries.map((entry) {
                   final index = entry.key;
                   final characteristic = entry.value;
+                  final isLast = index == characteristics.length - 1;
                   
                   return Container(
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    decoration: const BoxDecoration(
-                      border: Border(
+                    decoration: BoxDecoration(
+                      border: isLast ? null : const Border(
                         bottom: BorderSide(
                           color: Color(0xFFE5E5E7),
                           width: 0.5,
@@ -181,68 +484,126 @@ class TariffCard extends StatelessWidget {
               const SizedBox(height: 16),
             ],
             
-            // Кнопка или статус подключения
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: isConnected
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/check.svg',
-                            width: 16,
-                            height: 16,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.buttonLabelGhost,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Подключен',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.buttonLabelGhost,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : ElevatedButton(
-                    onPressed: () => showAccountSelectionModal(
-                      context, 
-                      tariffTitle: title,
-                      isPersonalTariff: isPersonalTariff,
-                      tariffPrice: price,
-                      tariffIcon: iconPath,
-                      tariffIconSize: iconSize,
-                      tariffIconBackgroundColor: iconBackgroundColor,
-                    ),
+            // Spacer для прижатия кнопок к низу
+            const Spacer(),
+            
+            // Кнопки
+            Column(
+              children: [
+                // Кнопка "Подробнее о тарифе"
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showTariffDetailsModal(
+                        context,
+                        tariffTitle: title,
+                        tariffDescription: description,
+                        sections: _getTariffDetails(),
+                        isConnected: isConnected,
+                        onConnectTariff: () {
+                          Navigator.of(context).pop(); // Закрываем модальное окно
+                          showAccountSelectionModal(
+                            context, 
+                            tariffTitle: title,
+                            isPersonalTariff: isPersonalTariff,
+                            tariffPrice: price,
+                            tariffIcon: iconPath,
+                            tariffIconSize: iconSize,
+                            tariffIconBackgroundColor: iconBackgroundColor,
+                          );
+                        },
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF3F4F6),
-                      foregroundColor: const Color(0xFF000000),
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: AppColors.buttonLabelSecondary,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
+                        side: const BorderSide(
+                          color: AppColors.buttonBorderOutlineDefault,
+                          width: 1,
+                        ),
                       ),
                     ),
-                    child: Text(
-                      buttonText,
-                      style: const TextStyle(
+                    child: const Text(
+                      'Подробнее о тарифе',
+                      style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
+                ),
+                
+                const SizedBox(height: 12),
+                
+                // Кнопка "Подключить" или статус "Подключен"
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: isConnected
+                    ? Container(
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/check.svg',
+                                width: 16,
+                                height: 16,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.buttonLabelGhost,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Подключен',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.buttonLabelGhost,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : ElevatedButton(
+                        onPressed: () => showAccountSelectionModal(
+                          context, 
+                          tariffTitle: title,
+                          isPersonalTariff: isPersonalTariff,
+                          tariffPrice: price,
+                          tariffIcon: iconPath,
+                          tariffIconSize: iconSize,
+                          tariffIconBackgroundColor: iconBackgroundColor,
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.buttonBgPrimaryDefault,
+                          foregroundColor: const Color(0xFF000000),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          buttonText,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                ),
+              ],
             ),
               ],
             ),

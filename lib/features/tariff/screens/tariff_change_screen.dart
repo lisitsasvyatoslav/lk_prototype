@@ -134,7 +134,7 @@ class TariffChangeScreen extends StatelessWidget {
           
           // Нижняя половина - информация и кнопки
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
             child: Column(
               children: [
                 // Информационный текст
