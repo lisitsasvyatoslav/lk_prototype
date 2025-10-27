@@ -19,6 +19,8 @@ void showAccountSelectionModal(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
+    isDismissible: true,
+    enableDrag: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -150,7 +152,12 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -203,55 +210,62 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
               const SizedBox(height: 24),
               
               // Connect tariff button
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Получаем выбранный счет
-                    final selectedAccount = _accounts[_selectedAccountIndex];
-                    
-                    // Закрываем модальное окно выбора счета
-                    Navigator.of(context).pop();
-                    
-                    // Сразу переходим на экран смены тарифа
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TariffChangeScreen(
-                          currentTariff: 'Инвестор', // Текущий тариф (можно сделать динамическим)
-                          newTariff: widget.tariffTitle,
-                          currentTariffCost: 'Бесплатно', // Текущая стоимость (можно сделать динамической)
-                          newTariffCost: widget.tariffPrice ?? 'Бесплатно',
-                          currentTariffDate: 'с 23 дек 2023', // Текущая дата (можно сделать динамической)
-                          newTariffDate: _getCurrentDateFormatted(),
-                          selectedAccountId: selectedAccount['id'],
-                          selectedAccountName: selectedAccount['name'],
-                          newTariffIcon: widget.tariffIcon,
-                          newTariffIconSize: widget.tariffIconSize,
-                          newTariffIconBackgroundColor: widget.tariffIconBackgroundColor,
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                child: SafeArea(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.buttonBgPrimaryDefault,
+                        foregroundColor: AppColors.buttonLabelPrimary,
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        // Получаем выбранный счет
+                        final selectedAccount = _accounts[_selectedAccountIndex];
+                        
+                        // Закрываем модальное окно выбора счета
+                        Navigator.of(context).pop();
+                        
+                        // Сразу переходим на экран смены тарифа
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => TariffChangeScreen(
+                              currentTariff: 'Инвестор', // Текущий тариф (можно сделать динамическим)
+                              newTariff: widget.tariffTitle,
+                              currentTariffCost: 'Бесплатно', // Текущая стоимость (можно сделать динамической)
+                              newTariffCost: widget.tariffPrice ?? 'Бесплатно',
+                              currentTariffDate: 'с 23 дек 2023', // Текущая дата (можно сделать динамической)
+                              newTariffDate: _getCurrentDateFormatted(),
+                              selectedAccountId: selectedAccount['id'],
+                              selectedAccountName: selectedAccount['name'],
+                              newTariffIcon: widget.tariffIcon,
+                              newTariffIconSize: widget.tariffIconSize,
+                              newTariffIconBackgroundColor: widget.tariffIconBackgroundColor,
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Выбрать счет',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.buttonBgPrimaryDefault,
-                    foregroundColor: AppColors.buttonLabelPrimary,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Выбрать счет',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
               ),
-              
-              const SizedBox(height: 8),
             ],
           ),
         ),

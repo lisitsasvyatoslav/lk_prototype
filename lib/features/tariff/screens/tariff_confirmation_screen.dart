@@ -42,9 +42,14 @@ class TariffConfirmationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-       backgroundColor: AppColors.bgBaseTertiary,
-      body: Column(
+    return Scaffold(
+      backgroundColor: AppColors.bgBaseTertiary,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
         children: [
           ScreenHeader(
             title: 'Подтверждение',
@@ -53,11 +58,12 @@ class TariffConfirmationScreen extends StatelessWidget {
           ),
           // Верхняя половина - контент
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                   // Иконка подтверждения
                   SvgPicture.asset(
                     'assets/icons/check_circle.svg',
@@ -91,6 +97,7 @@ class TariffConfirmationScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ],
+                ),
               ),
             ),
           ),
@@ -171,36 +178,36 @@ class TariffConfirmationScreen extends StatelessWidget {
           ),
           
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-            child: Column(
-              children: [
-                // Кнопка "Вернуться к профилю"
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton(
-                    onPressed: () => _navigateToSelectedProfile(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.buttonBgSecondaryDefault,
-                      foregroundColor: AppColors.buttonLabelSecondary,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            child: SafeArea(
+              child: SizedBox(
+                width: double.infinity,
+                height: 56,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.buttonBgSecondaryDefault,
+                    foregroundColor: AppColors.buttonLabelSecondary,
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
-                      'Вернуться к профилю',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    elevation: 0,
+                  ),
+                  onPressed: () => _navigateToSelectedProfile(context),
+                  child: const Text(
+                    'Вернуться к профилю',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],
+          ),
+        ),
       ),
     );
   }

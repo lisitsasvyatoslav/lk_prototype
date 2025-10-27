@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/theme/appcolors.dart';
 import 'tariff_agreements_button.dart';
 
@@ -113,9 +114,7 @@ class TariffDetailsModal extends StatelessWidget {
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // TODO: Navigate to detailed tariff description
-                          },
+                          onPressed: _launchTariffUrl,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             foregroundColor: AppColors.buttonLabelGhost,
@@ -125,7 +124,7 @@ class TariffDetailsModal extends StatelessWidget {
                             ),
                           ),
                           child: const Text(
-                            'Подробное описание тарифа',
+                            'Полное описание тарифа',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -168,30 +167,32 @@ class TariffDetailsModal extends StatelessWidget {
                 // Fixed button section
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  child: isConnected
-                    ? const TariffAgreementsButton(showBorder: true)
-                    : SizedBox(
-                        width: double.infinity,
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: onConnectTariff,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.buttonBgPrimaryDefault,
-                            foregroundColor: const Color(0xFF000000),
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                  child: SafeArea(
+                    child: isConnected
+                      ? const TariffAgreementsButton(showBorder: true)
+                      : SizedBox(
+                          width: double.infinity,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: onConnectTariff,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.buttonBgPrimaryDefault,
+                              foregroundColor: const Color(0xFF000000),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
-                          ),
-                          child: const Text(
-                            'Подключить тариф',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                            child: const Text(
+                              'Подключить тариф',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                  ),
                 ),
               ],
             ),
@@ -228,6 +229,42 @@ class TariffDetailsModal extends StatelessWidget {
 
   bool _isInstrumentsSection(String label) {
     return label.contains('Ценные бумаги, валюта и драгоценные металлы, фьючерсы, внебиржевой рынок');
+  }
+
+  String? _getTariffUrl(String tariffTitle) {
+    switch (tariffTitle) {
+      case 'Единый дневной':
+        return 'https://broker.finam.ru/landing/tariffs-n2-day/';
+      case 'Долгосрочный портфель':
+        return 'https://broker.finam.ru/landing/tariffs-n1-dolgosrochniy/';
+      case 'Инвестор':
+        return 'https://broker.finam.ru/landing/tariffs-n3-investor/';
+      case 'Стратег':
+        return 'https://broker.finam.ru/landing/tariffs-n4-strateg/';
+      case 'Единый Консультационный':
+        return 'https://broker.finam.ru/landing/tariffs-n5-consulting/';
+      default:
+        return null;
+    }
+  }
+
+  Future<void> _launchTariffUrl() async {
+    final url = _getTariffUrl(tariffTitle);
+    
+    if (url != null) {
+      final uri = Uri.parse(url);
+      
+      try {
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.platformDefault);
+        } else {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        }
+      } catch (e) {
+        // Ошибка при открытии URL - можно добавить обработку ошибок
+        print('Ошибка при открытии URL: $e');
+      }
+    }
   }
 
   Widget _buildSection(TariffDetailSection section) {

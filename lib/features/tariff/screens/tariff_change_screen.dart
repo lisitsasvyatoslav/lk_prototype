@@ -134,9 +134,10 @@ class TariffChangeScreen extends StatelessWidget {
           
           // Нижняя половина - информация и кнопки
           Container(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-            child: Column(
-              children: [
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+            child: SafeArea(
+              child: Column(
+                children: [
                 // Информационный текст
                 Text(
                   'Смена тарифа происходит\nна следующий день',
@@ -160,6 +161,7 @@ class TariffChangeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.buttonBgSecondaryDefault,
                       foregroundColor: AppColors.buttonLabelSecondary,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -196,6 +198,7 @@ class TariffChangeScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.buttonBgPrimaryDefault,
                       foregroundColor: AppColors.buttonLabelPrimary,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -210,7 +213,8 @@ class TariffChangeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
+                ],
+              ),
             ),
           ),
             ],

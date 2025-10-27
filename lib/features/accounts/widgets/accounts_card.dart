@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
 import '../../tariff/screens/tariffs_sheet_c.dart';
-import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../../core/theme/appcolors.dart';
 
 class AccountsCard extends StatelessWidget {
@@ -14,7 +13,7 @@ class AccountsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // 1-й счет - Премиум с отрицательным изменением
+        // 1-й счет - Инвестор с отрицательным изменением
         AccountListItem(
           balance: '1 593 742,90 ₽',
           changeText: '−2947,23 ₽',
@@ -22,8 +21,8 @@ class AccountsCard extends StatelessWidget {
           number: '15185RI112B',
           subtitle: 'Деньги на ветер',
           isFavorite: true,
-          tariffType: TariffType.premium,
-          tariffTitle: 'Премиум',
+          tariffType: TariffType.portfolio,
+          tariffTitle: 'Инвестор',
           tariffSubtitle: 'Текущий тариф',
           onTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
@@ -33,20 +32,9 @@ class AccountsCard extends StatelessWidget {
               ),
             ),
           ),
-          onTariffTap: (ctx) => showModalBottomSheet(
-            context: ctx,
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            builder: (context) => Container(
-              height: MediaQuery.of(context).size.height * 0.95,
-              decoration: const BoxDecoration(
-                color: Color(0xFFF2F4F6),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
-              ),
-              child: const PremiumTariffScreen(),
+          onTariffTap: (ctx) => Navigator.of(ctx).push(
+            MaterialPageRoute(
+              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
             ),
           ),
         ),
