@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/providers/profile_version_provider.dart';
-import 'profile_screen_a.dart';
-import 'profile_screen_b.dart';
+import '../../home/screens/home_screen.dart';
 
 class ProfileVersionSelectorScreen extends StatelessWidget {
   const ProfileVersionSelectorScreen({super.key});
@@ -53,7 +52,7 @@ class ProfileVersionSelectorScreen extends StatelessWidget {
                     provider.setVersion(ProfileVersion.versionA);
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const ProfileScreenA(),
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   },
@@ -101,7 +100,7 @@ class ProfileVersionSelectorScreen extends StatelessWidget {
                     provider.setVersion(ProfileVersion.versionB);
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const ProfileScreenB(),
+                        builder: (context) => const HomeScreen(),
                       ),
                     );
                   },

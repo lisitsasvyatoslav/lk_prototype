@@ -5,6 +5,7 @@ import '../../../core/widgets/modal_header.dart';
 import '../../../core/providers/account_provider.dart';
 import '../widgets/account_selection_card.dart';
 import 'tariff_change_screen.dart';
+import '../../accounts/data/accounts_data.dart';
 
 void showAccountSelectionModal(
   BuildContext context, {
@@ -60,71 +61,14 @@ class AccountSelectionModal extends StatefulWidget {
 class _AccountSelectionModalState extends State<AccountSelectionModal> {
   late int _selectedAccountIndex;
 
-  final List<Map<String, dynamic>> _accounts = [
-    // 1-й счет - Премиум с отрицательным изменением
-    {
-      'id': '15185RI112B',
-      'name': 'Деньги на ветер',
-      'balance': '1 593 742,90 ₽',
-      'change': '−2947,23 ₽',
-      'changeType': 'negative',
-      'icon': 'wallet',
-      'iconColor': AppColors.iconBaseSecondary,
-      'backgroundColor': AppColors.opacityBase24,
-    },
-    // 2-й счет - Инвестор с положительным изменением
-    {
-      'id': '15185RI112B',
-      'name': '123234',
-      'balance': '448 742,90 ₽',
-      'change': '0,00 ₽',
-      'changeType': 'neutral',
-      'icon': 'wallet',
-      'iconColor': const Color(0xFF3178D7),
-      'backgroundColor': const Color(0x1A3178D7), // 10% opacity
-    },
-    // 3-й счет - Единый дневной с нулевым изменением
-    {
-      'id': '15185RI112B',
-      'name': '123234',
-      'balance': '448 742,90 ₽',
-      'change': '0,00 ₽',
-      'changeType': 'neutral',
-      'icon': 'wallet',
-      'iconColor': AppColors.iconBaseSecondary,
-      'backgroundColor': AppColors.opacityBase24,
-    },
-    // 4-й счет - Инвестор с положительным изменением
-    {
-      'id': '15185RI112B',
-      'name': '123234',
-      'balance': '448 742,90 ₽',
-      'change': '+2947,93 ₽',
-      'changeType': 'positive',
-      'icon': 'wallet',
-      'iconColor': const Color(0xFF3178D7),
-      'backgroundColor': const Color(0x1A3178D7), // 10% opacity
-    },
-    // 5-й счет - ИИС
-    {
-      'id': '15185RI112B',
-      'name': 'Деньги на ветер',
-      'balance': '1 593 742,90 ₽',
-      'change': '−2947,23 ₽',
-      'changeType': 'negative',
-      'icon': 'iis',
-      'iconColor': const Color(0xFFEE8F4C),
-      'backgroundColor': const Color(0x1AEE8F4C), // 10% opacity
-    },
-  ];
-
   @override
   void initState() {
     super.initState();
     // Находим индекс счета по имени из глобального состояния
     final accountProvider = Provider.of<AccountProvider>(context, listen: false);
-    _selectedAccountIndex = _accounts.indexWhere(
-      (account) => account['name'] == accountProvider.selectedAccountName,
+    final accounts = AccountsDataSource.getAllAccounts();
+    _selectedAccountIndex = accounts.indexWhere(
+      (account) => account.name == accountProvider.selectedAccountName,
     );
     if (_selectedAccountIndex == -1) {
       _selectedAccountIndex = 1; // По умолчанию второй счет
@@ -184,13 +128,26 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                   ],
                 ),
                 child: Column(
-                  children: List.generate(_accounts.length, (index) {
-                    final account = _accounts[index];
+                  children: List.generate(AccountsDataSource.getAllAccounts().length, (index) {
+                    final accountData = AccountsDataSource.getAllAccounts()[index];
                     final isSelected = _selectedAccountIndex == index;
-                    final isLast = index == _accounts.length - 1;
+                    final isLast = index == AccountsDataSource.getAllAccounts().length - 1;
+                    
+                    // Преобразуем AccountData в Map для совместимости с AccountSelectionCard
+                    final accountMap = {
+                      'id': accountData.id,
+                      'name': accountData.name,
+                      'balance': accountData.balance,
+                      'change': accountData.changeText,
+                      'changeType': accountData.changeColor == AppColors.textNegativeDefault ? 'negative' :
+                                   accountData.changeColor == AppColors.textPositiveDefault ? 'positive' : 'neutral',
+                      'icon': accountData.icon ?? 'wallet',
+                      'iconColor': accountData.iconColor ?? AppColors.iconBaseSecondary,
+                      'backgroundColor': accountData.backgroundColor ?? AppColors.opacityBase24,
+                    };
                     
                     return AccountSelectionCard(
-                      account: account,
+                      account: accountMap,
                       isSelected: isSelected,
                       isLast: isLast,
                       onTap: () {
@@ -200,7 +157,7 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                         
                         // Сразу обновляем глобальное состояние при выборе счета
                         final accountProvider = Provider.of<AccountProvider>(context, listen: false);
-                        accountProvider.selectAccountFromMap(account);
+                        accountProvider.selectAccountFromMap(accountMap);
                       },
                     );
                   }),
@@ -231,7 +188,7 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                       ),
                       onPressed: () {
                         // Получаем выбранный счет
-                        final selectedAccount = _accounts[_selectedAccountIndex];
+                        final selectedAccountData = AccountsDataSource.getAllAccounts()[_selectedAccountIndex];
                         
                         // Закрываем модальное окно выбора счета
                         Navigator.of(context).pop();
@@ -240,14 +197,14 @@ class _AccountSelectionModalState extends State<AccountSelectionModal> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => TariffChangeScreen(
-                              currentTariff: 'Инвестор', // Текущий тариф (можно сделать динамическим)
+                              currentTariff: selectedAccountData.tariffTitle, // Текущий тариф из данных
                               newTariff: widget.tariffTitle,
                               currentTariffCost: 'Бесплатно', // Текущая стоимость (можно сделать динамической)
                               newTariffCost: widget.tariffPrice ?? 'Бесплатно',
                               currentTariffDate: 'с 23 дек 2023', // Текущая дата (можно сделать динамической)
                               newTariffDate: _getCurrentDateFormatted(),
-                              selectedAccountId: selectedAccount['id'],
-                              selectedAccountName: selectedAccount['name'],
+                              selectedAccountId: selectedAccountData.id,
+                              selectedAccountName: selectedAccountData.name,
                               newTariffIcon: widget.tariffIcon,
                               newTariffIconSize: widget.tariffIconSize,
                               newTariffIconBackgroundColor: widget.tariffIconBackgroundColor,

@@ -46,6 +46,10 @@ class PremiumStatusCard extends StatelessWidget {
                           'assets/icons/diamond.svg',
                           width: 20,
                           height: 20,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.iconBrandDefault,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),

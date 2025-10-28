@@ -99,6 +99,8 @@ class AccountSelectionCard extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF5E6472),
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

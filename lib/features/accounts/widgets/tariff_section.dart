@@ -31,6 +31,10 @@ class TariffSection extends StatelessWidget {
         return const Color(0xFFFFB23F).withOpacity(0.1); // #FFB23F 10%
       case TariffType.longTerm:
         return const Color(0xFF6FFF22).withOpacity(0.1); // #6FFF22 10%
+      case TariffType.strategist:
+        return const Color(0xFF93C7FF).withOpacity(0.1); // #93C7FF 10%
+      case TariffType.consultative:
+        return const Color(0xFFFF7A7C).withOpacity(0.1); // #FF7A7C 10%
       default:
         return const Color(0xFFF9F9F9); // Текущий цвет по умолчанию
     }

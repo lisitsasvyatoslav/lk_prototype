@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'features/profile/screens/profile_version_selector_screen.dart';
 import 'core/theme/appcolors.dart';
 import 'core/providers/account_provider.dart';
 import 'core/providers/profile_version_provider.dart';
 import 'core/providers/tariff_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'features/profile/screens/profile_version_selector_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,25 +72,8 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         themeMode: _themeMode,
-        home: MainScreen(toggleTheme: toggleTheme),
+        home: const ProfileVersionSelectorScreen(),
       ),
     );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  final VoidCallback toggleTheme;
-
-  const MainScreen({super.key, required this.toggleTheme});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-
-  @override
-  Widget build(BuildContext context) {
-    return const ProfileVersionSelectorScreen();
   }
 }

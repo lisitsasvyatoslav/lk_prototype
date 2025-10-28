@@ -5,118 +5,50 @@ import 'package:flutter/material.dart';
 import '../screens/account_details_modal.dart';
 import '../../tariff/screens/tariffs_sheet_c.dart';
 import '../../../core/theme/appcolors.dart';
+import '../data/accounts_data.dart';
 
 class AccountsCard extends StatelessWidget {
   const AccountsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Получаем первые 4 счета (не ИИС)
+    final brokerAccounts = AccountsDataSource.getAllAccounts()
+        .where((account) => !account.showIISIcon)
+        .toList();
+
     return Column(
-      children: [
-        // 1-й счет - Инвестор с отрицательным изменением
-        AccountListItem(
-          balance: '1 593 742,90 ₽',
-          changeText: '−2947,23 ₽',
-          changeColor: AppColors.textNegativeDefault,
-          number: '15185RI112B',
-          subtitle: 'Деньги на ветер',
-          isFavorite: true,
-          tariffType: TariffType.portfolio,
-          tariffTitle: 'Инвестор',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
+      children: brokerAccounts.map((accountData) {
+        return Column(
+          children: [
+            AccountListItem(
+              balance: accountData.balance,
+              changeText: accountData.changeText,
+              changeColor: accountData.changeColor,
+              number: accountData.number,
+              subtitle: accountData.subtitle,
+              isFavorite: accountData.isFavorite,
+              tariffType: accountData.tariffType,
+              tariffTitle: accountData.tariffTitle,
+              tariffSubtitle: accountData.tariffSubtitle,
+              onTap: (ctx) => Navigator.of(ctx).push(
+                MaterialPageRoute(
+                  builder: (context) => AccountDetailsScreen(
+                    title: accountData.name,
+                    number: accountData.number,
+                  ),
+                ),
+              ),
+              onTariffTap: (ctx) => Navigator.of(ctx).push(
+                MaterialPageRoute(
+                  builder: (context) => TariffsScreenC(selectedTariff: accountData.tariffTitle),
+                ),
               ),
             ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        // 2-й счет - Инвестор с положительным изменением
-        AccountListItem(
-          balance: '448 742,90 ₽',
-          changeText: '0,00 ₽',
-          changeColor: AppColors.textPositiveDefault,
-          number: '15185RI112B',
-          subtitle: '123234',
-          isFavorite: false,
-          tariffType: TariffType.portfolio,
-          tariffTitle: 'Инвестор',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
-              ),
-            ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        // 3-й счет - Единый дневной с нулевым изменением
-        AccountListItem(
-          balance: '448 742,90 ₽',
-          changeText: '0,00 ₽',
-          changeColor: AppColors.textBaseSecondary,
-          number: '15185RI112B',
-          subtitle: '123234',
-          isFavorite: false,
-          tariffType: TariffType.daily,
-          tariffTitle: 'Единый дневной',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
-              ),
-            ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreenC(selectedTariff: 'Единый дневной'),
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        // 4-й счет - Инвестор с положительным изменением
-        AccountListItem(
-          balance: '448 742,90 ₽',
-          changeText: '+2947,93 ₽',
-          changeColor: AppColors.textPositiveDefault,
-          number: '15185RI112B',
-          subtitle: '123234',
-          isFavorite: false,
-          tariffType: TariffType.portfolio,
-          tariffTitle: 'Инвестор',
-          tariffSubtitle: 'Текущий тариф',
-          onTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => AccountDetailsScreen(
-                title: '123234',
-                number: '15185RI112B',
-              ),
-            ),
-          ),
-          onTariffTap: (ctx) => Navigator.of(ctx).push(
-            MaterialPageRoute(
-              builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-            ),
-          ),
-        ),
-      ],
+            const SizedBox(height: 8),
+          ],
+        );
+      }).toList(),
     );
   }
 }

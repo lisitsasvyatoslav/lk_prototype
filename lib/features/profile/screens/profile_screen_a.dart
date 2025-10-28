@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../widgets/index.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/widgets/bottom_nav_bar.dart';
 import '../widgets/account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
 import '../../accounts/widgets/tariff_section.dart';
@@ -9,6 +10,7 @@ import '../../accounts/screens/account_details_modal.dart';
 import '../../tariff/screens/tariffs_sheet_c.dart';
 import '../../tariff/screens/premium_tariff_screen.dart';
 import '../../accounts/screens/test_list.dart';
+import '../../accounts/data/accounts_data.dart';
 
 class ProfileScreenA extends StatelessWidget {
   const ProfileScreenA({super.key});
@@ -17,7 +19,9 @@ class ProfileScreenA extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgBaseTertiary,
+      bottomNavigationBar: const BottomNavBar(currentIndex: 4),
       body: SafeArea(
+        bottom: false,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -42,80 +46,34 @@ class ProfileScreenA extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: AccountCarousel(
-                  cards: [
-                  AccountListItem(
-                    balance: '1 593 742,90 ₽',
-                    changeText: '−2947,23 ₽',
-                    changeColor: AppColors.textNegativeDefault,
-                    number: '15185RI112B',
-                    subtitle: 'Деньги на ветер',
-                    isFavorite: true,
-                    tariffType: TariffType.portfolio,
-                    tariffTitle: 'Инвестор',
-                    tariffSubtitle: 'Текущий тариф',
-                    onTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => AccountDetailsScreen(
-                          title: 'Деньги на ветер',
-                          number: '15185RI112B',
+                  cards: AccountsDataSource.getAllAccounts().map((accountData) {
+                    return AccountListItem(
+                      balance: accountData.balance,
+                      changeText: accountData.changeText,
+                      changeColor: accountData.changeColor,
+                      number: accountData.number,
+                      subtitle: accountData.subtitle,
+                      isFavorite: accountData.isFavorite,
+                      tariffType: accountData.tariffType,
+                      tariffTitle: accountData.tariffTitle,
+                      tariffSubtitle: accountData.tariffSubtitle,
+                      showIISIcon: accountData.showIISIcon,
+                      onTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => AccountDetailsScreen(
+                            title: accountData.name,
+                            number: accountData.number,
+                            isIIS: accountData.showIISIcon,
+                          ),
                         ),
                       ),
-                    ),
-                    onTariffTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-                      ),
-                    ),
-                  ),
-                  AccountListItem(
-                    balance: '1 593 742,90 ₽',
-                    changeText: '0,00 ₽',
-                    changeColor: AppColors.textBaseSecondary,
-                    number: '15185RI112B',
-                    subtitle: 'Деньги на ветер',
-                    isFavorite: false,
-                    tariffType: TariffType.portfolio,
-                    tariffTitle: 'Инвестор',
-                    tariffSubtitle: 'Текущий тариф',
-                    onTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => AccountDetailsScreen(
-                          title: 'Деньги на ветер',
-                          number: '15185RI112B',
+                      onTariffTap: (ctx) => Navigator.of(ctx).push(
+                        MaterialPageRoute(
+                          builder: (context) => TariffsScreenC(selectedTariff: accountData.tariffTitle),
                         ),
                       ),
-                    ),
-                    onTariffTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-                      ),
-                    ),
-                  ),
-                  AccountListItem(
-                    balance: '1 593 742,90 ₽',
-                    changeText: '+2947,23 ₽',
-                    changeColor: AppColors.textPositiveDefault,
-                    number: '15185RI112B',
-                    subtitle: 'Деньги на ветер',
-                    isFavorite: false,
-                    tariffType: TariffType.portfolio,
-                    tariffTitle: 'Инвестор',
-                    tariffSubtitle: 'Текущий тариф',
-                    onTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => AccountDetailsScreen(
-                          title: 'Деньги на ветер',
-                          number: '15185RI112B',
-                        ),
-                      ),
-                    ),
-                    onTariffTap: (ctx) => Navigator.of(ctx).push(
-                      MaterialPageRoute(
-                        builder: (context) => const TariffsScreenC(selectedTariff: 'Инвестор'),
-                      ),
-                    ),
-                  ),
-                ],
+                    );
+                  }).toList(),
                 ),
               ),
               const SizedBox(height: 16),

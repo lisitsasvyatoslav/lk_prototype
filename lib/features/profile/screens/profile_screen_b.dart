@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../widgets/index.dart';
 import '../../../core/theme/appcolors.dart';
+import '../../../core/widgets/bottom_nav_bar.dart';
 import '../widgets/account_chart_card.dart';
 import '../../accounts/widgets/account_list_item.dart';
 import '../../accounts/screens/account_details_modal.dart';
@@ -16,7 +17,9 @@ class ProfileScreenB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgBaseTertiary,
+      bottomNavigationBar: const BottomNavBar(currentIndex: 4),
       body: SafeArea(
+        bottom: false,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: SingleChildScrollView(

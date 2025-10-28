@@ -22,6 +22,10 @@ class LearningMenuCard extends StatelessWidget {
               'assets/icons/reward_first.svg',
               width: 24,
               height: 24,
+              colorFilter: const ColorFilter.mode(
+                AppColors.iconBaseDefault,
+                BlendMode.srcIn,
+              ),
             ),
             title: 'Тестирования для инвесторов',
             subtitle: '2 из 4 тестов пройдено',
@@ -32,6 +36,10 @@ class LearningMenuCard extends StatelessWidget {
               'assets/icons/book_center_learning.svg',
               width: 24,
               height: 24,
+              colorFilter: const ColorFilter.mode(
+                AppColors.iconBaseDefault,
+                BlendMode.srcIn,
+              ),
             ),
             title: 'Центр обучения',
           ),

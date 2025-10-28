@@ -88,6 +88,7 @@ class AppColors {
   // Input
   static const inputTextDefault = Color(0xFF1A1A1F);
   static const inputBgActive = Color(0x00C0C0CC); // 0% opacity
+  static const inputBgDefault = Color(0x29C0C0CC);
   static const inputCursorBlinker = Color(0xFFE08F05);
   static const inputLabelActive = Color(0xFFE08F05);
   static const inputBorderActive = Color(0xFFFFBA30);

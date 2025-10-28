@@ -4,36 +4,42 @@ import 'tariff_section.dart';
 import '../screens/account_details_modal.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../tariff/screens/tariffs_sheet_c.dart';
+import '../data/accounts_data.dart';
 
 class InvestAccountsCard extends StatelessWidget {
   const InvestAccountsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Получаем ИИС счет
+    final iisAccount = AccountsDataSource.getAllAccounts()
+        .where((account) => account.showIISIcon)
+        .first;
+
     return Column(
       children: [
         AccountListItem(
-          balance: '1 593 742,90 ₽',
-          changeText: '−2947,23 ₽',
-          changeColor: AppColors.textNegativeDefault,
-          number: '15185RI112B',
-          subtitle: 'Деньги на ветер',
-          showIISIcon: true,
-          tariffType: TariffType.longTerm,
-          tariffTitle: 'Долгосрочный портфель',
-          tariffSubtitle: 'Текущий тариф',
+          balance: iisAccount.balance,
+          changeText: iisAccount.changeText,
+          changeColor: iisAccount.changeColor,
+          number: iisAccount.number,
+          subtitle: iisAccount.subtitle,
+          showIISIcon: iisAccount.showIISIcon,
+          tariffType: iisAccount.tariffType,
+          tariffTitle: iisAccount.tariffTitle,
+          tariffSubtitle: iisAccount.tariffSubtitle,
           onTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
               builder: (context) => AccountDetailsScreen(
-                title: 'КЛФ-9182323',
-                number: '15185RI112B',
-                isIIS: true,
+                title: iisAccount.name,
+                number: iisAccount.number,
+                isIIS: iisAccount.showIISIcon,
               ),
             ),
           ),
           onTariffTap: (ctx) => Navigator.of(ctx).push(
             MaterialPageRoute(
-              builder: (context) => const TariffsScreenC(selectedTariff: 'Долгосрочный портфель'),
+              builder: (context) => TariffsScreenC(selectedTariff: iisAccount.tariffTitle),
             ),
           ),
         ),

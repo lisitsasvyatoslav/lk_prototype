@@ -20,7 +20,15 @@ class TipsCards extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: SvgPicture.asset('assets/icons/profile_icon_invest.svg', width: 28, height: 28),
+              child: SvgPicture.asset(
+                'assets/icons/profile_icon_invest.svg', 
+                width: 28, 
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.iconBaseDefault,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
           ),
           title: "Не определен",
@@ -40,7 +48,15 @@ class TipsCards extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: SvgPicture.asset('assets/icons/profile_icon_qual.svg', width: 28, height: 28),
+              child: SvgPicture.asset(
+                'assets/icons/profile_icon_qual.svg', 
+                width: 28, 
+                height: 28,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.iconBaseDefault,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
           ),
           title: "Получить статус",

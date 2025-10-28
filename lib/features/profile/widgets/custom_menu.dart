@@ -69,6 +69,10 @@ class _MenuItem extends StatelessWidget {
         width: 24,
         height: 24,
         fit: BoxFit.contain,
+        colorFilter: const ColorFilter.mode(
+          AppColors.iconBaseDefault,
+          BlendMode.srcIn,
+        ),
         errorBuilder: (context, error, stackTrace) {
           print('SVG Error: $error for path: $svgIcon');
           return Container(

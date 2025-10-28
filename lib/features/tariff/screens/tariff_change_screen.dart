@@ -6,7 +6,38 @@ import '../../../core/widgets/screen_header.dart';
 import 'sms_confirmation_screen.dart';
 import '../../../core/theme/appcolors.dart';
 import '../../../core/providers/tariff_provider.dart';
+import '../widgets/tariffs_carousel.dart';
 // top to bottom, #F9F9F9 to #DFE4ED
+
+// Map тарифов с их иконками и цветами
+final Map<String, Map<String, dynamic>> _tariffConfig = {
+  'Стратег': {
+    'icon': 'assets/icons/rocket.24.svg',
+    'iconSize': 20.5,
+    'backgroundColor': const Color(0x1A93C7FF), // #93C7FF 10%
+  },
+  'Единый дневной': {
+    'icon': 'assets/icons/daily_tariff.svg',
+    'iconSize': 20.5,
+    'backgroundColor': const Color(0x1AFFB23F), // #FFB23F 10%
+  },
+  'Долгосрочный портфель': {
+    'icon': 'assets/icons/wallet_transfer_send.svg',
+    'iconSize': 20.5,
+    'backgroundColor': const Color(0x1A6FFF22), // #6FFF22 10%
+  },
+  'Инвестор': {
+    'icon': 'assets/icons/chart_forest.svg',
+    'iconSize': 20.5,
+    'backgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
+  },
+  'Единый Консультационный': {
+    'icon': 'assets/icons/bubble.chart.24.svg',
+    'iconSize': 20.5,
+    'backgroundColor': const Color(0x1AFF7A7C), // #FF7A7C 10%
+  },
+};
+
 class TariffChangeScreen extends StatelessWidget {
   final String currentTariff;
   final String newTariff;
@@ -78,22 +109,36 @@ class TariffChangeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // Текущий тариф
-                Container(
-                    decoration: BoxDecoration(
+                Builder(
+                  builder: (context) {
+                    final currentTariffName = tariffProvider.connectedTariff;
+                    final currentTariffInfo = _tariffConfig[currentTariffName] ?? {
+                      'icon': 'assets/icons/chart_forest.svg',
+                      'iconSize': 20.5,
+                      'backgroundColor': const Color(0xFFF9F9F9),
+                    };
+                    
+                    return Container(
+                      decoration: BoxDecoration(
                         color: AppColors.bgBaseDefault,
                         borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Column(
+                      ),
+                      child: Column(
                         children: [
-                        TariffRow(
-                            title: tariffProvider.connectedTariff,
+                          TariffRow(
+                            title: currentTariffName,
                             subtitle: 'Бесплатно • с 23 дек 2023',
-                            svgIcon: 'assets/icons/chart_forest.svg',
-                            iconSize: 20.5,
-                            gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-                        ),
+                            svgIcon: currentTariffInfo['icon'],
+                            iconSize: currentTariffInfo['iconSize'],
+                            gradient: [
+                              currentTariffInfo['backgroundColor'] as Color,
+                              currentTariffInfo['backgroundColor'] as Color,
+                            ],
+                          ),
                         ],
-                    ),
+                      ),
+                    );
+                  },
                 ),
                   
                   const SizedBox(height: 8),
