@@ -3,7 +3,20 @@ import '../../../core/widgets/tariff_row.dart';
 import '../../tariff/screens/tariffs_sheet_c.dart';
 
 class InvestorCard extends StatelessWidget {
-  const InvestorCard({super.key});
+  final String tariffTitle;
+  final String tariffSubtitle;
+  final String tariffIcon;
+  final double tariffIconSize;
+  final List<Color> tariffGradient;
+
+  const InvestorCard({
+    super.key,
+    required this.tariffTitle,
+    required this.tariffSubtitle,
+    required this.tariffIcon,
+    required this.tariffIconSize,
+    required this.tariffGradient,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +31,12 @@ class InvestorCard extends StatelessWidget {
       child: Column(
         children: [
           TariffRow(
-            title: 'Инвестор',
-            subtitle: 'Бесплатно • с 23 дек 2023',
-            svgIcon: 'assets/icons/chart_forest.svg',
-            iconSize: 20.5,
-            gradient: const [Color(0xFFF9F9F9), Color(0xFFDFE4ED)],
-            tariffName: 'Инвестор',
+            title: tariffTitle,
+            subtitle: tariffSubtitle,
+            svgIcon: tariffIcon,
+            iconSize: tariffIconSize,
+            gradient: tariffGradient,
+            tariffName: tariffTitle,
           ),
         ],
       ),

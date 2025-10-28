@@ -10,6 +10,8 @@ import '../widgets/margin_trading_card.dart';
 import '../widgets/account_sections_table.dart';
 import '../widgets/iis_section.dart';
 import '../../../core/widgets/screen_header.dart';
+import '../data/accounts_data.dart';
+import '../../tariff/screens/tariff_change_screen.dart';
 
 class AccountDetailsScreen extends StatelessWidget {
   final String title;
@@ -17,6 +19,37 @@ class AccountDetailsScreen extends StatelessWidget {
   final bool isIIS;
 
   const AccountDetailsScreen({super.key, required this.title, required this.number, this.isIIS = false});
+
+  // Map тарифов с их иконками и цветами (дублируем из tariff_change_screen.dart)
+  Map<String, Map<String, dynamic>> _getTariffConfig() {
+    return {
+      'Стратег': {
+        'icon': 'assets/icons/rocket.24.svg',
+        'iconSize': 20.5,
+        'backgroundColor': const Color(0x1A93C7FF), // #93C7FF 10%
+      },
+      'Единый дневной': {
+        'icon': 'assets/icons/daily_tariff.svg',
+        'iconSize': 20.5,
+        'backgroundColor': const Color(0x1AFFB23F), // #FFB23F 10%
+      },
+      'Долгосрочный портфель': {
+        'icon': 'assets/icons/wallet_transfer_send.svg',
+        'iconSize': 20.5,
+        'backgroundColor': const Color(0x1A6FFF22), // #6FFF22 10%
+      },
+      'Инвестор': {
+        'icon': 'assets/icons/chart_forest.svg',
+        'iconSize': 20.5,
+        'backgroundColor': const Color(0x1AFF91C1), // #FF91C1 10%
+      },
+      'Единый Консультационный': {
+        'icon': 'assets/icons/bubble.chart.24.svg',
+        'iconSize': 20.5,
+        'backgroundColor': const Color(0x1AFF7A7C), // #FF7A7C 10%
+      },
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +78,33 @@ class AccountDetailsScreen extends StatelessWidget {
                   ],
                   if (!isIIS) ...[
                     const SizedBox(height: 16),
-                    const InvestorCard(),
+                    Builder(
+                      builder: (context) {
+                        // Находим счет по номеру
+                        final account = AccountsDataSource.accounts.firstWhere(
+                          (acc) => acc.number == number,
+                          orElse: () => AccountsDataSource.accounts.first,
+                        );
+                        
+                        final tariffConfig = _getTariffConfig();
+                        final tariffInfo = tariffConfig[account.tariffTitle] ?? {
+                          'icon': 'assets/icons/chart_forest.svg',
+                          'iconSize': 20.5,
+                          'backgroundColor': const Color(0xFFF9F9F9),
+                        };
+
+                        return InvestorCard(
+                          tariffTitle: account.tariffTitle,
+                          tariffSubtitle: account.tariffSubtitle,
+                          tariffIcon: tariffInfo['icon'],
+                          tariffIconSize: tariffInfo['iconSize'],
+                          tariffGradient: [
+                            tariffInfo['backgroundColor'] as Color,
+                            tariffInfo['backgroundColor'] as Color,
+                          ],
+                        );
+                      },
+                    ),
                   ],
                   const SizedBox(height: 16),
                   const SwitchRow(

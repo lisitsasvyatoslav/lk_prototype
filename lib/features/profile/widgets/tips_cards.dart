@@ -25,7 +25,7 @@ class TipsCards extends StatelessWidget {
                 width: 28, 
                 height: 28,
                 colorFilter: const ColorFilter.mode(
-                  AppColors.iconBaseDefault,
+                  AppColors.iconBaseSecondary,
                   BlendMode.srcIn,
                 ),
               ),
@@ -53,7 +53,7 @@ class TipsCards extends StatelessWidget {
                 width: 28, 
                 height: 28,
                 colorFilter: const ColorFilter.mode(
-                  AppColors.iconBaseDefault,
+                  AppColors.iconBaseSecondary,
                   BlendMode.srcIn,
                 ),
               ),
