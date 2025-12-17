@@ -1,0 +1,88 @@
+[
+  {
+    "title": "Единый дневной",
+    "subtitle": "177 ₽/мес",
+    "description": "Для активных трейдеров",
+    "price": "177 ₽/мес",
+    "priceDetail": "от 0,0354% за операции",
+    "icon": "assets/icons/daily_tariff.svg",
+    "buttonText": "Подключить",
+    "iconBackgroundColor": "#1AFFB23F",
+    "iconSize": 41.4,
+    "isPersonalTariff": false,
+    "characteristics": [
+      {"name": "Покупка ценных бумаг РФ", "value": "до 0,0354%"},
+      {"name": "NASDAQ, HKEX, NYSE", "value": "от 0,06%"},
+      {"name": "Фьючерсы и опционы РФ", "value": "0,45 ₽"}
+    ]
+  },
+  {
+    "title": "Долгосрочный портфель",
+    "subtitle": "Бесплатно",
+    "description": "Для стратегии «Купи и держи»",
+    "price": "Бесплатно",
+    "priceDetail": "от 0% за покупку ценных бумаг",
+    "icon": "assets/icons/wallet_transfer_send.svg",
+    "buttonText": "Подключить",
+    "iconBackgroundColor": "#1A6FFF22",
+    "iconSize": 37.57,
+    "isPersonalTariff": true,
+    "characteristics": [
+      {"name": "Покупка ценных бумаг РФ", "value": "0%"},
+      {"name": "NASDAQ, HKEX, NYSE", "value": "0,1%"},
+      {"name": "Фьючерсы и опционы РФ", "value": "0,45 ₽"}
+    ]
+  },
+  {
+    "title": "Инвестор",
+    "subtitle": "200 ₽/мес",
+    "description": "Выгодная торговля на иностранных рынках",
+    "price": "200 ₽/мес",
+    "priceDetail": "от 0,0154% за операции",
+    "icon": "assets/icons/chart_forest.svg",
+    "buttonText": "Подключить",
+    "iconBackgroundColor": "#1AFF91C1",
+    "iconSize": 33.73,
+    "isPersonalTariff": false,
+    "characteristics": [
+      {"name": "Покупка ценных бумаг РФ", "value": "0,035%"},
+      {"name": "NASDAQ, HKEX, NYSE", "value": "0,1%"},
+      {"name": "Фьючерсы и опционы РФ", "value": "0,45 ₽"}
+    ]
+  },
+  {
+    "title": "Стратег",
+    "subtitle": "Бесплатно",
+    "description": "Для долгосрочных целей",
+    "price": "Бесплатно",
+    "priceDetail": "от 0,5% за сделки с ценными бумагами",
+    "icon": "assets/icons/rocket.24.svg",
+    "buttonText": "Подключить",
+    "iconBackgroundColor": "#1A93C7FF",
+    "iconSize": 33.73,
+    "isPersonalTariff": false,
+    "characteristics": [
+      {"name": "Покупка ценных бумаг РФ", "value": "0,05%"},
+      {"name": "NASDAQ, HKEX, NYSE", "value": "0,1%"},
+      {"name": "Фьючерсы и опционы РФ", "value": "0,9 ₽"}
+    ]
+  },
+  {
+    "title": "Единый Консультационный",
+    "subtitle": "177 ₽/мес",
+    "description": "Инвестидеи от профессионалов «Финама»",
+    "price": "177 ₽/мес",
+    "priceDetail": "от 0,0354% за сделки с ценными бумагами",
+    "icon": "assets/icons/bubble.chart.24.svg",
+    "buttonText": "Подключить",
+    "iconBackgroundColor": "#1AFF7A7C",
+    "iconSize": 33.73,
+    "isPersonalTariff": false,
+    "characteristics": [
+      {"name": "Покупка ценных бумаг РФ", "value": "до 0,1%"},
+      {"name": "NASDAQ, HKEX, NYSE", "value": "0,17%"},
+      {"name": "Фьючерсы и опционы РФ", "value": "4,65 ₽"}
+    ]
+  }
+]
+

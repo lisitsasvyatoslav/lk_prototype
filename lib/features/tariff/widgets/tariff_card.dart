@@ -31,6 +31,7 @@ class TariffCard extends StatelessWidget {
   final double? iconSize;
   final List<TariffCharacteristic> characteristics;
   final String? iconPath;
+  final bool showAgreementsInfo;
 
   const TariffCard({
     super.key,
@@ -46,6 +47,7 @@ class TariffCard extends StatelessWidget {
     this.iconSize,
     this.characteristics = const [],
     this.iconPath,
+    this.showAgreementsInfo = false,
   });
 
   List<TariffDetailSection> _getTariffDetails() {
@@ -432,14 +434,33 @@ class TariffCard extends StatelessWidget {
             
             const SizedBox(height: 16),
             
-            // Кнопка "Соглашения по тарифу" для подключенных тарифов
-            if (isConnected) ...[
+            // Кнопка "Соглашения по тарифу" для подключенных тарифов или если showAgreementsInfo
+            if (isConnected || showAgreementsInfo) ...[
               const TariffAgreementsButton(),
               const SizedBox(height: 16),
             ],
             
+            // Текст вместо характеристик для showAgreementsInfo
+            if (showAgreementsInfo) ...[
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: Text(
+                    'Подробную информацию\nи актуальные ставки\nможно посмотреть\nв «Соглашениях по тарифу»',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.textBaseSecondary,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            
             // Характеристики тарифа
-            if (characteristics.isNotEmpty) ...[
+            if (characteristics.isNotEmpty && !showAgreementsInfo) ...[
               Column(
                 children: characteristics.asMap().entries.map((entry) {
                   final index = entry.key;
@@ -490,61 +511,63 @@ class TariffCard extends StatelessWidget {
             // Кнопки
             Column(
               children: [
-                // Кнопка "Подробнее о тарифе"
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showTariffDetailsModal(
-                        context,
-                        tariffTitle: title,
-                        tariffDescription: description,
-                        sections: _getTariffDetails(),
-                        isConnected: isConnected,
-                        onConnectTariff: () {
-                          Navigator.of(context).pop(); // Закрываем модальное окно
-                          showAccountSelectionModal(
-                            context, 
-                            tariffTitle: title,
-                            isPersonalTariff: isPersonalTariff,
-                            tariffPrice: price,
-                            tariffIcon: iconPath,
-                            tariffIconSize: iconSize,
-                            tariffIconBackgroundColor: iconBackgroundColor,
-                          );
-                        },
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: AppColors.buttonLabelSecondary,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(
-                          color: AppColors.buttonBorderOutlineDefault,
-                          width: 1,
+                // Кнопка "Подробнее о тарифе" (скрыта для showAgreementsInfo)
+                if (!showAgreementsInfo) ...[
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showTariffDetailsModal(
+                          context,
+                          tariffTitle: title,
+                          tariffDescription: description,
+                          sections: _getTariffDetails(),
+                          isConnected: isConnected,
+                          onConnectTariff: () {
+                            Navigator.of(context).pop(); // Закрываем модальное окно
+                            showAccountSelectionModal(
+                              context, 
+                              tariffTitle: title,
+                              isPersonalTariff: isPersonalTariff,
+                              tariffPrice: price,
+                              tariffIcon: iconPath,
+                              tariffIconSize: iconSize,
+                              tariffIconBackgroundColor: iconBackgroundColor,
+                            );
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        foregroundColor: AppColors.buttonLabelSecondary,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: const BorderSide(
+                            color: AppColors.buttonBorderOutlineDefault,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        'Подробнее о тарифе',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                    child: const Text(
-                      'Подробнее о тарифе',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
                   ),
-                ),
-                
-                const SizedBox(height: 12),
+                  
+                  const SizedBox(height: 12),
+                ],
                 
                 // Кнопка "Подключить" или статус "Подключен"
                 SizedBox(
                   width: double.infinity,
                   height: 48,
-                  child: isConnected
+                  child: (isConnected || showAgreementsInfo)
                     ? Container(
                         decoration: BoxDecoration(
                           color: Colors.transparent,

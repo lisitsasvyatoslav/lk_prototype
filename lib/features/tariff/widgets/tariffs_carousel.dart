@@ -24,6 +24,19 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
 
   final List<Map<String, dynamic>> _tariffData = [
     {
+      'title': 'Название тарифа',
+      'subtitle': '177 ₽/мес',
+      'description': 'Короткое описание',
+      'price': '177 ₽/мес',
+      'priceDetail': '',
+      'icon': 'assets/icons/star.24.svg',
+      'buttonText': 'Подключить',
+      'iconBackgroundColor': const Color(0x1A8596AF), // #8596AF 10%
+      'iconSize': 33.73,
+      'characteristics': <TariffCharacteristic>[],
+      'showAgreementsInfo': true,
+    },
+    {
       'title': 'Единый дневной',
       'subtitle': '177 ₽/мес',
       'description': 'Для активных трейдеров',
@@ -123,6 +136,7 @@ class _TariffsCarouselState extends State<TariffsCarousel> {
     isPersonalTariff: data['isPersonalTariff'] ?? false,
     characteristics: (data['characteristics'] as List<TariffCharacteristic>?) ?? [],
     iconPath: data['icon'],
+    showAgreementsInfo: data['showAgreementsInfo'] ?? false,
   )).toList();
 
   @override
